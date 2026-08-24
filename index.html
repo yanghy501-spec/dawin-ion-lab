@@ -1,0 +1,816 @@
+<!doctype html>
+<!--
+DAWIN I:ON Lab — 교육용 자가진단 (단일 파일 배포본)
+
+포함된 오픈소스: html-to-image v1.11.11 (결과 화면 PNG 저장)
+출처: https://github.com/bubkoo/html-to-image
+
+MIT License
+
+Copyright (c) 2017-2026 W.Y.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자기이해에서 조직활성화까지, DAWIN I:ON Lab 교육용 자가진단 도구">
+  <title>DAWIN I:ON Lab</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJJOk9OIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxOCIgZmlsbD0iIzA4N2Y3MyIvPgogIDx0ZXh0IHg9IjMyIiB5PSIzOCIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JOk9OPC90ZXh0Pgo8L3N2Zz4K" type="image/svg+xml">
+  <style>
+:root {
+  color-scheme: light;
+  --color-bg: #f4f8f7;
+  --color-surface: #ffffff;
+  --color-ink: #18322f;
+  --color-muted: #637572;
+  --color-muted-strong: #4f5d5a; /* 배지·작은 라벨용 (연한 배경에서 AA 통과) */
+  --color-brand: #087f73;
+  --color-brand-dark: #056158;
+  --color-brand-soft: #e7f5f2;
+  --color-line: #dbe7e4;
+  --color-warm: #ffca6a;
+  --shadow-card: 0 18px 45px rgba(25, 74, 68, 0.1);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 4%, rgba(91, 206, 187, 0.22), transparent 24rem),
+    var(--color-bg);
+  color: var(--color-ink);
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+button, a { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #ffb82e; outline-offset: 3px; }
+.app-shell { width: min(100% - 32px, 720px); margin: 0 auto; padding: 24px 0 56px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--color-brand-dark); font-weight: 900; letter-spacing: -0.04em; }
+.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: var(--color-brand); color: #fff; box-shadow: 0 8px 20px rgba(8,127,115,.24); }
+.brand small { display: block; color: var(--color-muted); font-size: .72rem; font-weight: 700; letter-spacing: .01em; }
+.hero { padding: 56px 0 28px; }
+.eyebrow { color: var(--color-brand); font-size: .82rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 18px; font-size: clamp(2.25rem, 10vw, 4.6rem); line-height: 1.06; letter-spacing: -.065em; }
+h2 { font-size: clamp(1.55rem, 6vw, 2.3rem); line-height: 1.25; letter-spacing: -.035em; }
+h3 { font-size: 1.08rem; }
+.lead { max-width: 34rem; color: var(--color-muted); font-size: 1.05rem; }
+.highlight { position: relative; z-index: 0; white-space: nowrap; }
+.highlight::after { content: ""; position: absolute; z-index: -1; left: -.05em; right: -.05em; bottom: .08em; height: .34em; border-radius: 99px; background: var(--color-warm); opacity: .7; }
+.card { border: 1px solid rgba(203, 222, 218, .9); border-radius: var(--radius-lg); background: rgba(255,255,255,.96); box-shadow: var(--shadow-card); }
+.module-card { padding: 26px; }
+.module-card-spaced { margin-top: 18px; }
+.motivation-module { border-color: #e7c49b; }
+.module-number { display: inline-grid; place-items: center; width: 42px; height: 42px; margin-bottom: 36px; border-radius: 14px; background: var(--color-brand-soft); color: var(--color-brand); font-weight: 900; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
+.chip { display: inline-flex; align-items: center; min-height: 32px; padding: 5px 11px; border-radius: 99px; background: #f0f5f4; color: var(--color-muted); font-size: .82rem; font-weight: 700; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 13px 18px; border: 0; border-radius: 16px; background: var(--color-brand); color: #fff; font-weight: 800; text-decoration: none; transition: transform .15s, background .15s, opacity .15s; }
+@media (hover: hover) and (pointer: fine) { .button:hover { background: var(--color-brand-dark); transform: translateY(-1px); } }
+.button:disabled { cursor: not-allowed; opacity: .42; transform: none; }
+.button.secondary { border: 1px solid var(--color-line); background: #fff; color: var(--color-ink); }
+.button.ghost { background: transparent; color: var(--color-brand-dark); }
+.privacy-note { display: flex; gap: 10px; margin: 26px 0 0; color: var(--color-muted); font-size: .86rem; }
+.footer { padding: 32px 0 12px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.roadmap { margin-top: 44px; }
+.roadmap-list { display: grid; gap: 12px; margin-top: 20px; }
+.roadmap-card { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 18px; box-shadow: none; }
+.roadmap-card .module-number { width: 38px; height: 38px; margin: 0; border-radius: 12px; }
+.roadmap-card strong { color: var(--color-brand); font-size: .76rem; letter-spacing: .08em; }
+.roadmap-card h3 { margin: 2px 0 3px; }
+.roadmap-card p { margin: 0; color: var(--color-muted); font-size: .86rem; }
+.coming-soon { grid-column: 2; justify-self: start; padding: 4px 9px; border-radius: 99px; background: #edf3f2; color: var(--color-muted); font-size: .72rem; font-weight: 900; }
+
+.assessment-header { padding-bottom: 20px; }
+.progress-wrap { margin-top: 22px; }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--color-muted); font-size: .84rem; font-weight: 800; }
+.progress-track { overflow: hidden; height: 8px; border-radius: 99px; background: #dce9e6; }
+.progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-brand), #31b59f); transition: width .28s ease; }
+.panel { padding: 24px; }
+.assessment-title { font-size: clamp(2rem, 9vw, 3.5rem); }
+.intro-icon { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 24px; border-radius: 22px; background: var(--color-brand-soft); color: var(--color-brand); font-size: 1.8rem; }
+.guide { display: grid; gap: 11px; margin: 24px 0; padding: 0; list-style: none; }
+.guide li { display: flex; gap: 11px; align-items: flex-start; color: var(--color-muted); }
+.guide strong { color: var(--color-brand-dark); }
+.question-head { margin-bottom: 20px; }
+.question-head p { color: var(--color-muted); }
+.option-list { display: grid; gap: 11px; }
+.option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 68px; padding: 12px 14px; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s, transform .15s; }
+@media (hover: hover) and (pointer: fine) { .option:hover:not(:disabled) { border-color: #64b9ad; transform: translateY(-1px); } }
+.option:active:not(:disabled) { transform: scale(.985); }
+.scale-option:active { transform: scale(.985); }
+.option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.option:disabled:not(.selected) { cursor: default; opacity: .54; }
+.option.least { border: 2px solid #9aa5a3; background: #f2f4f4; }
+.option.least .rank-badge { background: #7d8b88; color: #fff; }
+.option.least .option-label { color: #55605e; }
+.rank-badge { flex: 0 0 56px; display: grid; place-items: center; width: 56px; height: 42px; white-space: nowrap; border-radius: 13px; background: #edf3f2; color: var(--color-muted); font-size: .8rem; font-weight: 900; }
+.selected .rank-badge { background: var(--color-brand); color: #fff; }
+.option-label { font-size: 1.04rem; font-weight: 800; }
+.rank-meaning { display: block; margin-top: 1px; color: var(--color-muted); font-size: .74rem; font-weight: 700; }
+.actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 24px; }
+.reset-row { margin-top: 10px; text-align: center; }
+.text-button { min-height: 44px; padding: 8px 14px; border: 0; background: transparent; color: var(--color-muted); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.status-message { min-height: 1.5em; color: var(--color-brand-dark); font-size: .82rem; font-weight: 700; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.scale-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.scale-options { display: grid; gap: 10px; }
+.scale-option { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 12px; width: 100%; min-height: 58px; padding: 9px 13px; border: 1px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); font-weight: 800; text-align: left; }
+@media (hover: hover) and (pointer: fine) { .scale-option:hover { border-color: #64b9ad; transform: translateY(-1px); } }
+.scale-option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.scale-number { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #edf3f2; color: var(--color-muted); }
+.scale-option.selected .scale-number { background: var(--color-brand); color: #fff; }
+
+.result-hero { padding: 28px 24px; background: linear-gradient(145deg, #087f73, #075c55); color: #fff; }
+.result-hero .eyebrow { color: #bcebe4; }
+.result-hero p { color: #d8f3ee; }
+.profile-title { font-size: clamp(2rem, 9vw, 3.8rem); }
+.score-card, .content-card { margin-top: 16px; padding: 22px; }
+.score-list { display: grid; gap: 16px; }
+.score-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-weight: 900; }
+.score-track { overflow: hidden; height: 13px; border-radius: 99px; background: #e8efed; }
+.score-fill { height: 100%; border-radius: inherit; transform-origin: left; animation: grow .7s ease both; }
+@keyframes grow { from { transform: scaleX(0); } }
+.content-grid { display: grid; gap: 16px; margin-top: 16px; }
+.content-card ul { margin: 0; padding-left: 1.25rem; color: var(--color-muted); }
+.content-card li + li { margin-top: 8px; }
+.activity-card { border-color: #efd6a1; background: #fffaf0; }
+.disclaimer { margin: 20px 4px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.result-actions { display: grid; gap: 10px; margin-top: 20px; }
+.personality-result-hero { background: linear-gradient(145deg, #6857bb, #3f327f); }
+.personality-result-hero .eyebrow { color: #ded8ff; }
+.axis-list { display: grid; gap: 16px; margin-top: 16px; }
+.axis-card { padding: 22px; }
+.axis-heading { display: grid; gap: 12px; margin-bottom: 18px; }
+.axis-heading h2 { margin-bottom: 0; }
+.tendency-badge { justify-self: start; padding: 5px 10px; border-radius: 99px; background: #edeafa; color: #54469f; font-size: .78rem; font-weight: 900; }
+.tendency-badge.balanced { background: #e9f5f2; color: var(--color-brand-dark); }
+.axis-labels, .axis-percentages { display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; }
+.axis-labels { margin-bottom: 7px; }
+.axis-percentages { margin-top: 6px; color: var(--color-muted); font-weight: 800; }
+.axis-track { display: flex; overflow: hidden; height: 16px; border-radius: 99px; background: #edf0ef; }
+.axis-left { background: #ef8c67; }
+.axis-right { background: #6e70c9; }
+.axis-details { margin-top: 18px; border-top: 1px solid var(--color-line); }
+.axis-details summary { min-height: 48px; padding-top: 13px; color: var(--color-brand-dark); font-weight: 800; cursor: pointer; }
+.axis-detail-grid { display: grid; gap: 18px; padding-top: 10px; }
+.axis-detail-grid ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.reflection-card { border-color: #cfc8ef; background: #faf9ff; }
+.reference-code-card { margin-top: 16px; padding: 22px; border-style: dashed; box-shadow: none; }
+.reference-code-card p { color: var(--color-muted); }
+.motivation-intro-icon { background: #fff1dc; color: #a85a16; }
+.motivation-result-hero { background: linear-gradient(145deg, #b96120, #733a12); }
+.motivation-result-hero .eyebrow { color: #ffe3be; }
+.motivation-map-card { margin-top: 16px; padding: 22px; }
+.motivation-map-card > p { color: var(--color-muted); }
+.motivation-map { display: grid; gap: 16px; margin-top: 22px; }
+.motive-score-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+.motive-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.motive-score-head b { min-width: 2ch; color: #7a4519; text-align: right; }
+.motive-track { overflow: hidden; height: 12px; border-radius: 99px; background: #f2ebe4; }
+.motive-fill { display: block; height: 100%; border-radius: inherit; background: #c7b5a5; transform-origin: left; animation: grow .7s ease both; }
+.motive-fill.primary { background: #b85c1b; }
+.motive-fill.supporting { background: #db893d; }
+.motive-fill.potential { background: #e9b678; }
+.motive-role { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border-radius: 99px; background: #f4ece5; color: #75451f; font-size: .7rem; font-weight: 900; }
+.motive-role.primary { background: #8f4513; color: #fff; }
+.motive-role.supporting { background: #d47728; color: #fff; }
+.motive-role.potential { background: #f4d7ad; color: #63380f; }
+.profile-notice { margin-top: 16px; padding: 22px; border-color: #e7c49b; background: #fffaf3; }
+.profile-notice.even-profile { border-color: #b9d9d2; background: #f4fbf9; }
+.profile-notice ul { margin-bottom: 12px; padding-left: 1.2rem; color: var(--color-muted); }
+.top-motive-list { display: grid; gap: 16px; margin-top: 16px; }
+.top-motive-card { padding: 22px; border-top: 5px solid #e9b678; }
+.top-motive-card.primary { border-top-color: #9f4e17; }
+.top-motive-card.supporting { border-top-color: #d47728; }
+.top-motive-heading { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px; }
+.top-motive-heading h2 { margin-bottom: 5px; }
+.motive-score-circle { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 18px; background: #fff1dc; color: #8c4818; font-size: 1.15rem; font-weight: 900; }
+.motive-need { color: #75451f; }
+.combination-card { border-color: #e2bc8d; background: #fffaf4; }
+.combination-card > p { color: var(--color-muted); }
+.ta-intro-icon { background: #e7f0ff; color: #315b9b; }
+.ta-result-hero { background: linear-gradient(145deg, #315b9b, #1f3764); }
+.ta-result-hero .eyebrow { color: #d9e7ff; }
+.transaction-grid { display: grid; gap: 14px; margin-top: 18px; }
+.transaction-card { padding: 18px; border: 1px solid var(--color-line); border-radius: 18px; background: #f8fbff; }
+.transaction-card h3 { margin-bottom: 8px; color: #315b9b; }
+.transaction-card blockquote { margin: 14px 0; padding: 12px 14px; border-left: 4px solid #6d8fc3; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.repair-line { padding: 12px 14px; border-radius: 12px; background: #eaf6f2; color: var(--color-brand-dark); }
+.scenario-list { display: grid; gap: 10px; margin-top: 16px; }
+.scenario-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.scenario-card summary { padding: 14px 16px; color: #315b9b; font-weight: 900; cursor: pointer; }
+.scenario-card p { margin: 0 16px 12px; color: var(--color-muted); }
+.top-motive-card.less-used { margin-top: 16px; border-top-color: #7795ba; }
+.motive-score-head small, .top-motive-heading small { color: var(--color-muted); font-size: .7em; }
+.stroke-intro-icon { background: #fff0f1; color: #b33b55; }
+.stroke-result-hero { background: linear-gradient(145deg, #b33b55, #71253a); }
+.stroke-result-hero .eyebrow { color: #ffdce4; }
+.stroke-options .scale-option { grid-template-columns: 42px 1fr; min-height: 66px; }
+.stroke-code { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 8px; border-radius: 9px; background: #eff2f5; color: #576f88; font-size: .76rem; }
+/* 색은 '주고받는 방향'이 아니라 '긍정(핑크) · 부정(블루) · 신호(회색)'를 뜻한다.
+   다섯 색의 상대휘도를 0.255로 맞춰(3.05:1) 톤 통일감과 밝은 강의장 가독성을 함께 확보했다. */
+.stroke-row.tone-a .stroke-code { background: #fbe9ef; color: #c82858; }
+.stroke-row.tone-c .stroke-code { background: #faeaf6; color: #bc2e92; }
+.stroke-row.tone-b .stroke-code { background: #eaf5fb; color: #23759b; }
+.stroke-row.tone-d .stroke-code { background: #eaeefa; color: #3d64d0; }
+.stroke-row.tone-e .stroke-code { background: #eff2f5; color: #576f88; }
+.stroke-row .motive-score-head b { color: #8a2c42; }
+.stroke-row .motive-score-head b small { margin-left: 2px; color: var(--color-muted); font-size: .7em; }
+.stroke-fill-a { background: #d06a89; }   /* 긍정 · 핑크 */
+.stroke-fill-c { background: #c86aac; }   /* 긍정 · 핑크(연보라) */
+.stroke-fill-b { background: #4193b9; }   /* 부정 · 블루(하늘) */
+.stroke-fill-d { background: #7189ca; }   /* 부정 · 블루(연청) */
+.stroke-fill-e { background: #838b94; }   /* 신호 · 연회색 */
+.stroke-flow-grid { display: grid; gap: 16px; }
+.stroke-flow-card { border-top: 5px solid #d95773; }
+.stroke-flow-card.negative-flow { border-top-color: #7b719b; }
+.stroke-flow-card.withdrawal-flow { border-top-color: #6f8792; }
+.stroke-pattern-list { display: grid; gap: 16px; margin-top: 16px; }
+.stroke-pattern-card { padding: 22px; }
+.role-guide-grid { display: grid; gap: 12px; margin-top: 18px; }
+.role-guide-card { padding: 16px; border: 1px solid var(--color-line); border-radius: 16px; background: #fffafb; }
+.role-guide-card h3 { color: #9c3049; }
+.role-guide-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #d95773; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-module { border-color: #9ec9c0; }
+.stress-intro-icon { background: #e5f5ee; color: #25745e; }
+.safety-note { margin: 22px 0; padding: 16px; border: 1px solid #c7ded8; border-radius: 16px; background: #f4faf8; }
+.safety-note strong { color: var(--color-brand-dark); }
+.safety-note p { margin: 5px 0 0; color: var(--color-muted); font-size: .88rem; }
+.stress-result-hero { background: linear-gradient(145deg, #347b67, #1f5044); }
+.stress-result-hero .eyebrow { color: #d8f3e9; }
+.stress-map-card { margin-top: 16px; padding: 22px; }
+.stress-map-card > p { color: var(--color-muted); }
+.stress-map { display: grid; gap: 17px; margin-top: 22px; }
+.stress-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.stress-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.stress-score-head b { min-width: 2ch; color: #2a6a58; text-align: right; }
+.stress-score-head em { padding: 2px 7px; border-radius: 99px; background: #e4f3ee; color: #226450; font-size: .68rem; font-style: normal; font-weight: 900; }
+.stress-track { overflow: hidden; height: 12px; border-radius: 99px; background: #e6efec; }
+.stress-fill { display: block; height: 100%; border-radius: inherit; background: #77aa9b; transform-origin: left; animation: grow .7s ease both; }
+.stress-row.priority .stress-fill { background: #347b67; }
+.stress-priority-list { margin-top: 28px; }
+.stress-priority-list > h2 { margin-bottom: 16px; }
+.stress-priority-card { margin-top: 16px; padding: 22px; border-top: 5px solid #347b67; }
+.stress-priority-card > p { color: var(--color-muted); }
+.stress-priority-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.stress-priority-heading h2 { margin-bottom: 5px; }
+.stress-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; background: #e5f5ee; color: #246552; font-size: 1.15rem; font-weight: 900; }
+.stress-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.stress-action-card { padding: 16px; border: 1px solid #cfe2dc; border-radius: 16px; background: #f7fbfa; }
+.stress-action-card.organization { border-color: #d9d8ea; background: #f9f8fd; }
+.stress-action-card h3 { color: #286b58; }
+.stress-action-card.organization h3 { color: #57508a; }
+.stress-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.stress-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.stress-reflection blockquote, .stress-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #4b907d; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.stress-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.stress-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #286b58; font-weight: 900; cursor: pointer; }
+.stress-domain-card > p, .stress-domain-card > h3, .stress-domain-card > ul, .stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-left: 16px; margin-right: 16px; }
+.stress-domain-card > p, .stress-domain-card > ul { color: var(--color-muted); }
+.stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-bottom: 16px; }
+.support-card { border-color: #bcd6cf; background: #f5fbf9; }
+.resilience-module { border-color: #e3cf9a; }
+.resilience-intro-icon { background: #fdf3da; color: #8a6115; }
+.resilience-result-hero { background: linear-gradient(145deg, #a8791f, #6d4c10); }
+.resilience-result-hero .eyebrow { color: #fbe9c4; }
+.resilience-map-card { margin-top: 16px; padding: 22px; }
+.resilience-map-card > p { color: var(--color-muted); }
+.resilience-map { display: grid; gap: 17px; margin-top: 22px; }
+.resilience-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.resilience-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.resilience-score-head b { min-width: 2ch; color: #7d5a14; text-align: right; }
+.resilience-score-head em { padding: 2px 7px; border-radius: 99px; font-size: .68rem; font-style: normal; font-weight: 900; }
+.resilience-score-head em.tag-strength { background: #e6f2ea; color: #256349; }
+.resilience-score-head em.tag-growth { background: #fbeedb; color: #8a6115; }
+.resilience-track { overflow: hidden; height: 12px; border-radius: 99px; background: #eeeae0; }
+.resilience-fill { display: block; height: 100%; border-radius: inherit; background: #cbb277; transform-origin: left; animation: grow .7s ease both; }
+.resilience-row.strength .resilience-fill { background: #3d8a6c; }
+.resilience-row.growth .resilience-fill { background: #a8791f; }
+.resilience-strength-list, .resilience-growth-list { margin-top: 28px; }
+.resilience-strength-list > h2, .resilience-growth-list > h2 { margin-bottom: 16px; }
+.resilience-strength-card { margin-top: 16px; padding: 22px; border-top: 5px solid #3d8a6c; }
+.resilience-growth-card { margin-top: 16px; padding: 22px; border-top: 5px solid #a8791f; }
+.resilience-strength-card > p, .resilience-growth-card > p { color: var(--color-muted); }
+.resilience-card-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.resilience-card-heading h2 { margin-bottom: 5px; }
+.resilience-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; font-size: 1.15rem; font-weight: 900; }
+.resilience-score-circle.strength { background: #e6f2ea; color: #256349; }
+.resilience-score-circle.growth { background: #fdf3da; color: #7d5a14; }
+.resilience-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.resilience-action-card { padding: 16px; border: 1px solid #e6dcc4; border-radius: 16px; background: #fdfaf3; }
+.resilience-action-card.support { border-color: #d9d8ea; background: #f9f8fd; }
+.resilience-action-card h3 { color: #7d5a14; }
+.resilience-action-card.support h3 { color: #57508a; }
+.resilience-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.resilience-environment { margin-top: 16px; padding: 16px; border-radius: 16px; background: #f4f8f7; border-left: 4px solid #3d8a6c; }
+.resilience-environment p { color: var(--color-muted); }
+.resilience-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.resilience-reflection blockquote, .resilience-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #a8791f; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.resilience-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.resilience-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.resilience-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #7d5a14; font-weight: 900; cursor: pointer; }
+.resilience-domain-card > p, .resilience-domain-card > h3, .resilience-domain-card > ul, .resilience-domain-card > blockquote { margin-left: 16px; margin-right: 16px; }
+.resilience-domain-card > p, .resilience-domain-card > ul { color: var(--color-muted); }
+.resilience-domain-card > blockquote { margin-bottom: 16px; }
+
+.hidden { display: none !important; }
+
+@media (min-width: 640px) {
+  .app-shell { padding-top: 34px; }
+  .module-card, .panel { padding: 34px; }
+  .content-grid { grid-template-columns: 1fr 1fr; }
+  .axis-heading { grid-template-columns: 1fr auto; align-items: start; }
+  .axis-detail-grid { grid-template-columns: 1fr 1fr; }
+  .transaction-grid { grid-template-columns: repeat(3, 1fr); }
+  .stroke-flow-grid { grid-template-columns: 1fr 1fr; }
+  .stroke-flow-card.withdrawal-flow { grid-column: 1 / -1; }
+  .role-guide-grid { grid-template-columns: 1fr 1fr; }
+  .stress-action-grid { grid-template-columns: 1fr 1fr; }
+  .resilience-action-grid { grid-template-columns: 1fr 1fr; }
+  .result-actions { grid-template-columns: 1fr 1fr; }
+  .roadmap-card { grid-template-columns: auto 1fr auto; align-items: center; }
+  .coming-soon { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+
+/* 양극 선택 진행 안내 — 선택지가 아니라 '읽는 안내'로 보이게 한다 */
+.status-message.step-most,
+.status-message.step-least,
+.status-message.step-done {
+  display: block;
+  margin: 2px 0 16px;
+  padding: 11px 16px;
+  border: 0;
+  border-left: 5px solid transparent;
+  border-radius: 4px 14px 14px 4px;
+  text-align: left;
+  min-height: 0;
+}
+.status-message .step-tag {
+  display: block;
+  margin-bottom: 3px;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  opacity: .72;
+}
+.status-message .step-text {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: .015em;
+  line-height: 1.4;
+}
+.status-message.step-most {
+  background: var(--color-brand-soft);
+  border-left-color: var(--color-brand);
+  color: var(--color-brand-dark);
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-least {
+  background: #eef1f0;
+  border-left-color: #7d8b88;
+  color: #3d4946;
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-done {
+  background: transparent;
+  border-left-color: #cfd8d6;
+  color: var(--color-muted);
+  animation: none;
+}
+.status-message.step-done .step-text { font-weight: 600; }
+@keyframes step-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .58; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-message.step-most,
+  .status-message.step-least { animation: none; }
+}
+
+
+/* 진행 버튼 하단 고정 — 묶음마다 스크롤해서 누르지 않도록 (DISC 전용) */
+.actions.actions-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  margin: 18px -24px -24px;
+  padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  border-top: 1px solid rgba(203, 222, 218, .9);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 -10px 22px -14px rgba(15, 50, 45, .3);
+}
+/* 마지막 선택지가 고정 버튼에 가리지 않도록 여백 */
+#question-view .option-list { padding-bottom: 4px; }
+.reset-row { margin-top: 10px; text-align: center; }
+
+
+/* 2묶음부터는 머리말을 줄여 선택지 공간을 확보한다 (DISC 전용) */
+.question-head.compact { margin-bottom: 12px; }
+.question-head.compact .eyebrow { display: none; }
+.question-head.compact h2 { font-size: 1.22rem; line-height: 1.3; margin: 0; }
+
+
+/* 결과 저장 — 교육 후에도 남는 자산 */
+.save-card { margin-top: 16px; padding: 22px; }
+.save-card h3 { margin: 0 0 6px; }
+.save-card p { margin: 0 0 14px; color: var(--color-muted); }
+.copy-status { min-height: 1.4em; margin: 10px 0 0; font-weight: 700; }
+.copy-status.done { color: var(--color-brand-dark); }
+.copy-status.fail { color: #b4593f; }
+.copy-fallback { margin-top: 8px; }
+.copy-fallback summary { color: var(--color-muted); font-size: .88rem; cursor: pointer; }
+.copy-fallback textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+
+/* 쌍 비교 선택 (성격 선호도 4축) */
+.pair-option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 78px; padding: 16px; border: 1.5px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s; }
+.pair-option.selected { border-color: var(--color-brand); background: var(--color-brand-soft); }
+.pair-option:active { transform: scale(.985); }
+.pair-mark { flex: 0 0 36px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: #eef3f2; color: var(--color-muted); font-weight: 900; }
+.pair-option.selected .pair-mark { background: var(--color-brand); color: #fff; }
+.pair-text { font-size: 1.06rem; font-weight: 750; line-height: 1.35; }
+.scale-options.pair-mode { gap: 8px; }
+@media (hover: hover) and (pointer: fine) { .pair-option:hover { border-color: #64b9ad; } }
+
+/* ── 결과 내보내기 (PDF · PNG) ── */
+.save-actions { display: grid; gap: 10px; }
+.save-actions .button { width: 100%; }
+
+.export-overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 32, 30, .62); overflow: auto; }
+.export-sheet { width: min(100%, 560px); max-height: 92vh; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px; background: #fff; }
+.export-hint { margin: 0; color: var(--color-muted); font-size: .92rem; line-height: 1.5; }
+.export-preview { flex: 1 1 auto; min-height: 0; overflow: auto; border: 1px solid var(--color-line); border-radius: 12px; background: #fff; -webkit-overflow-scrolling: touch; }
+.export-preview img { display: block; width: 100%; height: auto; }
+.export-title { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.export-url { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--color-line); border-radius: 12px; background: #f7faf9; color: var(--color-ink); font-size: .9rem; }
+/* 화면 밖 임시 무대 — 이미지 저장용으로만 쓰고 바로 지운다. */
+.export-stage { box-sizing: border-box; }
+/* 막대가 자라나는 등장 애니메이션을 끈다.
+   복제하면 애니메이션이 처음부터 다시 시작하는데, 그 시작 시점(높이 0)이 그대로 찍혀
+   그래프가 텅 빈 이미지가 나온다. */
+.export-stage, .export-stage *, .export-stage *::before, .export-stage *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ── 인쇄(PDF 저장) ── */
+@media print {
+  :root { --color-brand-soft: #f4f4f4; }
+  body { background: #fff; }
+  .assessment-header,
+  #intro-view,
+  #question-view,
+  .save-card,
+  .export-stage,
+  .export-holder,
+  .export-overlay,
+  .actions,
+  .actions-sticky { display: none !important; }
+  #result-view:not(.hidden) { display: block !important; }
+  .app-shell { width: 100%; padding: 0; }
+  .card { break-inside: avoid; page-break-inside: avoid; box-shadow: none !important; border: 1px solid #d9dedd; }
+  details > summary { display: none !important; }
+  a[href]::after { content: none !important; }
+  @page { margin: 12mm; }
+}
+
+/* ── 가독성 보강 (2026-08-22 접근성 점검) ──
+   강의장 조명·노안 사용자를 기준으로 작은 라벨의 대비와 크기를 올린다. */
+body { overscroll-behavior-y: contain; }
+
+.rank-badge, .scale-number, .pair-mark, .chip { color: var(--color-muted-strong); }
+
+.eyebrow { font-size: .88rem; }
+.motive-role { font-size: .82rem; min-height: 28px; padding: 3px 10px; }
+.motive-role.supporting { background: #b0601c; }
+.stress-score-head em, .resilience-score-head em { font-size: .8rem; padding: 3px 9px; }
+.axis-labels, .axis-percentages, .tendency-badge { font-size: .84rem; }
+
+/* 결과 상단 문구는 밝은 조명에서도 읽히도록 흰색에 가깝게 */
+.result-hero .eyebrow,
+.personality-result-hero .eyebrow,
+.motivation-result-hero .eyebrow,
+.ta-result-hero .eyebrow,
+.stroke-result-hero .eyebrow,
+.stress-result-hero .eyebrow,
+.resilience-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+.result-hero p { color: rgba(255, 255, 255, .93); }
+
+/* 복사 실패 시 유일한 복구 경로 — 손가락으로 눌리는 크기로 */
+.copy-fallback summary {
+  display: flex; align-items: center; min-height: 48px; padding: 10px 4px;
+  color: var(--color-muted-strong); font-size: .95rem; font-weight: 700;
+}
+
+/* 포커스 표시를 어두운 링으로 (흰 배경 대비 확보) */
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid #18322f;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 184, 46, .55);
+}
+
+@media (max-width: 360px) {
+  h1 { font-size: clamp(1.9rem, 9vw, 4.6rem); }
+  .highlight { white-space: normal; }
+}
+
+/* 결과를 읽는 순서 안내 */
+.stability-card h3 { margin: 14px 0 6px; font-size: .95rem; color: var(--color-brand-dark); }
+.stability-card h3:first-of-type { margin-top: 4px; }
+.stability-card p { color: var(--color-muted); }
+
+/* Stroke — 내가 하는 행동(A·B) / 내가 놓인 환경(C·D) 분리 */
+/* 블록 구분은 제목이 하고, 색은 긍정·부정 구분에만 쓴다. 테두리는 중립으로. */
+.stroke-give-card, .stroke-receive-card, .stroke-signal-card { border-left: 4px solid var(--color-line); }
+.stroke-signal-card h2 small { color: var(--color-muted-strong); font-weight: 700; }
+.stroke-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 4px; padding: 0; list-style: none; font-size: .84rem; color: var(--color-muted-strong); }
+.stroke-legend li { display: flex; align-items: center; gap: 6px; }
+.stroke-legend i { width: 14px; height: 14px; border-radius: 5px; }
+
+/* ── 결과 화면: 결과만 보기 / 자세히 보기 ── */
+.result-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 14px; padding: 6px; border-radius: 16px; background: var(--color-brand-soft); }
+.result-tab { min-height: 48px; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--color-brand-dark); font-weight: 800; font-size: .98rem; }
+.result-tab.active { background: #fff; color: var(--color-ink); box-shadow: 0 2px 10px rgba(25, 74, 68, .12); }
+.result-panel:focus { outline: none; }
+.result-panel-hint { margin: 18px 4px 0; color: var(--color-muted-strong); font-size: .9rem; line-height: 1.6; }
+@media (hover: hover) and (pointer: fine) { .result-tab:not(.active):hover { background: rgba(255, 255, 255, .6); } }
+@media print {
+  .result-tabs, .result-panel-hint { display: none !important; }
+  .result-panel, .result-panel.hidden { display: block !important; }
+}
+
+/* 전체 수준 — 상대 순위보다 먼저 읽는 결과값 */
+.overall-level-card { padding: 24px; border-left: 5px solid var(--color-line); }
+.overall-level-card h2 { margin: 4px 0 2px; }
+.overall-level-card h2 strong { color: var(--color-brand-dark); }
+/* 문장이 주인공, 숫자는 보조. 크게 띄우면 성적표처럼 읽힌다. */
+.overall-figure { margin: 8px 0 12px; color: var(--color-muted-strong); font-size: .92rem; font-weight: 700; }
+.overall-figure b { margin-left: 4px; color: var(--color-ink); font-size: 1.5rem; font-weight: 900; }
+.overall-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-line); color: var(--color-muted-strong); font-size: .84rem; line-height: 1.65; }
+/* 색은 점수의 높낮이가 아니라 상태를 뜻한다. 두 모듈은 방향이 반대여서
+   스트레스는 낮을수록, 회복탄력성은 높을수록 tone-good 이 된다. */
+.overall-level-card.tone-good { border-left-color: #4f8f78; }
+.overall-level-card.tone-watch { border-left-color: #c08a2e; }
+.overall-level-card.tone-alert { border-left-color: #b0601c; }
+.overall-level-card.tone-good h2 strong { color: #35705c; }
+.overall-level-card.tone-watch h2 strong { color: #8a6115; }
+.overall-level-card.tone-alert h2 strong { color: #8a4a12; }
+
+/* ── 감성지수(EQ) 5영역 ── */
+.eq-module { border-color: #d3bcdd; }
+.eq-intro-icon { background: #f6ecfa; color: #7a3f8a; }
+.eq-result-hero { background: linear-gradient(145deg, #8e4f9e, #58306b); }
+.eq-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+
+/* 막대그래프 — 종이 실습지 2페이지 서식과 같은 0~20 눈금.
+   손으로 옮겨 그린 그래프와 모양이 같아야 강의장에서 나란히 놓고 볼 수 있다. */
+.eq-chart-card { margin-top: 16px; padding: 22px 18px; }
+.eq-chart-card > p { color: var(--color-muted); }
+.eq-chart { margin-top: 22px; }
+
+/* 좌·우 눈금 라벨(각 28px)을 뺀 안쪽이 막대 영역. 머리·발 라벨도 같은 폭을 쓴다. */
+.eq-chart-heads, .eq-chart-foots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 28px; }
+.eq-chart-heads { align-items: stretch; margin-bottom: 8px; }
+.eq-head { display: flex; overflow: hidden; align-items: center; justify-content: center; justify-self: center; width: 100%; max-width: 64px; min-height: 2.9em; padding: 5px 2px; border: 1px solid var(--color-line); border-radius: 10px; background: #fbfdfc; color: var(--color-muted-strong); font-size: .76rem; font-weight: 800; line-height: 1.25; text-align: center; }
+.eq-chart-foots { margin-top: 10px; }
+.eq-foot { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 7px; width: 100%; max-width: 64px; min-height: 42px; border: 1px solid var(--color-line); border-radius: 10px; background: #f7faf9; }
+.eq-foot b { font-size: 1rem; font-weight: 900; }
+.eq-foot span { color: var(--color-ink); font-size: 1.08rem; font-weight: 900; }
+
+.eq-chart-body { position: relative; height: 240px; }
+.eq-gridlines { position: absolute; inset: 0; }
+.eq-grid-row { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 4px; transform: translateY(50%); }
+.eq-grid-row span { flex: 0 0 24px; color: var(--color-muted-strong); font-size: .68rem; font-weight: 700; text-align: center; }
+.eq-grid-row i { flex: 1 1 auto; border-top: 1px dashed #d5e2df; }
+.eq-grid-row.base i { border-top: 2px solid #9fb3af; }
+
+.eq-chart-plot { position: absolute; top: 0; right: 28px; bottom: 0; left: 28px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.eq-col { display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+/* 다섯 색은 상대휘도를 0.254~0.257로 맞춰 어느 한 칸도 튀어 보이지 않게 했다. */
+.eq-bar { display: block; width: 100%; max-width: 64px; min-height: 3px; border-radius: 7px 7px 0 0; transform-origin: bottom; animation: eq-rise .7s ease backwards; }
+@keyframes eq-rise { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .eq-bar { animation: none; } }
+
+@media (max-width: 380px) {
+  .eq-chart-heads, .eq-chart-foots { margin: 0 22px; gap: 5px; }
+  .eq-chart-plot { right: 22px; left: 22px; gap: 5px; }
+  .eq-grid-row span { flex-basis: 18px; font-size: .62rem; }
+  .eq-head { font-size: .7rem; }
+}
+
+/* 결과 카드 */
+.eq-strength-list, .eq-growth-list { margin-top: 22px; }
+.eq-strength-card, .eq-growth-card { margin-top: 16px; padding: 22px; }
+.eq-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.eq-card-heading h2 { margin: 2px 0 0; }
+.eq-score-circle { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #fff; font-size: 1.15rem; font-weight: 900; }
+.eq-score-circle.muted { background: #eef2f1; color: var(--color-muted-strong); }
+.eq-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #faf5fc; }
+.eq-reflection blockquote, .eq-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #8e4f9e; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.eq-emphasis { color: var(--color-muted-strong); font-size: .9rem; }
+.eq-domain-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: #f4f7f6; color: var(--color-muted-strong); font-size: .88rem; line-height: 1.6; }
+
+.eq-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.eq-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.eq-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #6d3a7c; font-weight: 900; cursor: pointer; }
+.eq-domain-card summary span { display: flex; align-items: center; gap: 9px; }
+.eq-domain-card summary i { flex: 0 0 auto; width: 14px; height: 14px; border-radius: 5px; }
+.eq-domain-card > p, .eq-domain-card > h3, .eq-domain-card > ul, .eq-domain-card > blockquote { margin-right: 16px; margin-left: 16px; }
+.eq-domain-card > p, .eq-domain-card > ul { color: var(--color-muted); }
+.eq-domain-card > blockquote { margin-bottom: 16px; }
+
+/* 인쇄(PDF 저장) 때 막대 색이 빠지면 그래프가 빈 칸이 된다. */
+@media print {
+  .eq-bar, .eq-foot, .eq-head, .eq-domain-card summary i {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .eq-bar { animation: none; }
+}
+
+/* 성격 — 자세히 탭의 축별 상세 안내 */
+.axis-guide-list { display: grid; gap: 10px; margin-top: 18px; }
+.axis-guide-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.axis-guide-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #4b3f96; font-weight: 900; cursor: pointer; }
+.axis-guide-card .axis-detail-grid { margin: 0 16px 16px; }
+
+/* 행동경향(DISC) — 자세히 탭의 경향별 안내 묶음 */
+.disc-guide-section { margin-top: 22px; }
+.disc-guide-section > h2 { margin-bottom: 4px; }
+
+/* 배포 버전 표시 — 폰에서 지금 보고 있는 파일이 최신인지 눈으로 확인하는 용도 */
+.build-stamp {
+  margin: 0; padding: 10px 16px 24px;
+  color: var(--color-muted); font-size: .72rem; text-align: center; letter-spacing: .02em;
+}
+@media print { .build-stamp { display: none !important; } }
+
+</style>
+</head>
+<body>
+  <noscript>
+    <div class="app-shell"><div class="safety-note"><strong>브라우저 확인이 필요합니다</strong>
+      <p>이 체크는 자바스크립트가 켜져 있어야 동작합니다. 크롬이나 사파리로 다시 열어 주시고, 그래도 화면이 넘어가지 않으면 강사에게 알려 주세요.</p></div></div>
+  </noscript>
+  <main class="app-shell">
+    <a class="brand" href="./index.html" aria-label="DAWIN I:ON Lab 홈">
+      <span class="brand-mark">I:ON</span>
+      <span>DAWIN I:ON Lab<small>Self Insight · Team Synergy</small></span>
+    </a>
+    <section class="hero">
+      <p class="eyebrow">자기이해에서 조직활성화까지</p>
+      <h1>나를 이해하면,<br><span class="highlight">함께 일하는 방식</span>이 달라집니다.</h1>
+      <p class="lead">가볍게 체크하고, 나의 성격 선호와 행동경향, 동기와 관계 반응을 발견해 더 나은 협업 대화를 시작해 보세요.</p>
+    </section>
+    <section class="card module-card" aria-labelledby="personality-title">
+      <span class="module-number">01</span>
+      <p class="eyebrow">나의 성격</p>
+      <h2 id="personality-title">나는 어떤 방식으로 에너지를 얻고, 정보를 보고, 판단하고, 일할까요?</h2>
+      <p class="lead">40문항의 문장 비교로 <strong>에너지 방향 · 정보 수집 · 판단 기준 · 생활 방식</strong> 네 축의 상대적 선호를 살펴봅니다.</p>
+      <div class="meta-row">
+        <span class="chip">40문항</span><span class="chip">약 5~7분</span><span class="chip">교육용</span>
+      </div>
+      <a class="button" href="./personality.html?v=20260825-1031">성격 선호도 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+    <section class="card module-card module-card-spaced" aria-labelledby="disc-title">
+      <span class="module-number">02</span>
+      <p class="eyebrow">나의 행동</p>
+      <h2 id="disc-title">나는 일할 때 어떤 행동을 가장 자연스럽게 선택할까요?</h2>
+      <p class="lead">열두 묶음마다 나와 가장 가까운 표현 하나와 가장 먼 표현 하나를 고르면 D·I·S·C 네 경향의 상대적 비중을 확인할 수 있습니다.</p>
+      <div class="meta-row">
+        <span class="chip">12개 묶음</span><span class="chip">약 4~6분</span><span class="chip">교육용</span>
+      </div>
+      <a class="button" href="./assessment.html?v=20260825-1031">행동경향 4유형 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+    <section class="card module-card module-card-spaced motivation-module" aria-labelledby="motivation-title">
+      <span class="module-number">03</span>
+      <p class="eyebrow">나의 동기</p>
+      <h2 id="motivation-title">나는 무엇을 중요하게 여기고, 어떤 욕구에서 힘을 얻을까요?</h2>
+      <p class="lead">36개의 일·협업과 일상 문항을 통해 아홉 가지 동기의 상대적 경향과 상위 세 동기를 살펴봅니다.</p>
+      <div class="meta-row">
+        <span class="chip">36문항</span><span class="chip">약 6~8분</span><span class="chip">DAWIN 독자 모델</span>
+      </div>
+      <a class="button" href="./motivation.html?v=20260825-1031">동기패턴 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="card module-card module-card-spaced ta-module" aria-labelledby="ta-title">
+      <span class="module-number">04</span>
+      <p class="eyebrow">관계 속 나</p>
+      <h2 id="ta-title">나는 관계에서 어떤 에너지를 자주 꺼내고, 대화가 어긋날 때 어떻게 다시 이을까요?</h2>
+      <p class="lead">30개의 일·협업과 일상 문항으로 다섯 관계 에너지를 살펴보고, 교류 3종과 회복 문장을 연습합니다.</p>
+      <div class="meta-row">
+        <span class="chip">30문항</span><span class="chip">약 5~7분</span><span class="chip">TA 이론참조형</span>
+      </div>
+      <a class="button" href="./ta.html?v=20260825-1031">관계 에너지 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="card module-card module-card-spaced stroke-module" aria-labelledby="stroke-title">
+      <span class="module-number">05</span>
+      <p class="eyebrow">인정과 교류</p>
+      <h2 id="stroke-title">나는 관심과 인정을 어떻게 주고받으며, 관계에서 무엇을 조절하면 좋을까요?</h2>
+      <p class="lead">인정과 관심을 주고받는 25문항으로 주는 긍정·부정, 받는 긍정·부정, 단절·소진의 다섯 흐름을 살펴봅니다.</p>
+      <div class="meta-row">
+        <span class="chip">25문항</span><span class="chip">약 4~6분</span><span class="chip">직무·관계 실천</span>
+      </div>
+      <a class="button" href="./stroke.html?v=20260825-1031">Stroke 패턴 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="card module-card module-card-spaced stress-module" aria-labelledby="stress-title">
+      <span class="module-number">06</span>
+      <p class="eyebrow">지금의 나</p>
+      <h2 id="stress-title">최근 한 달, 어떤 업무환경 요인이 나의 부담을 높이거나 낮추고 있을까요?</h2>
+      <p class="lead">32개의 독자 문항으로 8가지 업무환경 요인을 살펴보고 개인 실천과 조직 개선의 출발점을 찾습니다.</p>
+      <div class="meta-row">
+        <span class="chip">32문항</span><span class="chip">약 6~8분</span><span class="chip">DAWIN 독자 모델</span>
+      </div>
+      <a class="button" href="./stress.html?v=20260825-1031">직무스트레스 요인 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="card module-card module-card-spaced resilience-module" aria-labelledby="resilience-title">
+      <span class="module-number">07</span>
+      <p class="eyebrow">다시 일어나는 힘</p>
+      <h2 id="resilience-title">어려운 일을 겪은 뒤, 나는 어떤 자원으로 다시 균형을 찾을까요?</h2>
+      <p class="lead">30개의 독자 문항으로 여섯 가지 회복 자원을 살펴보고, 잘 쓰는 자원과 보충할 자원을 함께 찾습니다.</p>
+      <div class="meta-row">
+        <span class="chip">30문항</span><span class="chip">약 5~7분</span><span class="chip">DAWIN 독자 모델</span>
+      </div>
+      <a class="button" href="./resilience.html?v=20260825-1031">회복탄력성 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="card module-card module-card-spaced eq-module" aria-labelledby="eq-title">
+      <span class="module-number">08</span>
+      <p class="eyebrow">감성지수 EQ</p>
+      <h2 id="eq-title">나는 감정을 어떻게 알아차리고, 조절하고, 사람들 사이에서 이어 갈까요?</h2>
+      <p class="lead">50개 문항으로 자기인식·자기조절·동기부여·감정이입·사회적 기술 다섯 영역을 각각 0~20점의 막대그래프로 살펴봅니다.</p>
+      <div class="meta-row">
+        <span class="chip">50문항</span><span class="chip">약 7~10분</span><span class="chip">골먼 5영역 참조형</span>
+      </div>
+      <a class="button" href="./eq.html?v=20260825-1031">감성지수 EQ 체크 시작하기 <span aria-hidden="true">→</span></a>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>이름이나 연락처를 받지 않으며, 응답과 결과를 저장하거나 전송하지 않습니다.</span></p>
+    </section>
+
+    <section class="roadmap" aria-labelledby="roadmap-title">
+      <p class="eyebrow">8개의 렌즈가 하나의 지도로</p>
+      <h2 id="roadmap-title">8개의 체크가 모두 열렸습니다.</h2>
+      <p class="lead">성격 → 행동 → 동기 → 관계 → 인정과 교류 → 지금의 나 → 다시 일어나는 힘 → 감성지수. 각각은 사람을 판정하는 도장이 아니라 서로 다른 렌즈이며, 이어서 볼 때 하나의 자기이해 지도가 됩니다.</p>
+    </section>
+    <footer class="footer">© DAWIN SERVICE · DAWIN I:ON Lab</footer>
+  </main>
+  <p class="build-stamp">버전 20260825-1031</p>
+</body>
+</html>

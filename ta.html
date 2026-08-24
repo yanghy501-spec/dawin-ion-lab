@@ -1,0 +1,1731 @@
+<!doctype html>
+<!--
+DAWIN I:ON Lab — 교육용 자가진단 (단일 파일 배포본)
+
+포함된 오픈소스: html-to-image v1.11.11 (결과 화면 PNG 저장)
+출처: https://github.com/bubkoo/html-to-image
+
+MIT License
+
+Copyright (c) 2017-2026 W.Y.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DAWIN I:ON Lab 교육용 관계 에너지 체크">
+  <title>관계 속 나 · 관계 에너지 체크 · DAWIN I:ON Lab</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJJOk9OIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxOCIgZmlsbD0iIzA4N2Y3MyIvPgogIDx0ZXh0IHg9IjMyIiB5PSIzOCIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JOk9OPC90ZXh0Pgo8L3N2Zz4K" type="image/svg+xml">
+  <style>
+:root {
+  color-scheme: light;
+  --color-bg: #f4f8f7;
+  --color-surface: #ffffff;
+  --color-ink: #18322f;
+  --color-muted: #637572;
+  --color-muted-strong: #4f5d5a; /* 배지·작은 라벨용 (연한 배경에서 AA 통과) */
+  --color-brand: #087f73;
+  --color-brand-dark: #056158;
+  --color-brand-soft: #e7f5f2;
+  --color-line: #dbe7e4;
+  --color-warm: #ffca6a;
+  --shadow-card: 0 18px 45px rgba(25, 74, 68, 0.1);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 4%, rgba(91, 206, 187, 0.22), transparent 24rem),
+    var(--color-bg);
+  color: var(--color-ink);
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+button, a { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #ffb82e; outline-offset: 3px; }
+.app-shell { width: min(100% - 32px, 720px); margin: 0 auto; padding: 24px 0 56px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--color-brand-dark); font-weight: 900; letter-spacing: -0.04em; }
+.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: var(--color-brand); color: #fff; box-shadow: 0 8px 20px rgba(8,127,115,.24); }
+.brand small { display: block; color: var(--color-muted); font-size: .72rem; font-weight: 700; letter-spacing: .01em; }
+.hero { padding: 56px 0 28px; }
+.eyebrow { color: var(--color-brand); font-size: .82rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 18px; font-size: clamp(2.25rem, 10vw, 4.6rem); line-height: 1.06; letter-spacing: -.065em; }
+h2 { font-size: clamp(1.55rem, 6vw, 2.3rem); line-height: 1.25; letter-spacing: -.035em; }
+h3 { font-size: 1.08rem; }
+.lead { max-width: 34rem; color: var(--color-muted); font-size: 1.05rem; }
+.highlight { position: relative; z-index: 0; white-space: nowrap; }
+.highlight::after { content: ""; position: absolute; z-index: -1; left: -.05em; right: -.05em; bottom: .08em; height: .34em; border-radius: 99px; background: var(--color-warm); opacity: .7; }
+.card { border: 1px solid rgba(203, 222, 218, .9); border-radius: var(--radius-lg); background: rgba(255,255,255,.96); box-shadow: var(--shadow-card); }
+.module-card { padding: 26px; }
+.module-card-spaced { margin-top: 18px; }
+.motivation-module { border-color: #e7c49b; }
+.module-number { display: inline-grid; place-items: center; width: 42px; height: 42px; margin-bottom: 36px; border-radius: 14px; background: var(--color-brand-soft); color: var(--color-brand); font-weight: 900; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
+.chip { display: inline-flex; align-items: center; min-height: 32px; padding: 5px 11px; border-radius: 99px; background: #f0f5f4; color: var(--color-muted); font-size: .82rem; font-weight: 700; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 13px 18px; border: 0; border-radius: 16px; background: var(--color-brand); color: #fff; font-weight: 800; text-decoration: none; transition: transform .15s, background .15s, opacity .15s; }
+@media (hover: hover) and (pointer: fine) { .button:hover { background: var(--color-brand-dark); transform: translateY(-1px); } }
+.button:disabled { cursor: not-allowed; opacity: .42; transform: none; }
+.button.secondary { border: 1px solid var(--color-line); background: #fff; color: var(--color-ink); }
+.button.ghost { background: transparent; color: var(--color-brand-dark); }
+.privacy-note { display: flex; gap: 10px; margin: 26px 0 0; color: var(--color-muted); font-size: .86rem; }
+.footer { padding: 32px 0 12px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.roadmap { margin-top: 44px; }
+.roadmap-list { display: grid; gap: 12px; margin-top: 20px; }
+.roadmap-card { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 18px; box-shadow: none; }
+.roadmap-card .module-number { width: 38px; height: 38px; margin: 0; border-radius: 12px; }
+.roadmap-card strong { color: var(--color-brand); font-size: .76rem; letter-spacing: .08em; }
+.roadmap-card h3 { margin: 2px 0 3px; }
+.roadmap-card p { margin: 0; color: var(--color-muted); font-size: .86rem; }
+.coming-soon { grid-column: 2; justify-self: start; padding: 4px 9px; border-radius: 99px; background: #edf3f2; color: var(--color-muted); font-size: .72rem; font-weight: 900; }
+
+.assessment-header { padding-bottom: 20px; }
+.progress-wrap { margin-top: 22px; }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--color-muted); font-size: .84rem; font-weight: 800; }
+.progress-track { overflow: hidden; height: 8px; border-radius: 99px; background: #dce9e6; }
+.progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-brand), #31b59f); transition: width .28s ease; }
+.panel { padding: 24px; }
+.assessment-title { font-size: clamp(2rem, 9vw, 3.5rem); }
+.intro-icon { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 24px; border-radius: 22px; background: var(--color-brand-soft); color: var(--color-brand); font-size: 1.8rem; }
+.guide { display: grid; gap: 11px; margin: 24px 0; padding: 0; list-style: none; }
+.guide li { display: flex; gap: 11px; align-items: flex-start; color: var(--color-muted); }
+.guide strong { color: var(--color-brand-dark); }
+.question-head { margin-bottom: 20px; }
+.question-head p { color: var(--color-muted); }
+.option-list { display: grid; gap: 11px; }
+.option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 68px; padding: 12px 14px; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s, transform .15s; }
+@media (hover: hover) and (pointer: fine) { .option:hover:not(:disabled) { border-color: #64b9ad; transform: translateY(-1px); } }
+.option:active:not(:disabled) { transform: scale(.985); }
+.scale-option:active { transform: scale(.985); }
+.option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.option:disabled:not(.selected) { cursor: default; opacity: .54; }
+.option.least { border: 2px solid #9aa5a3; background: #f2f4f4; }
+.option.least .rank-badge { background: #7d8b88; color: #fff; }
+.option.least .option-label { color: #55605e; }
+.rank-badge { flex: 0 0 56px; display: grid; place-items: center; width: 56px; height: 42px; white-space: nowrap; border-radius: 13px; background: #edf3f2; color: var(--color-muted); font-size: .8rem; font-weight: 900; }
+.selected .rank-badge { background: var(--color-brand); color: #fff; }
+.option-label { font-size: 1.04rem; font-weight: 800; }
+.rank-meaning { display: block; margin-top: 1px; color: var(--color-muted); font-size: .74rem; font-weight: 700; }
+.actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 24px; }
+.reset-row { margin-top: 10px; text-align: center; }
+.text-button { min-height: 44px; padding: 8px 14px; border: 0; background: transparent; color: var(--color-muted); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.status-message { min-height: 1.5em; color: var(--color-brand-dark); font-size: .82rem; font-weight: 700; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.scale-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.scale-options { display: grid; gap: 10px; }
+.scale-option { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 12px; width: 100%; min-height: 58px; padding: 9px 13px; border: 1px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); font-weight: 800; text-align: left; }
+@media (hover: hover) and (pointer: fine) { .scale-option:hover { border-color: #64b9ad; transform: translateY(-1px); } }
+.scale-option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.scale-number { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #edf3f2; color: var(--color-muted); }
+.scale-option.selected .scale-number { background: var(--color-brand); color: #fff; }
+
+.result-hero { padding: 28px 24px; background: linear-gradient(145deg, #087f73, #075c55); color: #fff; }
+.result-hero .eyebrow { color: #bcebe4; }
+.result-hero p { color: #d8f3ee; }
+.profile-title { font-size: clamp(2rem, 9vw, 3.8rem); }
+.score-card, .content-card { margin-top: 16px; padding: 22px; }
+.score-list { display: grid; gap: 16px; }
+.score-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-weight: 900; }
+.score-track { overflow: hidden; height: 13px; border-radius: 99px; background: #e8efed; }
+.score-fill { height: 100%; border-radius: inherit; transform-origin: left; animation: grow .7s ease both; }
+@keyframes grow { from { transform: scaleX(0); } }
+.content-grid { display: grid; gap: 16px; margin-top: 16px; }
+.content-card ul { margin: 0; padding-left: 1.25rem; color: var(--color-muted); }
+.content-card li + li { margin-top: 8px; }
+.activity-card { border-color: #efd6a1; background: #fffaf0; }
+.disclaimer { margin: 20px 4px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.result-actions { display: grid; gap: 10px; margin-top: 20px; }
+.personality-result-hero { background: linear-gradient(145deg, #6857bb, #3f327f); }
+.personality-result-hero .eyebrow { color: #ded8ff; }
+.axis-list { display: grid; gap: 16px; margin-top: 16px; }
+.axis-card { padding: 22px; }
+.axis-heading { display: grid; gap: 12px; margin-bottom: 18px; }
+.axis-heading h2 { margin-bottom: 0; }
+.tendency-badge { justify-self: start; padding: 5px 10px; border-radius: 99px; background: #edeafa; color: #54469f; font-size: .78rem; font-weight: 900; }
+.tendency-badge.balanced { background: #e9f5f2; color: var(--color-brand-dark); }
+.axis-labels, .axis-percentages { display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; }
+.axis-labels { margin-bottom: 7px; }
+.axis-percentages { margin-top: 6px; color: var(--color-muted); font-weight: 800; }
+.axis-track { display: flex; overflow: hidden; height: 16px; border-radius: 99px; background: #edf0ef; }
+.axis-left { background: #ef8c67; }
+.axis-right { background: #6e70c9; }
+.axis-details { margin-top: 18px; border-top: 1px solid var(--color-line); }
+.axis-details summary { min-height: 48px; padding-top: 13px; color: var(--color-brand-dark); font-weight: 800; cursor: pointer; }
+.axis-detail-grid { display: grid; gap: 18px; padding-top: 10px; }
+.axis-detail-grid ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.reflection-card { border-color: #cfc8ef; background: #faf9ff; }
+.reference-code-card { margin-top: 16px; padding: 22px; border-style: dashed; box-shadow: none; }
+.reference-code-card p { color: var(--color-muted); }
+.motivation-intro-icon { background: #fff1dc; color: #a85a16; }
+.motivation-result-hero { background: linear-gradient(145deg, #b96120, #733a12); }
+.motivation-result-hero .eyebrow { color: #ffe3be; }
+.motivation-map-card { margin-top: 16px; padding: 22px; }
+.motivation-map-card > p { color: var(--color-muted); }
+.motivation-map { display: grid; gap: 16px; margin-top: 22px; }
+.motive-score-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+.motive-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.motive-score-head b { min-width: 2ch; color: #7a4519; text-align: right; }
+.motive-track { overflow: hidden; height: 12px; border-radius: 99px; background: #f2ebe4; }
+.motive-fill { display: block; height: 100%; border-radius: inherit; background: #c7b5a5; transform-origin: left; animation: grow .7s ease both; }
+.motive-fill.primary { background: #b85c1b; }
+.motive-fill.supporting { background: #db893d; }
+.motive-fill.potential { background: #e9b678; }
+.motive-role { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border-radius: 99px; background: #f4ece5; color: #75451f; font-size: .7rem; font-weight: 900; }
+.motive-role.primary { background: #8f4513; color: #fff; }
+.motive-role.supporting { background: #d47728; color: #fff; }
+.motive-role.potential { background: #f4d7ad; color: #63380f; }
+.profile-notice { margin-top: 16px; padding: 22px; border-color: #e7c49b; background: #fffaf3; }
+.profile-notice.even-profile { border-color: #b9d9d2; background: #f4fbf9; }
+.profile-notice ul { margin-bottom: 12px; padding-left: 1.2rem; color: var(--color-muted); }
+.top-motive-list { display: grid; gap: 16px; margin-top: 16px; }
+.top-motive-card { padding: 22px; border-top: 5px solid #e9b678; }
+.top-motive-card.primary { border-top-color: #9f4e17; }
+.top-motive-card.supporting { border-top-color: #d47728; }
+.top-motive-heading { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px; }
+.top-motive-heading h2 { margin-bottom: 5px; }
+.motive-score-circle { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 18px; background: #fff1dc; color: #8c4818; font-size: 1.15rem; font-weight: 900; }
+.motive-need { color: #75451f; }
+.combination-card { border-color: #e2bc8d; background: #fffaf4; }
+.combination-card > p { color: var(--color-muted); }
+.ta-intro-icon { background: #e7f0ff; color: #315b9b; }
+.ta-result-hero { background: linear-gradient(145deg, #315b9b, #1f3764); }
+.ta-result-hero .eyebrow { color: #d9e7ff; }
+.transaction-grid { display: grid; gap: 14px; margin-top: 18px; }
+.transaction-card { padding: 18px; border: 1px solid var(--color-line); border-radius: 18px; background: #f8fbff; }
+.transaction-card h3 { margin-bottom: 8px; color: #315b9b; }
+.transaction-card blockquote { margin: 14px 0; padding: 12px 14px; border-left: 4px solid #6d8fc3; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.repair-line { padding: 12px 14px; border-radius: 12px; background: #eaf6f2; color: var(--color-brand-dark); }
+.scenario-list { display: grid; gap: 10px; margin-top: 16px; }
+.scenario-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.scenario-card summary { padding: 14px 16px; color: #315b9b; font-weight: 900; cursor: pointer; }
+.scenario-card p { margin: 0 16px 12px; color: var(--color-muted); }
+.top-motive-card.less-used { margin-top: 16px; border-top-color: #7795ba; }
+.motive-score-head small, .top-motive-heading small { color: var(--color-muted); font-size: .7em; }
+.stroke-intro-icon { background: #fff0f1; color: #b33b55; }
+.stroke-result-hero { background: linear-gradient(145deg, #b33b55, #71253a); }
+.stroke-result-hero .eyebrow { color: #ffdce4; }
+.stroke-options .scale-option { grid-template-columns: 42px 1fr; min-height: 66px; }
+.stroke-code { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 8px; border-radius: 9px; background: #eff2f5; color: #576f88; font-size: .76rem; }
+/* 색은 '주고받는 방향'이 아니라 '긍정(핑크) · 부정(블루) · 신호(회색)'를 뜻한다.
+   다섯 색의 상대휘도를 0.255로 맞춰(3.05:1) 톤 통일감과 밝은 강의장 가독성을 함께 확보했다. */
+.stroke-row.tone-a .stroke-code { background: #fbe9ef; color: #c82858; }
+.stroke-row.tone-c .stroke-code { background: #faeaf6; color: #bc2e92; }
+.stroke-row.tone-b .stroke-code { background: #eaf5fb; color: #23759b; }
+.stroke-row.tone-d .stroke-code { background: #eaeefa; color: #3d64d0; }
+.stroke-row.tone-e .stroke-code { background: #eff2f5; color: #576f88; }
+.stroke-row .motive-score-head b { color: #8a2c42; }
+.stroke-row .motive-score-head b small { margin-left: 2px; color: var(--color-muted); font-size: .7em; }
+.stroke-fill-a { background: #d06a89; }   /* 긍정 · 핑크 */
+.stroke-fill-c { background: #c86aac; }   /* 긍정 · 핑크(연보라) */
+.stroke-fill-b { background: #4193b9; }   /* 부정 · 블루(하늘) */
+.stroke-fill-d { background: #7189ca; }   /* 부정 · 블루(연청) */
+.stroke-fill-e { background: #838b94; }   /* 신호 · 연회색 */
+.stroke-flow-grid { display: grid; gap: 16px; }
+.stroke-flow-card { border-top: 5px solid #d95773; }
+.stroke-flow-card.negative-flow { border-top-color: #7b719b; }
+.stroke-flow-card.withdrawal-flow { border-top-color: #6f8792; }
+.stroke-pattern-list { display: grid; gap: 16px; margin-top: 16px; }
+.stroke-pattern-card { padding: 22px; }
+.role-guide-grid { display: grid; gap: 12px; margin-top: 18px; }
+.role-guide-card { padding: 16px; border: 1px solid var(--color-line); border-radius: 16px; background: #fffafb; }
+.role-guide-card h3 { color: #9c3049; }
+.role-guide-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #d95773; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-module { border-color: #9ec9c0; }
+.stress-intro-icon { background: #e5f5ee; color: #25745e; }
+.safety-note { margin: 22px 0; padding: 16px; border: 1px solid #c7ded8; border-radius: 16px; background: #f4faf8; }
+.safety-note strong { color: var(--color-brand-dark); }
+.safety-note p { margin: 5px 0 0; color: var(--color-muted); font-size: .88rem; }
+.stress-result-hero { background: linear-gradient(145deg, #347b67, #1f5044); }
+.stress-result-hero .eyebrow { color: #d8f3e9; }
+.stress-map-card { margin-top: 16px; padding: 22px; }
+.stress-map-card > p { color: var(--color-muted); }
+.stress-map { display: grid; gap: 17px; margin-top: 22px; }
+.stress-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.stress-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.stress-score-head b { min-width: 2ch; color: #2a6a58; text-align: right; }
+.stress-score-head em { padding: 2px 7px; border-radius: 99px; background: #e4f3ee; color: #226450; font-size: .68rem; font-style: normal; font-weight: 900; }
+.stress-track { overflow: hidden; height: 12px; border-radius: 99px; background: #e6efec; }
+.stress-fill { display: block; height: 100%; border-radius: inherit; background: #77aa9b; transform-origin: left; animation: grow .7s ease both; }
+.stress-row.priority .stress-fill { background: #347b67; }
+.stress-priority-list { margin-top: 28px; }
+.stress-priority-list > h2 { margin-bottom: 16px; }
+.stress-priority-card { margin-top: 16px; padding: 22px; border-top: 5px solid #347b67; }
+.stress-priority-card > p { color: var(--color-muted); }
+.stress-priority-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.stress-priority-heading h2 { margin-bottom: 5px; }
+.stress-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; background: #e5f5ee; color: #246552; font-size: 1.15rem; font-weight: 900; }
+.stress-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.stress-action-card { padding: 16px; border: 1px solid #cfe2dc; border-radius: 16px; background: #f7fbfa; }
+.stress-action-card.organization { border-color: #d9d8ea; background: #f9f8fd; }
+.stress-action-card h3 { color: #286b58; }
+.stress-action-card.organization h3 { color: #57508a; }
+.stress-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.stress-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.stress-reflection blockquote, .stress-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #4b907d; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.stress-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.stress-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #286b58; font-weight: 900; cursor: pointer; }
+.stress-domain-card > p, .stress-domain-card > h3, .stress-domain-card > ul, .stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-left: 16px; margin-right: 16px; }
+.stress-domain-card > p, .stress-domain-card > ul { color: var(--color-muted); }
+.stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-bottom: 16px; }
+.support-card { border-color: #bcd6cf; background: #f5fbf9; }
+.resilience-module { border-color: #e3cf9a; }
+.resilience-intro-icon { background: #fdf3da; color: #8a6115; }
+.resilience-result-hero { background: linear-gradient(145deg, #a8791f, #6d4c10); }
+.resilience-result-hero .eyebrow { color: #fbe9c4; }
+.resilience-map-card { margin-top: 16px; padding: 22px; }
+.resilience-map-card > p { color: var(--color-muted); }
+.resilience-map { display: grid; gap: 17px; margin-top: 22px; }
+.resilience-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.resilience-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.resilience-score-head b { min-width: 2ch; color: #7d5a14; text-align: right; }
+.resilience-score-head em { padding: 2px 7px; border-radius: 99px; font-size: .68rem; font-style: normal; font-weight: 900; }
+.resilience-score-head em.tag-strength { background: #e6f2ea; color: #256349; }
+.resilience-score-head em.tag-growth { background: #fbeedb; color: #8a6115; }
+.resilience-track { overflow: hidden; height: 12px; border-radius: 99px; background: #eeeae0; }
+.resilience-fill { display: block; height: 100%; border-radius: inherit; background: #cbb277; transform-origin: left; animation: grow .7s ease both; }
+.resilience-row.strength .resilience-fill { background: #3d8a6c; }
+.resilience-row.growth .resilience-fill { background: #a8791f; }
+.resilience-strength-list, .resilience-growth-list { margin-top: 28px; }
+.resilience-strength-list > h2, .resilience-growth-list > h2 { margin-bottom: 16px; }
+.resilience-strength-card { margin-top: 16px; padding: 22px; border-top: 5px solid #3d8a6c; }
+.resilience-growth-card { margin-top: 16px; padding: 22px; border-top: 5px solid #a8791f; }
+.resilience-strength-card > p, .resilience-growth-card > p { color: var(--color-muted); }
+.resilience-card-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.resilience-card-heading h2 { margin-bottom: 5px; }
+.resilience-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; font-size: 1.15rem; font-weight: 900; }
+.resilience-score-circle.strength { background: #e6f2ea; color: #256349; }
+.resilience-score-circle.growth { background: #fdf3da; color: #7d5a14; }
+.resilience-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.resilience-action-card { padding: 16px; border: 1px solid #e6dcc4; border-radius: 16px; background: #fdfaf3; }
+.resilience-action-card.support { border-color: #d9d8ea; background: #f9f8fd; }
+.resilience-action-card h3 { color: #7d5a14; }
+.resilience-action-card.support h3 { color: #57508a; }
+.resilience-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.resilience-environment { margin-top: 16px; padding: 16px; border-radius: 16px; background: #f4f8f7; border-left: 4px solid #3d8a6c; }
+.resilience-environment p { color: var(--color-muted); }
+.resilience-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.resilience-reflection blockquote, .resilience-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #a8791f; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.resilience-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.resilience-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.resilience-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #7d5a14; font-weight: 900; cursor: pointer; }
+.resilience-domain-card > p, .resilience-domain-card > h3, .resilience-domain-card > ul, .resilience-domain-card > blockquote { margin-left: 16px; margin-right: 16px; }
+.resilience-domain-card > p, .resilience-domain-card > ul { color: var(--color-muted); }
+.resilience-domain-card > blockquote { margin-bottom: 16px; }
+
+.hidden { display: none !important; }
+
+@media (min-width: 640px) {
+  .app-shell { padding-top: 34px; }
+  .module-card, .panel { padding: 34px; }
+  .content-grid { grid-template-columns: 1fr 1fr; }
+  .axis-heading { grid-template-columns: 1fr auto; align-items: start; }
+  .axis-detail-grid { grid-template-columns: 1fr 1fr; }
+  .transaction-grid { grid-template-columns: repeat(3, 1fr); }
+  .stroke-flow-grid { grid-template-columns: 1fr 1fr; }
+  .stroke-flow-card.withdrawal-flow { grid-column: 1 / -1; }
+  .role-guide-grid { grid-template-columns: 1fr 1fr; }
+  .stress-action-grid { grid-template-columns: 1fr 1fr; }
+  .resilience-action-grid { grid-template-columns: 1fr 1fr; }
+  .result-actions { grid-template-columns: 1fr 1fr; }
+  .roadmap-card { grid-template-columns: auto 1fr auto; align-items: center; }
+  .coming-soon { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+
+/* 양극 선택 진행 안내 — 선택지가 아니라 '읽는 안내'로 보이게 한다 */
+.status-message.step-most,
+.status-message.step-least,
+.status-message.step-done {
+  display: block;
+  margin: 2px 0 16px;
+  padding: 11px 16px;
+  border: 0;
+  border-left: 5px solid transparent;
+  border-radius: 4px 14px 14px 4px;
+  text-align: left;
+  min-height: 0;
+}
+.status-message .step-tag {
+  display: block;
+  margin-bottom: 3px;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  opacity: .72;
+}
+.status-message .step-text {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: .015em;
+  line-height: 1.4;
+}
+.status-message.step-most {
+  background: var(--color-brand-soft);
+  border-left-color: var(--color-brand);
+  color: var(--color-brand-dark);
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-least {
+  background: #eef1f0;
+  border-left-color: #7d8b88;
+  color: #3d4946;
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-done {
+  background: transparent;
+  border-left-color: #cfd8d6;
+  color: var(--color-muted);
+  animation: none;
+}
+.status-message.step-done .step-text { font-weight: 600; }
+@keyframes step-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .58; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-message.step-most,
+  .status-message.step-least { animation: none; }
+}
+
+
+/* 진행 버튼 하단 고정 — 묶음마다 스크롤해서 누르지 않도록 (DISC 전용) */
+.actions.actions-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  margin: 18px -24px -24px;
+  padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  border-top: 1px solid rgba(203, 222, 218, .9);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 -10px 22px -14px rgba(15, 50, 45, .3);
+}
+/* 마지막 선택지가 고정 버튼에 가리지 않도록 여백 */
+#question-view .option-list { padding-bottom: 4px; }
+.reset-row { margin-top: 10px; text-align: center; }
+
+
+/* 2묶음부터는 머리말을 줄여 선택지 공간을 확보한다 (DISC 전용) */
+.question-head.compact { margin-bottom: 12px; }
+.question-head.compact .eyebrow { display: none; }
+.question-head.compact h2 { font-size: 1.22rem; line-height: 1.3; margin: 0; }
+
+
+/* 결과 저장 — 교육 후에도 남는 자산 */
+.save-card { margin-top: 16px; padding: 22px; }
+.save-card h3 { margin: 0 0 6px; }
+.save-card p { margin: 0 0 14px; color: var(--color-muted); }
+.copy-status { min-height: 1.4em; margin: 10px 0 0; font-weight: 700; }
+.copy-status.done { color: var(--color-brand-dark); }
+.copy-status.fail { color: #b4593f; }
+.copy-fallback { margin-top: 8px; }
+.copy-fallback summary { color: var(--color-muted); font-size: .88rem; cursor: pointer; }
+.copy-fallback textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+
+/* 쌍 비교 선택 (성격 선호도 4축) */
+.pair-option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 78px; padding: 16px; border: 1.5px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s; }
+.pair-option.selected { border-color: var(--color-brand); background: var(--color-brand-soft); }
+.pair-option:active { transform: scale(.985); }
+.pair-mark { flex: 0 0 36px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: #eef3f2; color: var(--color-muted); font-weight: 900; }
+.pair-option.selected .pair-mark { background: var(--color-brand); color: #fff; }
+.pair-text { font-size: 1.06rem; font-weight: 750; line-height: 1.35; }
+.scale-options.pair-mode { gap: 8px; }
+@media (hover: hover) and (pointer: fine) { .pair-option:hover { border-color: #64b9ad; } }
+
+/* ── 결과 내보내기 (PDF · PNG) ── */
+.save-actions { display: grid; gap: 10px; }
+.save-actions .button { width: 100%; }
+
+.export-overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 32, 30, .62); overflow: auto; }
+.export-sheet { width: min(100%, 560px); max-height: 92vh; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px; background: #fff; }
+.export-hint { margin: 0; color: var(--color-muted); font-size: .92rem; line-height: 1.5; }
+.export-preview { flex: 1 1 auto; min-height: 0; overflow: auto; border: 1px solid var(--color-line); border-radius: 12px; background: #fff; -webkit-overflow-scrolling: touch; }
+.export-preview img { display: block; width: 100%; height: auto; }
+.export-title { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.export-url { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--color-line); border-radius: 12px; background: #f7faf9; color: var(--color-ink); font-size: .9rem; }
+/* 화면 밖 임시 무대 — 이미지 저장용으로만 쓰고 바로 지운다. */
+.export-stage { box-sizing: border-box; }
+/* 막대가 자라나는 등장 애니메이션을 끈다.
+   복제하면 애니메이션이 처음부터 다시 시작하는데, 그 시작 시점(높이 0)이 그대로 찍혀
+   그래프가 텅 빈 이미지가 나온다. */
+.export-stage, .export-stage *, .export-stage *::before, .export-stage *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ── 인쇄(PDF 저장) ── */
+@media print {
+  :root { --color-brand-soft: #f4f4f4; }
+  body { background: #fff; }
+  .assessment-header,
+  #intro-view,
+  #question-view,
+  .save-card,
+  .export-stage,
+  .export-holder,
+  .export-overlay,
+  .actions,
+  .actions-sticky { display: none !important; }
+  #result-view:not(.hidden) { display: block !important; }
+  .app-shell { width: 100%; padding: 0; }
+  .card { break-inside: avoid; page-break-inside: avoid; box-shadow: none !important; border: 1px solid #d9dedd; }
+  details > summary { display: none !important; }
+  a[href]::after { content: none !important; }
+  @page { margin: 12mm; }
+}
+
+/* ── 가독성 보강 (2026-08-22 접근성 점검) ──
+   강의장 조명·노안 사용자를 기준으로 작은 라벨의 대비와 크기를 올린다. */
+body { overscroll-behavior-y: contain; }
+
+.rank-badge, .scale-number, .pair-mark, .chip { color: var(--color-muted-strong); }
+
+.eyebrow { font-size: .88rem; }
+.motive-role { font-size: .82rem; min-height: 28px; padding: 3px 10px; }
+.motive-role.supporting { background: #b0601c; }
+.stress-score-head em, .resilience-score-head em { font-size: .8rem; padding: 3px 9px; }
+.axis-labels, .axis-percentages, .tendency-badge { font-size: .84rem; }
+
+/* 결과 상단 문구는 밝은 조명에서도 읽히도록 흰색에 가깝게 */
+.result-hero .eyebrow,
+.personality-result-hero .eyebrow,
+.motivation-result-hero .eyebrow,
+.ta-result-hero .eyebrow,
+.stroke-result-hero .eyebrow,
+.stress-result-hero .eyebrow,
+.resilience-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+.result-hero p { color: rgba(255, 255, 255, .93); }
+
+/* 복사 실패 시 유일한 복구 경로 — 손가락으로 눌리는 크기로 */
+.copy-fallback summary {
+  display: flex; align-items: center; min-height: 48px; padding: 10px 4px;
+  color: var(--color-muted-strong); font-size: .95rem; font-weight: 700;
+}
+
+/* 포커스 표시를 어두운 링으로 (흰 배경 대비 확보) */
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid #18322f;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 184, 46, .55);
+}
+
+@media (max-width: 360px) {
+  h1 { font-size: clamp(1.9rem, 9vw, 4.6rem); }
+  .highlight { white-space: normal; }
+}
+
+/* 결과를 읽는 순서 안내 */
+.stability-card h3 { margin: 14px 0 6px; font-size: .95rem; color: var(--color-brand-dark); }
+.stability-card h3:first-of-type { margin-top: 4px; }
+.stability-card p { color: var(--color-muted); }
+
+/* Stroke — 내가 하는 행동(A·B) / 내가 놓인 환경(C·D) 분리 */
+/* 블록 구분은 제목이 하고, 색은 긍정·부정 구분에만 쓴다. 테두리는 중립으로. */
+.stroke-give-card, .stroke-receive-card, .stroke-signal-card { border-left: 4px solid var(--color-line); }
+.stroke-signal-card h2 small { color: var(--color-muted-strong); font-weight: 700; }
+.stroke-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 4px; padding: 0; list-style: none; font-size: .84rem; color: var(--color-muted-strong); }
+.stroke-legend li { display: flex; align-items: center; gap: 6px; }
+.stroke-legend i { width: 14px; height: 14px; border-radius: 5px; }
+
+/* ── 결과 화면: 결과만 보기 / 자세히 보기 ── */
+.result-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 14px; padding: 6px; border-radius: 16px; background: var(--color-brand-soft); }
+.result-tab { min-height: 48px; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--color-brand-dark); font-weight: 800; font-size: .98rem; }
+.result-tab.active { background: #fff; color: var(--color-ink); box-shadow: 0 2px 10px rgba(25, 74, 68, .12); }
+.result-panel:focus { outline: none; }
+.result-panel-hint { margin: 18px 4px 0; color: var(--color-muted-strong); font-size: .9rem; line-height: 1.6; }
+@media (hover: hover) and (pointer: fine) { .result-tab:not(.active):hover { background: rgba(255, 255, 255, .6); } }
+@media print {
+  .result-tabs, .result-panel-hint { display: none !important; }
+  .result-panel, .result-panel.hidden { display: block !important; }
+}
+
+/* 전체 수준 — 상대 순위보다 먼저 읽는 결과값 */
+.overall-level-card { padding: 24px; border-left: 5px solid var(--color-line); }
+.overall-level-card h2 { margin: 4px 0 2px; }
+.overall-level-card h2 strong { color: var(--color-brand-dark); }
+/* 문장이 주인공, 숫자는 보조. 크게 띄우면 성적표처럼 읽힌다. */
+.overall-figure { margin: 8px 0 12px; color: var(--color-muted-strong); font-size: .92rem; font-weight: 700; }
+.overall-figure b { margin-left: 4px; color: var(--color-ink); font-size: 1.5rem; font-weight: 900; }
+.overall-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-line); color: var(--color-muted-strong); font-size: .84rem; line-height: 1.65; }
+/* 색은 점수의 높낮이가 아니라 상태를 뜻한다. 두 모듈은 방향이 반대여서
+   스트레스는 낮을수록, 회복탄력성은 높을수록 tone-good 이 된다. */
+.overall-level-card.tone-good { border-left-color: #4f8f78; }
+.overall-level-card.tone-watch { border-left-color: #c08a2e; }
+.overall-level-card.tone-alert { border-left-color: #b0601c; }
+.overall-level-card.tone-good h2 strong { color: #35705c; }
+.overall-level-card.tone-watch h2 strong { color: #8a6115; }
+.overall-level-card.tone-alert h2 strong { color: #8a4a12; }
+
+/* ── 감성지수(EQ) 5영역 ── */
+.eq-module { border-color: #d3bcdd; }
+.eq-intro-icon { background: #f6ecfa; color: #7a3f8a; }
+.eq-result-hero { background: linear-gradient(145deg, #8e4f9e, #58306b); }
+.eq-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+
+/* 막대그래프 — 종이 실습지 2페이지 서식과 같은 0~20 눈금.
+   손으로 옮겨 그린 그래프와 모양이 같아야 강의장에서 나란히 놓고 볼 수 있다. */
+.eq-chart-card { margin-top: 16px; padding: 22px 18px; }
+.eq-chart-card > p { color: var(--color-muted); }
+.eq-chart { margin-top: 22px; }
+
+/* 좌·우 눈금 라벨(각 28px)을 뺀 안쪽이 막대 영역. 머리·발 라벨도 같은 폭을 쓴다. */
+.eq-chart-heads, .eq-chart-foots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 28px; }
+.eq-chart-heads { align-items: stretch; margin-bottom: 8px; }
+.eq-head { display: flex; overflow: hidden; align-items: center; justify-content: center; justify-self: center; width: 100%; max-width: 64px; min-height: 2.9em; padding: 5px 2px; border: 1px solid var(--color-line); border-radius: 10px; background: #fbfdfc; color: var(--color-muted-strong); font-size: .76rem; font-weight: 800; line-height: 1.25; text-align: center; }
+.eq-chart-foots { margin-top: 10px; }
+.eq-foot { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 7px; width: 100%; max-width: 64px; min-height: 42px; border: 1px solid var(--color-line); border-radius: 10px; background: #f7faf9; }
+.eq-foot b { font-size: 1rem; font-weight: 900; }
+.eq-foot span { color: var(--color-ink); font-size: 1.08rem; font-weight: 900; }
+
+.eq-chart-body { position: relative; height: 240px; }
+.eq-gridlines { position: absolute; inset: 0; }
+.eq-grid-row { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 4px; transform: translateY(50%); }
+.eq-grid-row span { flex: 0 0 24px; color: var(--color-muted-strong); font-size: .68rem; font-weight: 700; text-align: center; }
+.eq-grid-row i { flex: 1 1 auto; border-top: 1px dashed #d5e2df; }
+.eq-grid-row.base i { border-top: 2px solid #9fb3af; }
+
+.eq-chart-plot { position: absolute; top: 0; right: 28px; bottom: 0; left: 28px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.eq-col { display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+/* 다섯 색은 상대휘도를 0.254~0.257로 맞춰 어느 한 칸도 튀어 보이지 않게 했다. */
+.eq-bar { display: block; width: 100%; max-width: 64px; min-height: 3px; border-radius: 7px 7px 0 0; transform-origin: bottom; animation: eq-rise .7s ease backwards; }
+@keyframes eq-rise { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .eq-bar { animation: none; } }
+
+@media (max-width: 380px) {
+  .eq-chart-heads, .eq-chart-foots { margin: 0 22px; gap: 5px; }
+  .eq-chart-plot { right: 22px; left: 22px; gap: 5px; }
+  .eq-grid-row span { flex-basis: 18px; font-size: .62rem; }
+  .eq-head { font-size: .7rem; }
+}
+
+/* 결과 카드 */
+.eq-strength-list, .eq-growth-list { margin-top: 22px; }
+.eq-strength-card, .eq-growth-card { margin-top: 16px; padding: 22px; }
+.eq-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.eq-card-heading h2 { margin: 2px 0 0; }
+.eq-score-circle { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #fff; font-size: 1.15rem; font-weight: 900; }
+.eq-score-circle.muted { background: #eef2f1; color: var(--color-muted-strong); }
+.eq-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #faf5fc; }
+.eq-reflection blockquote, .eq-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #8e4f9e; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.eq-emphasis { color: var(--color-muted-strong); font-size: .9rem; }
+.eq-domain-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: #f4f7f6; color: var(--color-muted-strong); font-size: .88rem; line-height: 1.6; }
+
+.eq-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.eq-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.eq-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #6d3a7c; font-weight: 900; cursor: pointer; }
+.eq-domain-card summary span { display: flex; align-items: center; gap: 9px; }
+.eq-domain-card summary i { flex: 0 0 auto; width: 14px; height: 14px; border-radius: 5px; }
+.eq-domain-card > p, .eq-domain-card > h3, .eq-domain-card > ul, .eq-domain-card > blockquote { margin-right: 16px; margin-left: 16px; }
+.eq-domain-card > p, .eq-domain-card > ul { color: var(--color-muted); }
+.eq-domain-card > blockquote { margin-bottom: 16px; }
+
+/* 인쇄(PDF 저장) 때 막대 색이 빠지면 그래프가 빈 칸이 된다. */
+@media print {
+  .eq-bar, .eq-foot, .eq-head, .eq-domain-card summary i {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .eq-bar { animation: none; }
+}
+
+/* 성격 — 자세히 탭의 축별 상세 안내 */
+.axis-guide-list { display: grid; gap: 10px; margin-top: 18px; }
+.axis-guide-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.axis-guide-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #4b3f96; font-weight: 900; cursor: pointer; }
+.axis-guide-card .axis-detail-grid { margin: 0 16px 16px; }
+
+/* 행동경향(DISC) — 자세히 탭의 경향별 안내 묶음 */
+.disc-guide-section { margin-top: 22px; }
+.disc-guide-section > h2 { margin-bottom: 4px; }
+
+/* 배포 버전 표시 — 폰에서 지금 보고 있는 파일이 최신인지 눈으로 확인하는 용도 */
+.build-stamp {
+  margin: 0; padding: 10px 16px 24px;
+  color: var(--color-muted); font-size: .72rem; text-align: center; letter-spacing: .02em;
+}
+@media print { .build-stamp { display: none !important; } }
+
+</style>
+</head>
+<body>
+  <noscript>
+    <div class="app-shell"><div class="safety-note"><strong>브라우저 확인이 필요합니다</strong>
+      <p>이 체크는 자바스크립트가 켜져 있어야 동작합니다. 크롬이나 사파리로 다시 열어 주시고, 그래도 화면이 넘어가지 않으면 강사에게 알려 주세요.</p></div></div>
+  </noscript>
+  <main class="app-shell">
+    <header class="assessment-header">
+      <a class="brand" href="./index.html" aria-label="DAWIN I:ON Lab 홈"><span class="brand-mark">I:ON</span><span>DAWIN I:ON Lab<small>관계 속 나</small></span></a>
+      <div id="progress" class="progress-wrap hidden" aria-label="진단 진행률">
+        <div class="progress-info"><span id="progress-label">1 / 30</span><span id="progress-percent">3%</span></div>
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+    </header>
+    <section id="intro-view" class="card panel">
+      <div class="intro-icon ta-intro-icon" aria-hidden="true">↔</div>
+      <p class="eyebrow">관계 속 나 · 관계 에너지 체크</p>
+      <h1 class="assessment-title">관계에서 자주 꺼내는<br>나의 반응을 살펴보세요.</h1>
+      <p class="lead">최근 6개월의 일·협업과 일상에서 실제로 반복된 모습을 떠올려 답해 주세요.</p>
+      <ul class="guide">
+        <li><strong>다섯 에너지</strong><span>누구나 다섯 가지를 모두 쓰며 상황에 따라 조절할 수 있습니다.</span></li>
+        <li><strong>상대적 경향</strong><span>높고 낮음은 능력의 우열이나 이상적인 성격을 뜻하지 않습니다.</span></li>
+        <li><strong>DAWIN 독자 모델</strong><span>교류분석(TA)을 교육적으로 참고해 문항·채점·해석을 새로 구성했습니다.</span></li>
+      </ul>
+      <button id="start-button" class="button" type="button">체크 시작하기</button>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>응답은 현재 화면에서만 계산되며 저장되거나 전송되지 않습니다.</span></p>
+    </section>
+    <section id="question-view" class="card panel hidden" aria-labelledby="question-title">
+      <div class="question-head"><p class="eyebrow">최근 6개월의 실제 모습</p><h2 id="question-title"></h2><p>바람직한 모습보다 자연스럽고 자주 나타난 반응을 선택해 주세요.</p></div>
+      <fieldset class="scale-fieldset"><legend class="sr-only">동의 정도 선택</legend><div id="scale-options" class="scale-options"></div></fieldset>
+      <p id="status-message" class="status-message" aria-live="polite">한 가지 응답을 선택해 주세요.</p>
+      <div class="actions"><button id="previous-button" class="button secondary" type="button">이전</button><button id="next-button" class="button" type="button" disabled>다음</button></div>
+    </section>
+    <section id="result-view" class="hidden" aria-live="polite"></section>
+  </main>
+  <script>/*! html-to-image v1.11.11 | (c) 2017-2026 W.Y. | MIT License | https://github.com/bubkoo/html-to-image */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).htmlToImage={})}(this,(function(t){"use strict";function e(t,e,n,r){return new(n||(n=Promise))((function(i,o){function u(t){try{a(r.next(t))}catch(t){o(t)}}function c(t){try{a(r.throw(t))}catch(t){o(t)}}function a(t){var e;t.done?i(t.value):(e=t.value,e instanceof n?e:new n((function(t){t(e)}))).then(u,c)}a((r=r.apply(t,e||[])).next())}))}function n(t,e){var n,r,i,o,u={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return o={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function c(c){return function(a){return function(c){if(n)throw new TypeError("Generator is already executing.");for(;o&&(o=0,c[0]&&(u=0)),u;)try{if(n=1,r&&(i=2&c[0]?r.return:c[0]?r.throw||((i=r.return)&&i.call(r),0):r.next)&&!(i=i.call(r,c[1])).done)return i;switch(r=0,i&&(c=[2&c[0],i.value]),c[0]){case 0:case 1:i=c;break;case 4:return u.label++,{value:c[1],done:!1};case 5:u.label++,r=c[1],c=[0];continue;case 7:c=u.ops.pop(),u.trys.pop();continue;default:if(!(i=u.trys,(i=i.length>0&&i[i.length-1])||6!==c[0]&&2!==c[0])){u=0;continue}if(3===c[0]&&(!i||c[1]>i[0]&&c[1]<i[3])){u.label=c[1];break}if(6===c[0]&&u.label<i[1]){u.label=i[1],i=c;break}if(i&&u.label<i[2]){u.label=i[2],u.ops.push(c);break}i[2]&&u.ops.pop(),u.trys.pop();continue}c=e.call(t,u)}catch(t){c=[6,t],r=0}finally{n=i=0}if(5&c[0])throw c[1];return{value:c[0]?c[1]:void 0,done:!0}}([c,a])}}}var r,i=(r=0,function(){return r+=1,"u".concat("0000".concat((Math.random()*Math.pow(36,4)<<0).toString(36)).slice(-4)).concat(r)});function o(t){for(var e=[],n=0,r=t.length;n<r;n++)e.push(t[n]);return e}function u(t,e){var n=(t.ownerDocument.defaultView||window).getComputedStyle(t).getPropertyValue(e);return n?parseFloat(n.replace("px","")):0}function c(t,e){void 0===e&&(e={});var n,r,i,o=e.width||(r=u(n=t,"border-left-width"),i=u(n,"border-right-width"),n.clientWidth+r+i),c=e.height||function(t){var e=u(t,"border-top-width"),n=u(t,"border-bottom-width");return t.clientHeight+e+n}(t);return{width:o,height:c}}var a=16384;function s(t,e){return void 0===e&&(e={}),t.toBlob?new Promise((function(n){t.toBlob(n,e.type?e.type:"image/png",e.quality?e.quality:1)})):new Promise((function(n){for(var r=window.atob(t.toDataURL(e.type?e.type:void 0,e.quality?e.quality:void 0).split(",")[1]),i=r.length,o=new Uint8Array(i),u=0;u<i;u+=1)o[u]=r.charCodeAt(u);n(new Blob([o],{type:e.type?e.type:"image/png"}))}))}function l(t){return new Promise((function(e,n){var r=new Image;r.decode=function(){return e(r)},r.onload=function(){return e(r)},r.onerror=n,r.crossOrigin="anonymous",r.decoding="async",r.src=t}))}function f(t){return e(this,void 0,void 0,(function(){return n(this,(function(e){return[2,Promise.resolve().then((function(){return(new XMLSerializer).serializeToString(t)})).then(encodeURIComponent).then((function(t){return"data:image/svg+xml;charset=utf-8,".concat(t)}))]}))}))}function h(t,r,i){return e(this,void 0,void 0,(function(){var e,o,u;return n(this,(function(n){return e="http://www.w3.org/2000/svg",o=document.createElementNS(e,"svg"),u=document.createElementNS(e,"foreignObject"),o.setAttribute("width","".concat(r)),o.setAttribute("height","".concat(i)),o.setAttribute("viewBox","0 0 ".concat(r," ").concat(i)),u.setAttribute("width","100%"),u.setAttribute("height","100%"),u.setAttribute("x","0"),u.setAttribute("y","0"),u.setAttribute("externalResourcesRequired","true"),o.appendChild(u),u.appendChild(t),[2,f(o)]}))}))}var d=function(t,e){if(t instanceof e)return!0;var n=Object.getPrototypeOf(t);return null!==n&&(n.constructor.name===e.name||d(n,e))};function v(t,e,n){var r=".".concat(t,":").concat(e),i=n.cssText?function(t){var e=t.getPropertyValue("content");return"".concat(t.cssText," content: '").concat(e.replace(/'|"/g,""),"';")}(n):function(t){return o(t).map((function(e){var n=t.getPropertyValue(e),r=t.getPropertyPriority(e);return"".concat(e,": ").concat(n).concat(r?" !important":"",";")})).join(" ")}(n);return document.createTextNode("".concat(r,"{").concat(i,"}"))}function p(t,e,n){var r=window.getComputedStyle(t,n),o=r.getPropertyValue("content");if(""!==o&&"none"!==o){var u=i();try{e.className="".concat(e.className," ").concat(u)}catch(t){return}var c=document.createElement("style");c.appendChild(v(u,n,r)),e.appendChild(c)}}var g="application/font-woff",m="image/jpeg",w={woff:g,woff2:g,ttf:"application/font-truetype",eot:"application/vnd.ms-fontobject",png:"image/png",jpg:m,jpeg:m,gif:"image/gif",tiff:"image/tiff",svg:"image/svg+xml",webp:"image/webp"};function b(t){var e=function(t){var e=/\.([^./]*?)$/g.exec(t);return e?e[1]:""}(t).toLowerCase();return w[e]||""}function y(t){return-1!==t.search(/^(data:)/)}function x(t,e){return"data:".concat(e,";base64,").concat(t)}function S(t,r,i){return e(this,void 0,void 0,(function(){var e,o;return n(this,(function(n){switch(n.label){case 0:return[4,fetch(t,r)];case 1:if(404===(e=n.sent()).status)throw new Error('Resource "'.concat(e.url,'" not found'));return[4,e.blob()];case 2:return o=n.sent(),[2,new Promise((function(t,n){var r=new FileReader;r.onerror=n,r.onloadend=function(){try{t(i({res:e,result:r.result}))}catch(t){n(t)}},r.readAsDataURL(o)}))]}}))}))}var E={};function C(t,r,i){return e(this,void 0,void 0,(function(){var e,o,u,c,a;return n(this,(function(n){switch(n.label){case 0:if(e=function(t,e,n){var r=t.replace(/\?.*/,"");return n&&(r=t),/ttf|otf|eot|woff2?/i.test(r)&&(r=r.replace(/.*\//,"")),e?"[".concat(e,"]").concat(r):r}(t,r,i.includeQueryParams),null!=E[e])return[2,E[e]];i.cacheBust&&(t+=(/\?/.test(t)?"&":"?")+(new Date).getTime()),n.label=1;case 1:return n.trys.push([1,3,,4]),[4,S(t,i.fetchRequestInit,(function(t){var e=t.res,n=t.result;return r||(r=e.headers.get("Content-Type")||""),function(t){return t.split(/,/)[1]}(n)}))];case 2:return u=n.sent(),o=x(u,r),[3,4];case 3:return c=n.sent(),o=i.imagePlaceholder||"",a="Failed to fetch resource: ".concat(t),c&&(a="string"==typeof c?c:c.message),a&&console.warn(a),[3,4];case 4:return E[e]=o,[2,o]}}))}))}function P(t){return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){return"data:,"===(e=t.toDataURL())?[2,t.cloneNode(!1)]:[2,l(e)]}))}))}function R(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return t.currentSrc?(e=document.createElement("canvas"),i=e.getContext("2d"),e.width=t.clientWidth,e.height=t.clientHeight,null==i||i.drawImage(t,0,0,e.width,e.height),[2,l(e.toDataURL())]):(o=t.poster,u=b(o),[4,C(o,u,r)]);case 1:return[2,l(n.sent())]}}))}))}function T(t){var r;return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return e.trys.push([0,3,,4]),(null===(r=null==t?void 0:t.contentDocument)||void 0===r?void 0:r.body)?[4,L(t.contentDocument.body,{},!0)]:[3,2];case 1:return[2,e.sent()];case 2:return[3,4];case 3:return e.sent(),[3,4];case 4:return[2,t.cloneNode(!1)]}}))}))}function A(t,e){return d(e,Element)&&(function(t,e){var n=e.style;if(n){var r=window.getComputedStyle(t);r.cssText?(n.cssText=r.cssText,n.transformOrigin=r.transformOrigin):o(r).forEach((function(i){var o=r.getPropertyValue(i);if("font-size"===i&&o.endsWith("px")){var u=Math.floor(parseFloat(o.substring(0,o.length-2)))-.1;o="".concat(u,"px")}d(t,HTMLIFrameElement)&&"display"===i&&"inline"===o&&(o="block"),"d"===i&&e.getAttribute("d")&&(o="path(".concat(e.getAttribute("d"),")")),n.setProperty(i,o,r.getPropertyPriority(i))}))}}(t,e),function(t,e){p(t,e,":before"),p(t,e,":after")}(t,e),function(t,e){d(t,HTMLTextAreaElement)&&(e.innerHTML=t.value),d(t,HTMLInputElement)&&e.setAttribute("value",t.value)}(t,e),function(t,e){if(d(t,HTMLSelectElement)){var n=e,r=Array.from(n.children).find((function(e){return t.value===e.getAttribute("value")}));r&&r.setAttribute("selected","")}}(t,e)),e}function L(t,r,i){return e(this,void 0,void 0,(function(){return n(this,(function(u){return i||!r.filter||r.filter(t)?[2,Promise.resolve(t).then((function(t){return function(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){return d(t,HTMLCanvasElement)?[2,P(t)]:d(t,HTMLVideoElement)?[2,R(t,r)]:d(t,HTMLIFrameElement)?[2,T(t)]:[2,t.cloneNode(!1)]}))}))}(t,r)})).then((function(i){return function(t,r,i){var u,c;return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){switch(n.label){case 0:return e=[],0===(e=null!=(a=t).tagName&&"SLOT"===a.tagName.toUpperCase()&&t.assignedNodes?o(t.assignedNodes()):d(t,HTMLIFrameElement)&&(null===(u=t.contentDocument)||void 0===u?void 0:u.body)?o(t.contentDocument.body.childNodes):o((null!==(c=t.shadowRoot)&&void 0!==c?c:t).childNodes)).length||d(t,HTMLVideoElement)?[2,r]:[4,e.reduce((function(t,e){return t.then((function(){return L(e,i)})).then((function(t){t&&r.appendChild(t)}))}),Promise.resolve())];case 1:return n.sent(),[2,r]}var a}))}))}(t,i,r)})).then((function(e){return A(t,e)})).then((function(t){return function(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u,c,a,s,l,f,h,d,v,p;return n(this,(function(n){switch(n.label){case 0:if(0===(e=t.querySelectorAll?t.querySelectorAll("use"):[]).length)return[2,t];i={},p=0,n.label=1;case 1:return p<e.length?(o=e[p],(u=o.getAttribute("xlink:href"))?(c=t.querySelector(u),a=document.querySelector(u),c||!a||i[u]?[3,3]:(s=i,l=u,[4,L(a,r,!0)])):[3,3]):[3,4];case 2:s[l]=n.sent(),n.label=3;case 3:return p++,[3,1];case 4:if((f=Object.values(i)).length){for(h="http://www.w3.org/1999/xhtml",(d=document.createElementNS(h,"svg")).setAttribute("xmlns",h),d.style.position="absolute",d.style.width="0",d.style.height="0",d.style.overflow="hidden",d.style.display="none",v=document.createElementNS(h,"defs"),d.appendChild(v),p=0;p<f.length;p++)v.appendChild(f[p]);t.appendChild(d)}return[2,t]}}))}))}(t,r)}))]:[2,null]}))}))}var N=/url\((['"]?)([^'"]+?)\1\)/g,k=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,I=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function D(t,r,i,o,u){return e(this,void 0,void 0,(function(){var e,c,a,s;return n(this,(function(n){switch(n.label){case 0:return n.trys.push([0,5,,6]),e=i?function(t,e){if(t.match(/^[a-z]+:\/\//i))return t;if(t.match(/^\/\//))return window.location.protocol+t;if(t.match(/^[a-z]+:/i))return t;var n=document.implementation.createHTMLDocument(),r=n.createElement("base"),i=n.createElement("a");return n.head.appendChild(r),n.body.appendChild(i),e&&(r.href=e),i.href=t,i.href}(r,i):r,c=b(r),a=void 0,u?[4,u(e)]:[3,2];case 1:return s=n.sent(),a=x(s,c),[3,4];case 2:return[4,C(e,c,o)];case 3:a=n.sent(),n.label=4;case 4:return[2,t.replace((l=r,f=l.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1"),new RegExp("(url\\(['\"]?)(".concat(f,")(['\"]?\\))"),"g")),"$1".concat(a,"$3"))];case 5:return n.sent(),[3,6];case 6:return[2,t]}var l,f}))}))}function M(t){return-1!==t.search(N)}function H(t,r,i){return e(this,void 0,void 0,(function(){var e,o;return n(this,(function(n){return M(t)?(e=function(t,e){var n=e.preferredFontFormat;return n?t.replace(I,(function(t){for(;;){var e=k.exec(t)||[],r=e[0],i=e[2];if(!i)return"";if(i===n)return"src: ".concat(r,";")}})):t}(t,i),o=function(t){var e=[];return t.replace(N,(function(t,n,r){return e.push(r),t})),e.filter((function(t){return!y(t)}))}(e),[2,o.reduce((function(t,e){return t.then((function(t){return D(t,e,r,i)}))}),Promise.resolve(e))]):[2,t]}))}))}function V(t,r,i){var o;return e(this,void 0,void 0,(function(){var e,u;return n(this,(function(n){switch(n.label){case 0:return(e=null===(o=r.style)||void 0===o?void 0:o.getPropertyValue(t))?[4,H(e,null,i)]:[3,2];case 1:return u=n.sent(),r.style.setProperty(t,u,r.style.getPropertyPriority(t)),[2,!0];case 2:return[2,!1]}}))}))}function F(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,V("background",t,r)];case 1:return e.sent()?[3,3]:[4,V("background-image",t,r)];case 2:e.sent(),e.label=3;case 3:return[4,V("mask",t,r)];case 4:return e.sent()?[3,6]:[4,V("mask-image",t,r)];case 5:e.sent(),e.label=6;case 6:return[2]}}))}))}function j(t,r){return e(this,void 0,void 0,(function(){var e,i,o;return n(this,(function(n){switch(n.label){case 0:return(e=d(t,HTMLImageElement))&&!y(t.src)||d(t,SVGImageElement)&&!y(t.href.baseVal)?[4,C(i=e?t.src:t.href.baseVal,b(i),r)]:[2];case 1:return o=n.sent(),[4,new Promise((function(n,r){t.onload=n,t.onerror=r;var i=t;i.decode&&(i.decode=n),"lazy"===i.loading&&(i.loading="eager"),e?(t.srcset="",t.src=o):t.href.baseVal=o}))];case 2:return n.sent(),[2]}}))}))}function q(t,r){return e(this,void 0,void 0,(function(){var e,i;return n(this,(function(n){switch(n.label){case 0:return e=o(t.childNodes),i=e.map((function(t){return U(t,r)})),[4,Promise.all(i).then((function(){return t}))];case 1:return n.sent(),[2]}}))}))}function U(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return d(t,Element)?[4,F(t,r)]:[3,4];case 1:return e.sent(),[4,j(t,r)];case 2:return e.sent(),[4,q(t,r)];case 3:e.sent(),e.label=4;case 4:return[2]}}))}))}var O={};function B(t){return e(this,void 0,void 0,(function(){var e,r;return n(this,(function(n){switch(n.label){case 0:return null!=(e=O[t])?[2,e]:[4,fetch(t)];case 1:return[4,n.sent().text()];case 2:return r=n.sent(),e={url:t,cssText:r},O[t]=e,[2,e]}}))}))}function z(t,r){return e(this,void 0,void 0,(function(){var i,o,u,c,a=this;return n(this,(function(s){return i=t.cssText,o=/url\(["']?([^"')]+)["']?\)/g,u=i.match(/url\([^)]+\)/g)||[],c=u.map((function(u){return e(a,void 0,void 0,(function(){var e;return n(this,(function(n){return(e=u.replace(o,"$1")).startsWith("https://")||(e=new URL(e,t.url).href),[2,S(e,r.fetchRequestInit,(function(t){var e=t.result;return i=i.replace(u,"url(".concat(e,")")),[u,e]}))]}))}))})),[2,Promise.all(c).then((function(){return i}))]}))}))}function W(t){if(null==t)return[];for(var e=[],n=t.replace(/(\/\*[\s\S]*?\*\/)/gi,""),r=new RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){if(null===(u=r.exec(n)))break;e.push(u[0])}n=n.replace(r,"");for(var i=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi,o=new RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){var u;if(null===(u=i.exec(n))){if(null===(u=o.exec(n)))break;i.lastIndex=o.lastIndex}else o.lastIndex=i.lastIndex;e.push(u[0])}return e}function $(t,r){return e(this,void 0,void 0,(function(){var e,i;return n(this,(function(n){return e=[],i=[],t.forEach((function(e){if("cssRules"in e)try{o(e.cssRules||[]).forEach((function(t,n){if(t.type===CSSRule.IMPORT_RULE){var o=n+1,u=B(t.href).then((function(t){return z(t,r)})).then((function(t){return W(t).forEach((function(t){try{e.insertRule(t,t.startsWith("@import")?o+=1:e.cssRules.length)}catch(e){console.error("Error inserting rule from remote css",{rule:t,error:e})}}))})).catch((function(t){console.error("Error loading remote css",t.toString())}));i.push(u)}}))}catch(o){var n=t.find((function(t){return null==t.href}))||document.styleSheets[0];null!=e.href&&i.push(B(e.href).then((function(t){return z(t,r)})).then((function(t){return W(t).forEach((function(t){n.insertRule(t,e.cssRules.length)}))})).catch((function(t){console.error("Error loading remote stylesheet",t)}))),console.error("Error inlining remote css file",o)}})),[2,Promise.all(i).then((function(){return t.forEach((function(t){if("cssRules"in t)try{o(t.cssRules||[]).forEach((function(t){e.push(t)}))}catch(e){console.error("Error while reading CSS rules from ".concat(t.href),e)}})),e}))]}))}))}function _(t){return t.filter((function(t){return t.type===CSSRule.FONT_FACE_RULE})).filter((function(t){return M(t.style.getPropertyValue("src"))}))}function G(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:if(null==t.ownerDocument)throw new Error("Provided element is not within a Document");return[4,$(o(t.ownerDocument.styleSheets),r)];case 1:return[2,_(e.sent())]}}))}))}function J(t,r){return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){switch(n.label){case 0:return[4,G(t,r)];case 1:return e=n.sent(),[4,Promise.all(e.map((function(t){var e=t.parentStyleSheet?t.parentStyleSheet.href:null;return H(t.cssText,e,r)})))];case 2:return[2,n.sent().join("\n")]}}))}))}function Q(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u,c;return n(this,(function(n){switch(n.label){case 0:return null==r.fontEmbedCSS?[3,1]:(i=r.fontEmbedCSS,[3,5]);case 1:return r.skipFonts?(o=null,[3,4]):[3,2];case 2:return[4,J(t,r)];case 3:o=n.sent(),n.label=4;case 4:i=o,n.label=5;case 5:return(e=i)&&(u=document.createElement("style"),c=document.createTextNode(e),u.appendChild(c),t.firstChild?t.insertBefore(u,t.firstChild):t.appendChild(u)),[2]}}))}))}function X(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,L(t,r,!0)];case 1:return[4,Q(u=n.sent(),r)];case 2:return n.sent(),[4,U(u,r)];case 3:return n.sent(),function(t,e){var n=t.style;e.backgroundColor&&(n.backgroundColor=e.backgroundColor),e.width&&(n.width="".concat(e.width,"px")),e.height&&(n.height="".concat(e.height,"px"));var r=e.style;null!=r&&Object.keys(r).forEach((function(t){n[t]=r[t]}))}(u,r),[4,h(u,i,o)];case 4:return[2,n.sent()]}}))}))}function K(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u,s,f,h,d,v;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,X(t,r)];case 1:return[4,l(n.sent())];case 2:return u=n.sent(),s=document.createElement("canvas"),f=s.getContext("2d"),h=r.pixelRatio||function(){var t,e;try{e=process}catch(t){}var n=e&&e.env?e.env.devicePixelRatio:null;return n&&(t=parseInt(n,10),Number.isNaN(t)&&(t=1)),t||window.devicePixelRatio||1}(),d=r.canvasWidth||i,v=r.canvasHeight||o,s.width=d*h,s.height=v*h,r.skipAutoScale||function(t){(t.width>a||t.height>a)&&(t.width>a&&t.height>a?t.width>t.height?(t.height*=a/t.width,t.width=a):(t.width*=a/t.height,t.height=a):t.width>a?(t.height*=a/t.width,t.width=a):(t.width*=a/t.height,t.height=a))}(s),s.style.width="".concat(d),s.style.height="".concat(v),r.backgroundColor&&(f.fillStyle=r.backgroundColor,f.fillRect(0,0,s.width,s.height)),f.drawImage(u,0,0,s.width,s.height),[2,s]}}))}))}t.getFontEmbedCSS=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){return[2,J(t,r)]}))}))},t.toBlob=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[4,s(e.sent())];case 2:return[2,e.sent()]}}))}))},t.toCanvas=K,t.toJpeg=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[2,e.sent().toDataURL("image/jpeg",r.quality||1)]}}))}))},t.toPixelData=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,K(t,r)];case 1:return u=n.sent(),[2,u.getContext("2d").getImageData(0,0,i,o).data]}}))}))},t.toPng=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[2,e.sent().toDataURL()]}}))}))},t.toSvg=X}));
+//# sourceMappingURL=html-to-image.js.map
+</script>
+  <script>(() => {
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/data/ta.js
+  var state = (label, code, summary, strengths, overuse, underuse, usefulWhen, collaboration, practice, reflection, combination) => ({
+    label,
+    code,
+    summary,
+    strengths,
+    overuse,
+    underuse,
+    usefulWhen,
+    collaboration,
+    practice,
+    reflection,
+    combination
+  });
+  var taAssessment = {
+    id: "relationship-energy",
+    responseMode: "scale",
+    title: "관계 속 나 · 관계 에너지 체크",
+    subtitle: "상황에 따라 내가 자주 꺼내 쓰는 다섯 가지 관계 반응",
+    duration: "약 5~7분",
+    guidance: "최근 6개월의 내 모습을 떠올리며 답해 주세요. 직장뿐 아니라 가족·친구 등 가까운 관계에서의 모습도 함께 포함합니다. 바람직해 보이는 모습이 아니라 실제로 자주 하는 행동에 가깝게 답할수록 도움이 됩니다.",
+    questions: [
+      { id: "t01", state: "standard", context: "work", direction: "positive", text: "일을 시작할 때 지켜야 할 선부터 분명히 해 두는 편이다." },
+      { id: "t02", state: "care", context: "work", direction: "positive", text: "표정이 안 좋은 사람이 있으면 먼저 말을 걸어 보는 편이다." },
+      { id: "t03", state: "reality", context: "work", direction: "positive", text: "의견이 엇갈리면 확인된 사실부터 하나씩 정리해 본다." },
+      { id: "t04", state: "expression", context: "work", direction: "positive", text: "떠오른 생각이나 느낌을 그 자리에서 꺼내 놓는 편이다." },
+      { id: "t05", state: "adaptation", context: "work", direction: "positive", text: "분위기를 살펴 내 말의 세기를 조절하는 편이다." },
+      { id: "t06", state: "standard", context: "work", direction: "positive", text: "기준에 어긋난 걸 보면 상황을 듣기 전에 지적부터 나간다." },
+      { id: "t07", state: "care", context: "work", direction: "positive", text: "상대가 부탁하지 않아도 내가 먼저 대신 처리해 줄 때가 많다." },
+      { id: "t08", state: "reality", context: "work", direction: "positive", text: "감정이 올라온 사람 앞에서도 사실관계부터 따지게 된다." },
+      { id: "t09", state: "expression", context: "work", direction: "positive", text: "재미있어 보이면 정해진 방식을 벗어나 버릴 때가 있다." },
+      { id: "t10", state: "adaptation", context: "work", direction: "positive", text: "할 말이 있어도 분위기가 불편해질까 봐 삼킬 때가 많다." },
+      { id: "t11", state: "standard", context: "work", direction: "positive", text: "그냥 넘어가도 될 일에 내가 나서서 문제를 삼을 때가 있다." },
+      { id: "t12", state: "care", context: "work", direction: "positive", text: "누가 애쓴 부분을 보면 그 자리에서 말로 표현하는 편이다." },
+      { id: "t13", state: "reality", context: "work", direction: "positive", text: "문제가 생기면 원인과 다음 할 일을 순서대로 짚어 본다." },
+      { id: "t14", state: "expression", context: "work", direction: "positive", text: "분위기가 굳으면 농담이나 반응으로 풀어 보는 편이다." },
+      { id: "t15", state: "adaptation", context: "work", direction: "positive", text: "내키지 않는 요청에도 일단 알겠다고 답할 때가 많다." },
+      { id: "t16", state: "standard", context: "work", direction: "positive", text: "상대가 무안해할 걸 알면서도 짚고 넘어가야 직성이 풀린다." },
+      { id: "t17", state: "care", context: "work", direction: "positive", text: "내 일이 남아 있어도 남을 돕느라 시간을 다 쓸 때가 있다." },
+      { id: "t18", state: "reality", context: "work", direction: "positive", text: "정보가 더 필요하다는 생각에 결정을 미룰 때가 있다." },
+      { id: "t19", state: "expression", context: "work", direction: "positive", text: "흥미가 식으면 마무리가 느슨해질 때가 있는 편이다." },
+      { id: "t20", state: "adaptation", context: "work", direction: "positive", text: "내 의견을 말한 뒤에 괜히 말했나 하고 곱씹을 때가 있다." },
+      { id: "t21", state: "standard", context: "life", direction: "positive", text: "가까운 사이에도 지킬 선은 있어야 한다고 말하는 편이다." },
+      { id: "t22", state: "care", context: "life", direction: "positive", text: "상대가 스스로 하도록 두지 못하고 자꾸 챙기게 된다." },
+      { id: "t23", state: "reality", context: "life", direction: "positive", text: "상대가 위로를 바랄 때도 상황 분석을 먼저 하게 된다." },
+      { id: "t24", state: "expression", context: "life", direction: "positive", text: "기분이 좋고 나쁜 것이 표정과 말에 그대로 드러난다." },
+      { id: "t25", state: "adaptation", context: "life", direction: "positive", text: "모임에서 다른 사람이 편하도록 내 속도를 맞추는 편이다." },
+      { id: "t26", state: "standard", context: "life", direction: "reverse", text: "원칙에 어긋나도 사정이 있으면 그냥 넘어가는 편이다." },
+      { id: "t27", state: "care", context: "life", direction: "reverse", text: "힘들어 보여도 각자 알아서 할 일이라고 생각하는 편이다." },
+      { id: "t28", state: "reality", context: "life", direction: "reverse", text: "따져 보기보다 그때의 느낌대로 정하는 편이라고 느낀다." },
+      { id: "t29", state: "expression", context: "life", direction: "reverse", text: "감정을 드러내기보다 안에 담아 두는 편이 편하다." },
+      { id: "t30", state: "adaptation", context: "life", direction: "reverse", text: "주변 분위기와 달라도 내 방식대로 하는 편이다." }
+    ],
+    states: {
+      standard: state(
+        "기준을 세우는 나",
+        "CP",
+        "원칙과 책임의 경계를 분명히 하며 관계에 질서와 신뢰를 더합니다.",
+        ["기준과 책임을 명확히 합니다.", "불공정하거나 위험한 상황에 필요한 제동을 겁니다.", "약속과 품질을 꾸준히 지킵니다."],
+        ["기준이 비판이나 통제로 들릴 수 있습니다.", "예외가 필요한 상황에서도 융통성을 잃을 수 있습니다."],
+        ["불편한 문제를 미루거나 필요한 경계를 세우기 어려울 수 있습니다.", "책임 범위가 흐려져 혼란이 커질 수 있습니다."],
+        ["안전·윤리·품질 기준을 세울 때", "역할과 책임을 명료하게 합의할 때"],
+        ["기준과 그 이유를 함께 말해 주세요.", "사람이 아니라 관찰한 행동을 짚어 주세요.", "지적 뒤에는 가능한 다음 행동을 제안해 주세요."],
+        "“왜 이것도 못했나요?” 대신 “합의한 기준과 현재 상태의 차이를 함께 확인해 볼까요?”라고 말해 보세요.",
+        "지금 세우는 기준은 공동의 목적을 돕나요, 아니면 상대를 통제하려는 방식이 되었나요?",
+        "다른 에너지와 만나면 방향과 경계를 잡아 주는 역할을 합니다."
+      ),
+      care: state(
+        "돌보고 격려하는 나",
+        "NP",
+        "상대의 필요와 감정을 살피며 관계에 온기와 심리적 여유를 더합니다.",
+        ["상대의 어려움을 알아차리고 지원합니다.", "노력과 기여를 구체적으로 인정합니다.", "실수 뒤에 다시 시도할 안전감을 만듭니다."],
+        ["도움이 지나치면 상대의 자율성을 줄일 수 있습니다.", "자신의 한계를 넘겨 돌보다 소진될 수 있습니다."],
+        ["관계가 성과 중심으로 메마르게 느껴질 수 있습니다.", "도움이나 감사가 필요한 순간을 놓칠 수 있습니다."],
+        ["실수나 변화로 불안한 사람을 지원할 때", "팀의 기여와 성장을 인정할 때"],
+        ["도움이 필요한지 먼저 물어 주세요.", "공감과 해결 제안을 구분해 주세요.", "지원 가능한 범위와 시간을 분명히 해 주세요."],
+        "“제가 해드릴게요” 전에 “지금은 경청과 실질적 도움 중 무엇이 필요하세요?”라고 물어보세요.",
+        "지금의 도움은 상대가 원하는 것인가요, 내가 필요하다고 추측한 것인가요?",
+        "다른 에너지가 관계 속에서 안전하게 작동하도록 온기와 지지를 더합니다."
+      ),
+      reality: state(
+        "현실을 판단하는 나",
+        "A",
+        "사실과 감정을 구분하고 질문하며 지금 가능한 해결책을 차분히 찾습니다.",
+        ["정보와 추측을 구분합니다.", "감정이 큰 상황에서도 문제를 구조화합니다.", "선택지와 결과를 현실적으로 비교합니다."],
+        ["분석이 앞서 상대의 감정을 놓칠 수 있습니다.", "충분한 정보만 기다리다 반응이 늦을 수 있습니다."],
+        ["확인 없이 추측하거나 순간 감정에 끌릴 수 있습니다.", "복잡한 문제에서 실행 가능한 선택을 놓칠 수 있습니다."],
+        ["의견 충돌의 사실관계를 확인할 때", "제약 안에서 다음 행동을 정할 때"],
+        ["결론 전에 상대의 목적을 질문해 주세요.", "사실·해석·감정을 나누어 말해 주세요.", "분석 뒤에는 누가 언제 무엇을 할지 정해 주세요."],
+        "“그건 말이 안 돼요” 대신 “확인된 사실과 우리가 아직 모르는 것을 나눠 볼까요?”라고 말해 보세요.",
+        "나는 지금 충분히 확인하고 있나요, 아니면 감정을 배제해야 객관적이라고 믿고 있나요?",
+        "다른 에너지 사이에서 현재 조건을 확인하고 실행 가능한 균형점을 찾습니다."
+      ),
+      expression: state(
+        "자유롭게 표현하는 나",
+        "FC",
+        "호기심과 감정, 창의성을 자연스럽게 드러내며 관계에 활력과 새 가능성을 만듭니다.",
+        ["새로운 아이디어와 관점을 제안합니다.", "기쁨과 호기심으로 분위기를 살립니다.", "솔직한 감정 표현으로 진정성을 더합니다."],
+        ["즉흥성이 약속이나 세부사항을 놓치게 할 수 있습니다.", "강한 표현이 다른 사람에게 부담이 될 수 있습니다."],
+        ["새로운 시도와 즐거움이 줄어 관계가 경직될 수 있습니다.", "원하는 것과 감정을 알아차리기 어려울 수 있습니다."],
+        ["아이디어가 필요한 초기 탐색 단계", "긴장을 풀고 활력을 회복해야 할 때"],
+        ["아이디어와 결정된 사항을 구분해 주세요.", "표현 뒤에 상대가 어떻게 들었는지 확인해 주세요.", "자유로운 시도에도 지킬 약속을 함께 정해 주세요."],
+        "떠오른 말을 바로 확정하기보다 “아이디어 단계인데, 함께 가능성을 살펴볼까요?”라고 밝혀 보세요.",
+        "지금의 표현은 관계에 생기를 더하나요, 상대의 공간을 덮고 있지는 않나요?",
+        "다른 에너지에 창의성·솔직함·즐거움을 공급해 변화의 문을 엽니다."
+      ),
+      adaptation: state(
+        "상황에 맞추는 나",
+        "AC",
+        "주변의 기대와 분위기를 읽고 조정하며 관계의 연결과 공동 규칙을 지킵니다.",
+        ["상대와 상황의 요구를 세심하게 읽습니다.", "공동 규칙과 역할에 안정적으로 적응합니다.", "갈등에서 성급히 밀어붙이지 않고 조율합니다."],
+        ["맞추는 일이 반복되면 자신의 욕구와 의견을 잃을 수 있습니다.", "거절하지 못해 부담과 속상함이 쌓일 수 있습니다."],
+        ["공동의 약속이나 상대의 신호를 놓칠 수 있습니다.", "필요한 조율 없이 자기 방식만 고집할 수 있습니다."],
+        ["새 환경의 규칙과 관계를 익힐 때", "여러 사람의 속도와 요구를 조율할 때"],
+        ["동의와 이해를 구분해 표현해 주세요.", "수용 가능한 범위와 어려운 점을 함께 말해 주세요.", "맞춘 뒤에는 내 필요도 다시 확인해 주세요."],
+        "“괜찮아요”로 끝내기보다 “요청은 이해했고, 이 부분은 조정이 필요합니다”라고 말해 보세요.",
+        "나는 지금 선택해서 맞추고 있나요, 거절하기 어려워 자동으로 따르고 있나요?",
+        "다른 에너지가 공동체의 맥락과 연결되도록 수용과 조율의 통로가 됩니다."
+      )
+    },
+    transactions: [
+      { id: "complementary", label: "상보교류", definition: "말을 건 방향과 상대의 응답 방향이 맞아 대화가 자연스럽게 이어지는 교류입니다.", dialogue: "“마감은 금요일입니다.” → “목요일까지 초안을 공유하겠습니다.”", example: "업무 요청과 현실적인 응답이 같은 주제에서 오가며 다음 행동이 정해집니다.", repair: "지금 합의한 내용과 다음 행동을 한 문장으로 확인해 보세요." },
+      { id: "crossed", label: "교차교류", definition: "예상한 방향과 다른 반응이 돌아와 대화가 어긋나거나 멈추기 쉬운 교류입니다.", dialogue: "“자료 위치를 알려 주실래요?” → “그것도 아직 모르세요?”", example: "정보 요청에 평가가 돌아오면서 원래 해결하려던 문제가 뒤로 밀립니다.", repair: "“평가보다 먼저 자료 위치를 확인하고 싶습니다. 이후 필요한 부분을 함께 점검할까요?”" },
+      { id: "ulterior", label: "이면교류", definition: "겉으로 드러난 말과 다르게 들리는 메시지가 함께 있을 수 있는 교류입니다. 숨은 의도를 단정하지 말고 직접 확인합니다.", dialogue: "“이번에도 편한 방식대로 하시면 되겠네요.” → “무슨 뜻인지 정확히 말해 주세요.”", example: "표면은 허용처럼 보이지만 비난으로 들릴 여지가 있어 의미 확인이 필요합니다.", repair: "“제가 비난으로 들었는데 단정하고 싶지는 않습니다. 전달하려던 뜻을 확인해도 될까요?”" }
+    ],
+    scenarios: [
+      { category: "업무 요청", opening: "“오늘 안에 이 자료를 정리해 주세요.”", response: "“우선순위와 완료 기준을 확인하면 가능한 시간을 말씀드리겠습니다.”", transaction: "상보교류로 전환", outcome: "요청의 긴장을 낮추고 범위와 일정 합의를 돕습니다.", repair: "“필수 범위와 마감 시각을 함께 정해 볼까요?”" },
+      { category: "피드백", opening: "“왜 매번 같은 실수를 하죠?”", response: "“반복된 부분은 확인했습니다. 이번에는 원인과 수정 방법을 같이 정하고 싶습니다.”", transaction: "교차교류를 현실 중심으로 전환", outcome: "사람 평가에서 관찰된 행동과 개선 행동으로 초점을 옮깁니다.", repair: "“어떤 장면을 말씀하는지 한 가지 사례부터 볼까요?”" },
+      { category: "일정 지연", opening: "“일정이 늦었는데 아무 설명도 없네요.”", response: "“공유가 늦었습니다. 현재 상태와 영향, 새 완료 시점을 바로 말씀드리겠습니다.”", transaction: "상보교류 회복", outcome: "책임을 인정하면서 다음 판단에 필요한 정보를 제공합니다.", repair: "“현재 70%이며 내일 오후 3시 완료가 가능합니다. 괜찮을까요?”" },
+      { category: "의견 충돌", opening: "“그 방식은 현실성이 전혀 없어요.”", response: "“우려하는 조건을 확인하고, 제안에서 살릴 수 있는 부분을 함께 나눠 보겠습니다.”", transaction: "교차교류 예방", outcome: "방어와 공격 대신 조건·아이디어를 분리해 검토합니다.", repair: "“가장 큰 위험 한 가지와 기대 효과 한 가지씩 비교해 볼까요?”" },
+      { category: "도움 요청", opening: "“이건 도저히 혼자 못 하겠어요.”", response: "“어려운 지점을 듣고 제가 도울 수 있는 범위를 함께 정하겠습니다.”", transaction: "상보교류 유지", outcome: "대신 해주기보다 상대의 자율성과 실질 지원을 함께 살립니다.", repair: "“경청, 방법 설명, 일부 분담 중 무엇이 지금 가장 필요하세요?”" }
+    ],
+    activity: {
+      title: "관계 반응 다시 쓰기",
+      steps: ["불편했던 대화 한 장면을 선택합니다.", "상황·내가 한 말·상대 반응을 사실 중심으로 적습니다.", "교류 종류를 가설로만 살펴봅니다.", "내가 보낸 뜻과 상대가 받은 뜻의 차이를 비교합니다.", "다른 관계 에너지를 보태 회복 문장을 다시 씁니다.", "짝과 역할 연습 후 실제 행동 한 가지를 정합니다."]
+    },
+    methodNotice: "교류분석(TA)의 자아상태 개념을 교육적으로 참고해 DAWIN이 문항·채점·해석을 새로 구성한 비표준화 자기성찰 도구입니다.",
+    disclaimer: "이 결과는 능력의 우열이나 고정된 성격, 이상적인 자아상태를 뜻하지 않습니다. 다른 사람을 부모·성인·아이로 낙인찍지 말고 자신의 반응 선택을 성찰하는 데만 사용하세요. 채용·인사평가·의학적 진단·심리상담의 근거로 사용할 수 없습니다."
+  };
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-export.js
+  var VENDOR_SRC = "./assets/vendor/html-to-image.js";
+  var MAX_SIDE = 8192;
+  var MAX_AREA = 16e6;
+  var EXPORT_WIDTH = 720;
+  var MAX_RATIO = 3;
+  var vendorPromise = null;
+  function loadVendor() {
+    if (window.htmlToImage) return Promise.resolve(window.htmlToImage);
+    if (vendorPromise) return vendorPromise;
+    vendorPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = VENDOR_SRC;
+      script.onload = () => window.htmlToImage ? resolve(window.htmlToImage) : reject(new Error("vendor missing"));
+      script.onerror = () => reject(new Error("vendor load failed"));
+      document.head.appendChild(script);
+    });
+    return vendorPromise;
+  }
+  function looksLikeInAppBrowser() {
+    const ua = String(navigator.userAgent || "");
+    return /KAKAOTALK|kakaostory|NAVER\(|DaumApps|FBAN|FBAV|FB_IAB|Instagram|Line\/|everytimeApp|zumapp|whale\/.*inapp/i.test(ua);
+  }
+  function openAllDetails(root) {
+    const closed = Array.from(root.querySelectorAll("details")).filter((item) => !item.open);
+    closed.forEach((item) => {
+      item.open = true;
+    });
+    let restored = false;
+    return () => {
+      if (restored) return;
+      restored = true;
+      closed.forEach((item) => {
+        item.open = false;
+      });
+    };
+  }
+  function stampedName(title) {
+    const now = /* @__PURE__ */ new Date();
+    const pad = (value) => String(value).padStart(2, "0");
+    const date = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
+    const safe = String(title || "진단결과").replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_").slice(0, 40);
+    return `${safe}_${date}`;
+  }
+  function openSheet(label, innerHtml, onClose) {
+    const overlay = document.createElement("div");
+    overlay.className = "export-overlay";
+    overlay.innerHTML = `<div class="export-sheet" role="dialog" aria-modal="true" aria-label="${label}">${innerHtml}</div>`;
+    const sheet = overlay.querySelector(".export-sheet");
+    const opener = document.activeElement;
+    const close = () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+      overlay.remove();
+      if (typeof onClose === "function") onClose();
+      if (opener && typeof opener.focus === "function") opener.focus();
+    };
+    function onKey(event) {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = sheet.querySelectorAll('a[href], button, input, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close();
+    });
+    document.body.style.overflow = "hidden";
+    document.body.appendChild(overlay);
+    const closer = sheet.querySelector(".export-close");
+    if (closer) closer.addEventListener("click", close);
+    const firstFocusable = sheet.querySelector("button, a[href]");
+    if (firstFocusable) firstFocusable.focus();
+    return { overlay, sheet, close };
+  }
+  function saveAsPdf(root, setStatus) {
+    const canPrint = typeof window.print === "function";
+    if (!canPrint || looksLikeInAppBrowser()) {
+      const url = String(location.href);
+      openSheet("PDF로 저장", `
+      <h3 class="export-title">PDF로 저장하기</h3>
+      <p class="export-hint">지금 보고 계신 화면은 <strong>앱 안에 들어 있는 브라우저</strong>로 보입니다. 이런 화면에서는 인쇄(PDF 저장) 창이 열리지 않는 경우가 많습니다.</p>
+      <p class="export-hint">아래 주소를 복사해 <strong>크롬이나 사파리</strong>에서 다시 열면 PDF로 저장할 수 있습니다.</p>
+      <input class="export-url" type="text" readonly value="${url}" aria-label="현재 주소">
+      <p class="export-hint">그대로 남기고 싶으시면 <strong>이미지(PNG)로 저장</strong>이나 <strong>결과 텍스트 복사하기</strong>를 쓰셔도 됩니다.</p>
+      <button type="button" class="button secondary export-close">닫기</button>`);
+      setStatus("앱 안 브라우저에서는 인쇄가 열리지 않을 수 있습니다.", "fail");
+      return;
+    }
+    const { sheet, close } = openSheet("PDF로 저장", `
+    <h3 class="export-title">PDF로 저장하기</h3>
+    <p class="export-hint">아래 버튼을 누르면 브라우저 <strong>인쇄 화면</strong>이 열립니다. 거기서 대상(프린터)을 <strong>“PDF로 저장”</strong>으로 바꿔 주세요. 해설까지 전부 담깁니다.</p>
+    <button type="button" class="button export-print">인쇄 화면 열기</button>
+    <p class="export-hint export-after" hidden>인쇄 화면이 열리지 않았다면 이 브라우저가 인쇄를 지원하지 않는 것입니다. <strong>이미지(PNG)로 저장</strong>을 이용해 주세요.</p>
+    <button type="button" class="button secondary export-close">닫기</button>`);
+    sheet.querySelector(".export-print").addEventListener("click", () => {
+      sheet.querySelector(".export-after").hidden = false;
+      const restore = openAllDetails(root);
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        restore();
+        window.removeEventListener("afterprint", finish);
+      };
+      window.addEventListener("afterprint", finish);
+      window.setTimeout(finish, 8e3);
+      setStatus("인쇄 화면에서 “PDF로 저장”을 골라 주세요.", "done");
+      window.setTimeout(() => {
+        try {
+          window.print();
+        } catch (error) {
+          finish();
+          close();
+          setStatus("이 브라우저에서는 인쇄를 열 수 없습니다. 이미지로 저장해 주세요.", "fail");
+        }
+      }, 80);
+    });
+  }
+  var DROP_FROM_IMAGE = [".save-card", ".result-actions", ".result-tabs", ".result-panel-hint"];
+  function buildExportStage(root) {
+    const holder = document.createElement("div");
+    holder.className = "export-holder";
+    holder.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;z-index:-1;";
+    const stage = document.createElement("div");
+    stage.className = "export-stage";
+    stage.style.cssText = `width:${EXPORT_WIDTH}px;padding:24px;background:#ffffff;`;
+    holder.appendChild(stage);
+    const hero = root.querySelector(":scope > .result-hero");
+    if (hero) stage.appendChild(hero.cloneNode(true));
+    const summary = root.querySelector("#result-panel-summary");
+    const source = summary || root;
+    Array.from(source.children).forEach((node) => {
+      if (node === hero) return;
+      if (DROP_FROM_IMAGE.some((selector) => node.matches && node.matches(selector))) return;
+      stage.appendChild(node.cloneNode(true));
+    });
+    stage.querySelectorAll(DROP_FROM_IMAGE.join(",")).forEach((node) => node.remove());
+    document.body.appendChild(holder);
+    return holder;
+  }
+  function dataUrlToBlob(dataUrl) {
+    const comma = dataUrl.indexOf(",");
+    const mime = (dataUrl.slice(0, comma).match(/:(.*?);/) || [])[1] || "image/png";
+    const binary = atob(dataUrl.slice(comma + 1));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+    return new Blob([bytes], { type: mime });
+  }
+  function showImageOverlay(dataUrl, filename, title) {
+    const blob = dataUrlToBlob(dataUrl);
+    const objectUrl = URL.createObjectURL(blob);
+    let file = null;
+    try {
+      file = new File([blob], `${filename}.png`, { type: "image/png" });
+    } catch (error) {
+      file = null;
+    }
+    const canShareFile = Boolean(
+      file && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })
+    );
+    const hint = canShareFile ? "아래 <strong>사진 앨범에 저장</strong>을 누르면 공유 창이 열립니다. 거기서 <strong>“이미지 저장”</strong>을 고르면 앨범에 들어갑니다." : "이미지를 <strong>길게 눌러</strong> “사진에 추가”를 고르시거나, 아래 버튼으로 내려받으세요.";
+    const { sheet } = openSheet(
+      "결과 이미지",
+      `
+    <p class="export-hint">${hint} 해설은 담기지 않습니다 — 해설까지 남기시려면 <strong>PDF로 저장</strong>을 쓰세요.</p>
+    <div class="export-preview"><img alt="진단 결과 이미지"></div>
+    ${canShareFile ? '<button type="button" class="button export-share">사진 앨범에 저장</button>' : ""}
+    <a class="button ${canShareFile ? "secondary " : ""}export-download" download="${filename}.png">파일로 내려받기</a>
+    <p class="export-hint export-share-note" hidden>저장이 되지 않았다면 이미지를 <strong>길게 눌러</strong> “사진에 추가”를 골라 주세요.</p>
+    <button type="button" class="button secondary export-close">닫기</button>`,
+      () => URL.revokeObjectURL(objectUrl)
+    );
+    sheet.querySelector("img").src = dataUrl;
+    sheet.querySelector(".export-download").href = objectUrl;
+    const shareButton = sheet.querySelector(".export-share");
+    if (shareButton) {
+      shareButton.addEventListener("click", async () => {
+        try {
+          await navigator.share({ files: [file], title: title || "진단 결과" });
+        } catch (error) {
+          if (error && error.name === "AbortError") return;
+          sheet.querySelector(".export-share-note").hidden = false;
+        }
+      });
+    }
+  }
+  async function saveAsPng(root, title, setStatus, button) {
+    button.disabled = true;
+    setStatus("이미지를 만드는 중입니다. 잠시만 기다려 주세요.", "");
+    let holder = null;
+    try {
+      const lib = await loadVendor();
+      holder = buildExportStage(root);
+      const stage = holder.firstElementChild;
+      const width = stage.offsetWidth;
+      const height = stage.offsetHeight;
+      let ratio = Math.min(MAX_RATIO, MAX_SIDE / Math.max(width, height), Math.sqrt(MAX_AREA / (width * height)));
+      if (!Number.isFinite(ratio) || ratio <= 0) ratio = 1;
+      if (ratio < 0.55) {
+        setStatus("결과가 길어 이미지로 만들기 어렵습니다. PDF로 저장을 이용해 주세요.", "fail");
+        return;
+      }
+      const dataUrl = await lib.toPng(stage, {
+        pixelRatio: ratio,
+        backgroundColor: "#ffffff",
+        skipFonts: true,
+        width,
+        height,
+        // 복제본이 껍데기의 위치를 물려받지 않도록 흐름 위치로 되돌린다.
+        style: { position: "static", margin: "0", top: "0", left: "0", transform: "none" }
+      });
+      showImageOverlay(dataUrl, stampedName(title), title);
+      setStatus("이미지를 만들었습니다.", "done");
+    } catch (error) {
+      setStatus("이미지 저장이 어려운 환경입니다. PDF로 저장을 이용해 주세요.", "fail");
+    } finally {
+      if (holder) holder.remove();
+      button.disabled = false;
+    }
+  }
+  function exportButtonsHtml() {
+    return `
+    <div class="save-actions">
+      <button id="copy-button" class="button" type="button">결과 텍스트 복사하기</button>
+      <button id="png-button" class="button secondary" type="button">이미지(PNG)로 저장</button>
+      <button id="pdf-button" class="button secondary" type="button">PDF로 저장</button>
+    </div>`;
+  }
+  function mountResultExport(root, title, setStatus) {
+    const pdfButton = root.querySelector("#pdf-button");
+    const pngButton = root.querySelector("#png-button");
+    if (pdfButton) pdfButton.addEventListener("click", () => saveAsPdf(root, setStatus));
+    if (pngButton) pngButton.addEventListener("click", () => saveAsPng(root, title, setStatus, pngButton));
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-save.js
+  var HEADINGS = /* @__PURE__ */ new Set(["H1", "H2", "H3", "H4", "H5", "H6"]);
+  var CONTAINERS = /* @__PURE__ */ new Set(["DIV", "SECTION", "ARTICLE", "UL", "OL", "DL", "HEADER", "FOOTER", "MAIN", "ASIDE"]);
+  var SKIP = ["save-card", "result-actions"];
+  function textOf(element) {
+    return Array.from(element.childNodes).map((node) => node.nodeType === 3 ? node.nodeValue : node.nodeType === 1 ? textOf(node) : "").join(" ").replace(/\s+/g, " ").trim();
+  }
+  function walk(node, lines) {
+    for (const element of node.children) {
+      if (SKIP.some((name) => element.classList.contains(name))) continue;
+      const tag = element.tagName;
+      if (HEADINGS.has(tag)) {
+        const text = textOf(element);
+        if (text) lines.push("", tag === "H1" ? `■ ${text}` : `[ ${text} ]`);
+        continue;
+      }
+      if (tag === "LI") {
+        const text = textOf(element);
+        if (text) lines.push(`- ${text}`);
+        continue;
+      }
+      if (tag === "P") {
+        const text = textOf(element);
+        if (text) lines.push(text);
+        continue;
+      }
+      const hasStructure = Array.from(element.children).some((child) => CONTAINERS.has(child.tagName) || HEADINGS.has(child.tagName) || child.tagName === "P" || child.tagName === "LI");
+      if (hasStructure) {
+        walk(element, lines);
+      } else {
+        const text = textOf(element);
+        if (text) lines.push(text);
+      }
+    }
+  }
+  function extractResultText(root, title) {
+    const today = /* @__PURE__ */ new Date();
+    const stamp = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()}.`;
+    const lines = [title, stamp];
+    walk(root, lines);
+    return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  function saveCardHtml() {
+    return `
+    <article class="card save-card">
+      <h3>결과를 남겨 두세요</h3>
+      <p>새로고침하면 결과가 사라집니다. 텍스트로 복사하거나 PDF·이미지로 저장해 두면 교육 후에도 다시 볼 수 있습니다.</p>
+      ${exportButtonsHtml()}
+      <p id="copy-status" class="copy-status" aria-live="polite"></p>
+      <details id="copy-fallback" class="copy-fallback">
+        <summary>복사가 안 되면 여기를 눌러 직접 선택하세요</summary>
+        <textarea id="copy-area" readonly rows="12"></textarea>
+      </details>
+    </article>`;
+  }
+  async function copyToClipboard(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (error) {
+    }
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0";
+    document.body.appendChild(area);
+    area.select();
+    area.setSelectionRange(0, area.value.length);
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (error) {
+      copied = false;
+    }
+    document.body.removeChild(area);
+    return copied;
+  }
+  function mountResultSave(root, title, presetText) {
+    const button = root.querySelector("#copy-button");
+    const status = root.querySelector("#copy-status");
+    const area = root.querySelector("#copy-area");
+    const fallback = root.querySelector("#copy-fallback");
+    if (!button || !area) return;
+    const text = presetText || extractResultText(root, title);
+    area.value = text;
+    const setStatus = (message, tone) => {
+      status.textContent = message;
+      status.className = tone ? `copy-status ${tone}` : "copy-status";
+    };
+    button.addEventListener("click", async () => {
+      const copied = await copyToClipboard(text);
+      setStatus(
+        copied ? "복사했습니다. 메모나 메신저에 붙여 넣어 주세요." : "자동 복사가 막혀 있습니다. 아래를 펼쳐 직접 선택해 주세요.",
+        copied ? "done" : "fail"
+      );
+      if (!copied) fallback.open = true;
+    });
+    mountResultExport(root, title, setStatus);
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-tabs.js
+  var SUMMARY_SELECTORS = [
+    ".result-map-card",
+    // 8개 진단 공용 — 결과값(점수 지도·그래프)
+    ".overall-level-card",
+    // 전체 수준 — 상대 순위보다 먼저 읽어야 할 결과값
+    ".motivation-map-card",
+    // 동기 · TA · Stroke 점수 지도
+    ".stroke-give-card",
+    ".stroke-receive-card",
+    ".stroke-signal-card",
+    ".score-card",
+    // 행동경향(DISC)
+    ".eq-chart-card",
+    // 감성지수 5영역 막대그래프
+    ".stress-map-card",
+    ".resilience-map-card",
+    ".axis-list",
+    // 성격 — 네 축 결과 카드
+    ".stability-card",
+    // 성격 — 뚜렷한 축 / 흔들리는 축
+    ".profile-notice"
+    // 고른 프로필 · 가까운 점수 안내
+  ];
+  var ALWAYS_VISIBLE = [".save-card", ".result-actions"];
+  var matches = (node, selectors) => node.nodeType === 1 && selectors.some((selector) => node.matches(selector));
+  function splitResultIntoTabs(root, options = {}) {
+    if (!root || root.querySelector(".result-tabs")) return;
+    const detailLabel = options.detailLabel || "자세히 보기";
+    const hero = root.querySelector(":scope > .result-hero");
+    const summary = [];
+    const detail = [];
+    const tail = [];
+    for (const node of Array.from(root.childNodes)) {
+      if (node === hero) continue;
+      if (node.nodeType === 3 && !node.nodeValue.trim()) continue;
+      if (matches(node, ALWAYS_VISIBLE)) tail.push(node);
+      else if (matches(node, SUMMARY_SELECTORS)) summary.push(node);
+      else detail.push(node);
+    }
+    if (detail.length === 0) return;
+    const make = (tag, className, html) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (html !== void 0) element.innerHTML = html;
+      return element;
+    };
+    const tabs = make("div", "result-tabs");
+    tabs.setAttribute("role", "tablist");
+    tabs.setAttribute("aria-label", "결과 보기 방식");
+    const summaryPanel = make("section", "result-panel");
+    const detailPanel = make("section", "result-panel hidden");
+    summaryPanel.id = "result-panel-summary";
+    detailPanel.id = "result-panel-detail";
+    for (const panel of [summaryPanel, detailPanel]) {
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("tabindex", "-1");
+    }
+    summary.forEach((node) => summaryPanel.appendChild(node));
+    detail.forEach((node) => detailPanel.appendChild(node));
+    summaryPanel.appendChild(make(
+      "p",
+      "result-panel-hint",
+      `해석과 실습 내용은 위 <strong>${detailLabel}</strong>에 담아 두었습니다. 먼저 숫자만 확인해 주세요.`
+    ));
+    const buttons = [
+      { key: "summary", label: "결과만 보기", panel: summaryPanel },
+      { key: "detail", label: detailLabel, panel: detailPanel }
+    ].map(({ key, label, panel }) => {
+      const button = make("button", "result-tab", label);
+      button.type = "button";
+      button.dataset.tab = key;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", panel.id);
+      tabs.appendChild(button);
+      return { button, panel };
+    });
+    const activate = (index) => {
+      buttons.forEach((item, i) => {
+        const on = i === index;
+        item.button.classList.toggle("active", on);
+        item.button.setAttribute("aria-selected", on ? "true" : "false");
+        item.panel.classList.toggle("hidden", !on);
+      });
+      const target = buttons[index].panel;
+      target.focus({ preventScroll: true });
+      const top = tabs.getBoundingClientRect().top + window.scrollY - 12;
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    };
+    buttons.forEach((item, index) => item.button.addEventListener("click", () => activate(index)));
+    root.replaceChildren(
+      ...hero ? [hero] : [],
+      tabs,
+      summaryPanel,
+      detailPanel,
+      ...tail
+    );
+    activate(0);
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/scoring.js
+  var TYPES = ["D", "I", "S", "C"];
+  var PICK2_MOST = 2;
+  var PICK2_LEAST = 0;
+  var PICK2_MIDDLE = 1;
+  function rankToScore(rank) {
+    if (!Number.isInteger(rank) || rank < 1 || rank > 4) {
+      throw new RangeError("순위는 1부터 4까지여야 합니다.");
+    }
+    return 5 - rank;
+  }
+  function validateAnswers(groups, answers) {
+    if (!Array.isArray(groups) || !answers) return false;
+    return groups.every((group) => {
+      const selected = answers[group.id];
+      const validIds = new Set(group.options.map((option) => option.id));
+      return Array.isArray(selected) && selected.length === 4 && new Set(selected).size === 4 && selected.every((id) => validIds.has(id));
+    });
+  }
+  function calculateScores(groups, answers) {
+    if (!validateAnswers(groups, answers)) {
+      throw new Error("모든 문항의 순위 선택이 완료되지 않았습니다.");
+    }
+    const scores = { D: 0, I: 0, S: 0, C: 0 };
+    for (const group of groups) {
+      const byId = new Map(group.options.map((option) => [option.id, option]));
+      answers[group.id].forEach((id, index) => {
+        const type = byId.get(id).type;
+        if (!TYPES.includes(type)) throw new Error(`알 수 없는 유형: ${type}`);
+        scores[type] += rankToScore(index + 1);
+      });
+    }
+    return scores;
+  }
+  function validatePick2Answers(groups, answers) {
+    if (!Array.isArray(groups) || !answers) return false;
+    return groups.every((group) => {
+      const value = answers[group.id];
+      if (!value || typeof value !== "object") return false;
+      const ids = new Set(group.options.map((option) => option.id));
+      return ids.has(value.most) && ids.has(value.least) && value.most !== value.least;
+    });
+  }
+  function calculatePick2Scores(groups, answers) {
+    if (!validatePick2Answers(groups, answers)) {
+      throw new Error("각 묶음에서 가장 가까운 표현과 가장 먼 표현을 하나씩 골라 주세요.");
+    }
+    const scores = { D: 0, I: 0, S: 0, C: 0 };
+    for (const group of groups) {
+      const { most, least } = answers[group.id];
+      for (const option of group.options) {
+        if (!TYPES.includes(option.type)) throw new Error(`알 수 없는 유형: ${option.type}`);
+        scores[option.type] += option.id === most ? PICK2_MOST : option.id === least ? PICK2_LEAST : PICK2_MIDDLE;
+      }
+    }
+    return scores;
+  }
+  function classifyProfile(scores) {
+    const ranked = TYPES.map((type) => ({ type, score: scores[type] })).sort((a, b) => b.score - a.score || TYPES.indexOf(a.type) - TYPES.indexOf(b.type));
+    const total = TYPES.reduce((sum, type) => sum + scores[type], 0);
+    const mean = total / 4;
+    const blendGap = Math.max(1, Math.round(mean * 0.15));
+    const dominantAt = Math.round(mean * 1.3);
+    const balancedLow = Math.round(mean * 0.88);
+    const balancedHigh = Math.round(mean * 1.12);
+    const topScore = ranked[0].score;
+    const balanced = ranked.every((item) => item.score >= balancedLow && item.score <= balancedHigh);
+    const dominant = topScore >= dominantAt;
+    const primary = ranked.filter((item) => item.score === topScore).map((item) => item.type);
+    const lowestScore = ranked.at(-1).score;
+    const lowest = lowestScore === topScore ? [] : ranked.filter((item) => item.score === lowestScore).map((item) => item.type);
+    if (primary.length > 1) {
+      return { kind: "tie", primary, secondary: [], lowest, gap: 0, ranked, total, mean, balanced, dominant };
+    }
+    const gap = topScore - ranked[1].score;
+    const secondScore = ranked[1].score;
+    return {
+      kind: gap <= blendGap ? "blend" : "primary-secondary",
+      primary,
+      // 2위와 동점인 유형은 함께 보조경향으로 본다.
+      secondary: ranked.filter((item) => item.score === secondScore).map((item) => item.type),
+      lowest,
+      gap,
+      ranked,
+      total,
+      mean,
+      balanced,
+      dominant
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/engine.js
+  function createAssessmentEngine(assessment2) {
+    const mode = assessment2.responseMode || "ranking";
+    const items = mode === "scale" || mode === "pair" ? assessment2.questions : assessment2.groups;
+    const scaleValues = mode === "scale" && Array.isArray(assessment2.responseOptions) ? assessment2.responseOptions.map((option) => option.value) : [1, 2, 3, 4, 5];
+    if (!Array.isArray(items) || items.length === 0) {
+      throw new Error("진단 문항이 필요합니다.");
+    }
+    let index = 0;
+    let answered = 0;
+    let finished = false;
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", (event) => {
+        if (answered === 0 || finished) return;
+        event.preventDefault();
+        event.returnValue = "";
+      });
+    }
+    const emptyValue = () => {
+      if (mode === "scale") return null;
+      if (mode === "pick2") return { most: null, least: null };
+      if (mode === "pair") return null;
+      return [];
+    };
+    const emptyAnswers = () => Object.fromEntries(items.map((item) => [item.id, emptyValue()]));
+    let answers = emptyAnswers();
+    const currentItem = () => items[index];
+    const isComplete = () => {
+      const value = answers[currentItem().id];
+      if (mode === "scale") return scaleValues.includes(value);
+      if (mode === "pick2") return Boolean(value.most) && Boolean(value.least);
+      if (mode === "pair") return value === "left" || value === "right";
+      return value.length === 4;
+    };
+    const getState = () => ({
+      index,
+      total: items.length,
+      item: currentItem(),
+      group: currentItem(),
+      answers: structuredClone(answers),
+      isCurrentComplete: isComplete(),
+      isLast: index === items.length - 1
+    });
+    return {
+      getState,
+      select(optionId) {
+        answered += 1;
+        if (mode === "pair") {
+          if (optionId !== "left" && optionId !== "right") return false;
+          if (answers[currentItem().id] === optionId) return false;
+          answers[currentItem().id] = optionId;
+          return true;
+        }
+        if (mode === "pick2") {
+          const group2 = currentItem();
+          if (!group2.options.some((option) => option.id === optionId)) return false;
+          const value = answers[group2.id];
+          if (value.most === optionId) {
+            value.most = null;
+            return true;
+          }
+          if (value.least === optionId) {
+            value.least = null;
+            return true;
+          }
+          if (value.most === null) {
+            value.most = optionId;
+            return true;
+          }
+          if (value.least === null) {
+            value.least = optionId;
+            return true;
+          }
+          return false;
+        }
+        if (mode !== "ranking") return false;
+        const group = currentItem();
+        const selected = answers[group.id];
+        if (!group.options.some((option) => option.id === optionId)) return false;
+        const selectedIndex = selected.indexOf(optionId);
+        if (selectedIndex >= 0) {
+          selected.splice(selectedIndex, 1);
+          return true;
+        }
+        if (selected.length >= 4) return false;
+        selected.push(optionId);
+        return true;
+      },
+      answer(value) {
+        if (mode !== "scale" || !Number.isInteger(value) || !scaleValues.includes(value)) return false;
+        answered += 1;
+        answers[currentItem().id] = value;
+        return true;
+      },
+      resetCurrent() {
+        answers[currentItem().id] = emptyValue();
+      },
+      previous() {
+        if (index === 0) return false;
+        index -= 1;
+        return true;
+      },
+      next() {
+        if (!isComplete() || index >= items.length - 1) return false;
+        index += 1;
+        return true;
+      },
+      restart() {
+        index = 0;
+        answered = 0;
+        finished = false;
+        answers = emptyAnswers();
+      },
+      getResult() {
+        finished = true;
+        if (typeof assessment2.score === "function") return assessment2.score(structuredClone(answers));
+        const scores = mode === "pick2" ? calculatePick2Scores(items, answers) : calculateScores(items, answers);
+        return { scores, profile: classifyProfile(scores) };
+      }
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/ta-scoring.js
+  var TA_STATE_ORDER = ["standard", "care", "reality", "expression", "adaptation"];
+  function calculateTaScores(questions, answers) {
+    const scores = Object.fromEntries(TA_STATE_ORDER.map((id) => [id, 0]));
+    for (const question of questions) {
+      if (!TA_STATE_ORDER.includes(question.state)) throw new Error(`알 수 없는 관계 에너지: ${question.state}`);
+      const value = answers[question.id];
+      if (value === void 0) throw new Error("모든 문항에 응답해 주세요.");
+      if (!Number.isInteger(value) || value < 1 || value > 5) throw new RangeError("응답은 1~5의 정수여야 합니다.");
+      scores[question.state] += question.direction === "reverse" ? 6 - value : value;
+    }
+    return scores;
+  }
+  function toTaDisplayScore(raw) {
+    if (!Number.isFinite(raw) || raw < 6 || raw > 30) throw new RangeError("관계 에너지 원점수는 6~30이어야 합니다.");
+    return Math.round((raw - 6) / 24 * 100);
+  }
+  function pickWithTies(sorted, wanted, limit) {
+    for (let n = wanted; n >= 1; n -= 1) {
+      const threshold = sorted[n - 1].raw;
+      const group = sorted.filter((item) => item.raw >= threshold);
+      if (group.length <= limit) return group;
+    }
+    return [];
+  }
+  function interpretTaScores(scores, order = TA_STATE_ORDER) {
+    const ranked = order.map((id, index) => ({ id, raw: scores[id], index })).sort((a, b) => b.raw - a.raw || a.index - b.index).map(({ id, raw }) => ({ id, raw, percent: toTaDisplayScore(raw) }));
+    const groups = [];
+    for (const item of ranked) {
+      const current = groups.at(-1);
+      if (!current || current[0].raw - item.raw > 1) groups.push([item]);
+      else current.push(item);
+    }
+    const primary = pickWithTies(ranked, 2, 3);
+    const indeterminate = primary.length === 0;
+    const primaryIds = new Set(primary.map((item) => item.id));
+    const topRaw = ranked[0].raw;
+    const bottomRaw = ranked.at(-1).raw;
+    const lessUsedList = indeterminate ? [] : ranked.filter((item) => item.raw === bottomRaw && item.raw < topRaw && !primaryIds.has(item.id));
+    return {
+      ranked,
+      primary,
+      lessUsedList,
+      indeterminate,
+      lessUsed: lessUsedList[0] ?? null,
+      closeGroups: groups.filter((group) => group.length > 1).map((group) => group.map((item) => item.id)),
+      isEvenProfile: ranked[0].raw - ranked.at(-1).raw <= 3
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/assessment-ui.js
+  function progressData({ index, total }) {
+    if (!Number.isInteger(index) || !Number.isInteger(total) || total < 1 || index < 0 || index >= total) {
+      throw new RangeError("유효한 진행 상태가 필요합니다.");
+    }
+    return { label: `${index + 1} / ${total}`, percent: Math.round((index + 1) / total * 100) };
+  }
+  function escapeHtml(value) {
+    return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  }
+  function listHtml(items) {
+    return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+  }
+  function updateProgress(state2, refs) {
+    const data = progressData(state2);
+    refs.label.textContent = data.label;
+    refs.percent.textContent = `${data.percent}%`;
+    refs.bar.style.width = `${data.percent}%`;
+  }
+  function scrollToTop() {
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    window.scrollTo({ top: 0, behavior });
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/ta-app.js
+  var assessment = { ...taAssessment, score(answers) {
+    const scores = calculateTaScores(taAssessment.questions, answers);
+    return { scores, ...interpretTaScores(scores) };
+  } };
+  var engine = createAssessmentEngine(assessment);
+  var scaleLabels = ["전혀 그렇지 않다", "그렇지 않은 편이다", "보통이다", "그런 편이다", "매우 그렇다"];
+  var $ = (selector) => document.querySelector(selector);
+  var introView = $("#intro-view");
+  var questionView = $("#question-view");
+  var resultView = $("#result-view");
+  var progress = $("#progress");
+  var scaleOptions = $("#scale-options");
+  function showQuestions() {
+    introView.classList.add("hidden");
+    resultView.classList.add("hidden");
+    questionView.classList.remove("hidden");
+    progress.classList.remove("hidden");
+    renderQuestion();
+  }
+  function renderQuestion() {
+    const state2 = engine.getState();
+    const answer = state2.answers[state2.item.id];
+    updateProgress(state2, { label: $("#progress-label"), percent: $("#progress-percent"), bar: $("#progress-bar") });
+    $("#question-title").textContent = state2.item.text;
+    scaleOptions.replaceChildren(...scaleLabels.map((label, index) => {
+      const value = index + 1;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `scale-option${answer === value ? " selected" : ""}`;
+      button.dataset.value = String(value);
+      button.setAttribute("aria-pressed", answer === value ? "true" : "false");
+      button.innerHTML = `<span class="scale-number">${value}</span><span>${escapeHtml(label)}</span>`;
+      button.addEventListener("click", () => {
+        if (engine.answer(value)) renderQuestion();
+      });
+      return button;
+    }));
+    $("#previous-button").disabled = state2.index === 0;
+    $("#next-button").disabled = !state2.isCurrentComplete;
+    $("#next-button").textContent = state2.isLast ? "결과 보기" : "다음";
+    $("#status-message").textContent = state2.isCurrentComplete ? "응답이 선택되었습니다. 다음으로 이동해 주세요." : "한 가지 응답을 선택해 주세요.";
+  }
+  function itemById(result, id) {
+    return result.ranked.find((item) => item.id === id);
+  }
+  function renderMap(result) {
+    const rows = TA_STATE_ORDER.map((id) => {
+      const item = itemById(result, id);
+      const content = taAssessment.states[id];
+      const badge = result.primary.some((x) => x.id === id) ? '<span class="motive-role primary">자주 사용</span>' : result.lessUsedList.some((x) => x.id === id) ? '<span class="motive-role potential">덜 사용</span>' : "";
+      return `<div class="motive-row"><div class="motive-score-head"><strong>${escapeHtml(content.label)} <small>${content.code}</small></strong><span>${badge}<b>${item.percent}</b></span></div><div class="motive-track" role="img" aria-label="${escapeHtml(content.label)} 상대 점수 ${item.percent}점"><span class="motive-fill" style="width:${item.percent}%"></span></div></div>`;
+    }).join("");
+    return `<article class="card result-map-card motivation-map-card"><p class="eyebrow">전체 프로필</p><h2>나의 관계 에너지 지도</h2><p>다른 사람과 비교하는 점수가 아니라, 내 응답 안에서 다섯 반응이 나타난 상대적 정도입니다.</p><div class="motivation-map">${rows}</div></article>`;
+  }
+  function renderAdaptationNote(result) {
+    const find = (id) => result.ranked.find((item) => item.id === id);
+    const ac = find("adaptation");
+    const fc = find("expression");
+    if (!ac || !fc) return "";
+    const acLeads = result.primary.some((item) => item.id === "adaptation");
+    if (!acLeads || ac.raw - fc.raw < 5) return "";
+    return `<article class="card profile-notice"><p class="eyebrow">함께 살펴볼 신호</p><h2>맞추는 힘은 큰데 표현하는 힘이 그만큼 쓰이지 않았습니다.</h2><p>상황에 맞추는 반응이 앞서고 자유롭게 표현하는 반응이 뒤에 있습니다. 조율을 잘한다는 뜻이기도 하고, 하고 싶은 말을 자주 삼키고 있다는 뜻이기도 합니다. 최근에 말하지 못하고 넘어간 장면이 있었는지 떠올려 보세요.</p><p>두 점수가 비슷하다면 이 안내는 나타나지 않습니다. 지금은 차이가 커서 함께 보시라고 띄웠습니다.</p></article>`;
+  }
+  function renderNotice(result) {
+    if (result.isEvenProfile) return `<article class="card profile-notice even-profile"><p class="eyebrow">고른 관계 에너지</p><h2>다섯 에너지가 비슷하게 나타났습니다.</h2><p>순위를 고정된 유형으로 읽기보다 상황별로 어떤 반응을 선택하는지 실제 경험과 비교해 보세요.</p></article>`;
+    if (!result.closeGroups.length) return "";
+    const groups = result.closeGroups.map((group) => group.map((id) => taAssessment.states[id].label).join(" · "));
+    return `<article class="card profile-notice"><p class="eyebrow">가까운 관계 에너지군</p><h2>1점 이내의 차이는 비슷한 경향으로 읽어 주세요.</h2>${listHtml(groups)}</article>`;
+  }
+  function renderStateCard(item, kind) {
+    const c = taAssessment.states[item.id];
+    const heading = kind === "primary" ? "자주 꺼내는 관계 에너지" : "비교적 덜 사용하는 관계 에너지";
+    return `<article class="card top-motive-card ${kind}"><div class="top-motive-heading"><div><p class="eyebrow">${heading}</p><h2>${escapeHtml(c.label)} <small>${c.code}</small></h2></div><span class="motive-score-circle">${item.percent}</span></div><p>${escapeHtml(c.summary)}</p><details class="axis-details"><summary>강점과 조절 방법 펼쳐보기</summary><div class="axis-detail-grid"><section><h3>✨ 강점과 기여</h3>${listHtml(c.strengths)}</section><section><h3>🔎 과사용 시 주의</h3>${listHtml(c.overuse)}</section><section><h3>🌱 덜 사용할 때 살펴볼 점</h3>${listHtml(c.underuse)}</section><section><h3>🧭 유용한 상황</h3>${listHtml(c.usefulWhen)}</section><section><h3>🤝 협업 팁</h3>${listHtml(c.collaboration)}</section><section><h3>💬 연습 문장</h3><p>${escapeHtml(c.practice)}</p></section><section><h3>💭 성찰 질문</h3><p>${escapeHtml(c.reflection)}</p></section></div></details></article>`;
+  }
+  function renderTransactions() {
+    return `<article class="card content-card transaction-section"><p class="eyebrow">상보교류 · 교차교류 · 이면교류</p><h2>대화가 이어지고 어긋나는 세 가지 방식</h2><p>상대의 성격이나 숨은 의도를 단정하지 말고, 실제 말과 반응을 바탕으로 확인하세요.</p><div class="transaction-grid">${taAssessment.transactions.map((t) => `<section class="transaction-card"><h3>${escapeHtml(t.label)}</h3><p>${escapeHtml(t.definition)}</p><blockquote>${escapeHtml(t.dialogue)}</blockquote><p><strong>상황:</strong> ${escapeHtml(t.example)}</p><p class="repair-line"><strong>회복 문장:</strong> ${escapeHtml(t.repair)}</p></section>`).join("")}</div></article>`;
+  }
+  function renderScenarios() {
+    return `<article class="card content-card"><p class="eyebrow">상황별 연습</p><h2>관계를 다시 잇는 말</h2><div class="scenario-list">${taAssessment.scenarios.map((s) => `<details class="scenario-card"><summary>${escapeHtml(s.category)}</summary><p><strong>시작:</strong> ${escapeHtml(s.opening)}</p><p><strong>응답:</strong> ${escapeHtml(s.response)}</p><p><strong>교류:</strong> ${escapeHtml(s.transaction)}</p><p>${escapeHtml(s.outcome)}</p><p class="repair-line"><strong>다시 말하기:</strong> ${escapeHtml(s.repair)}</p></details>`).join("")}</div></article>`;
+  }
+  function renderResult() {
+    const result = engine.getResult();
+    const combo = result.primary.map((item) => taAssessment.states[item.id]);
+    resultView.innerHTML = `<article class="card result-hero ta-result-hero"><p class="eyebrow">나의 관계 에너지 프로필</p><h1 class="profile-title">점수보다 중요한 것은<br>상황에 맞게 선택하는 힘입니다.</h1><p>${escapeHtml(taAssessment.disclaimer)}</p></article>${renderMap(result)}${renderNotice(result)}${result.primary.length ? `<section class="top-motive-list" aria-label="자주 사용하는 관계 에너지">${result.primary.map((item) => renderStateCard(item, "primary")).join("")}</section>` : ""}${result.lessUsedList.map((item) => renderStateCard(item, "less-used")).join("")}${renderAdaptationNote(result)}${combo.length > 1 ? `<article class="card content-card combination-card"><p class="eyebrow">함께 꺼내는 관계 에너지</p><h2>${combo.map((c) => escapeHtml(c.label)).join(" + ")}</h2>${listHtml(combo.map((c) => c.combination))}<p>새로운 유형 이름이 아니라 현재 응답에서 자주 함께 꺼내는 반응들을 연결해 본 해석입니다.</p></article>` : ""}${renderTransactions()}${renderScenarios()}<article class="card content-card reflection-card"><p class="eyebrow">성찰 질문</p><h2>내가 보낸 뜻과 상대가 받은 뜻을 비교해 보세요.</h2>${listHtml(result.primary.map((item) => taAssessment.states[item.id].reflection))}</article><article class="card content-card activity-card"><p class="eyebrow">교육활동</p><h2>관계 반응 다시 쓰기</h2>${listHtml(taAssessment.activity.steps)}<p><strong>개인 경험 공개와 역할 연습 참여는 선택할 수 있습니다.</strong></p></article><article class="card reference-code-card"><p class="eyebrow">교육용 안내</p><h2>평가가 아닌 자기성찰의 출발점입니다.</h2><p>${escapeHtml(taAssessment.methodNotice)}</p><p>타인을 부모·성인·아이로 분류하거나 채용·평가·상담의 근거로 사용하지 마세요.</p></article>${saveCardHtml()}<div class="result-actions"><button id="restart-button" class="button secondary" type="button">다시 하기</button><a class="button" href="./index.html">다른 진단 보기</a></div>`;
+    splitResultIntoTabs(resultView);
+    questionView.classList.add("hidden");
+    progress.classList.add("hidden");
+    resultView.classList.remove("hidden");
+    scrollToTop();
+    mountResultSave(resultView, "DAWIN I:ON Lab · 관계 에너지 체크");
+    $("#restart-button").addEventListener("click", () => {
+      engine.restart();
+      resultView.classList.add("hidden");
+      showQuestions();
+    });
+  }
+  $("#start-button").addEventListener("click", showQuestions);
+  $("#previous-button").addEventListener("click", () => {
+    if (engine.previous()) {
+      renderQuestion();
+      scrollToTop();
+    }
+  });
+  $("#next-button").addEventListener("click", () => {
+    const state2 = engine.getState();
+    if (!state2.isCurrentComplete) return;
+    if (state2.isLast) renderResult();
+    else if (engine.next()) {
+      renderQuestion();
+      scrollToTop();
+    }
+  });
+})();
+</script>
+  <p class="build-stamp">버전 20260825-1031</p>
+</body>
+</html>

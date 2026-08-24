@@ -1,0 +1,1822 @@
+<!doctype html>
+<!--
+DAWIN I:ON Lab — 교육용 자가진단 (단일 파일 배포본)
+
+포함된 오픈소스: html-to-image v1.11.11 (결과 화면 PNG 저장)
+출처: https://github.com/bubkoo/html-to-image
+
+MIT License
+
+Copyright (c) 2017-2026 W.Y.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DAWIN I:ON Lab 교육용 직무스트레스 요인 체크">
+  <title>지금의 나 · 직무스트레스 요인 체크 · DAWIN I:ON Lab</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJJOk9OIj4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxOCIgZmlsbD0iIzA4N2Y3MyIvPgogIDx0ZXh0IHg9IjMyIiB5PSIzOCIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JOk9OPC90ZXh0Pgo8L3N2Zz4K" type="image/svg+xml">
+  <style>
+:root {
+  color-scheme: light;
+  --color-bg: #f4f8f7;
+  --color-surface: #ffffff;
+  --color-ink: #18322f;
+  --color-muted: #637572;
+  --color-muted-strong: #4f5d5a; /* 배지·작은 라벨용 (연한 배경에서 AA 통과) */
+  --color-brand: #087f73;
+  --color-brand-dark: #056158;
+  --color-brand-soft: #e7f5f2;
+  --color-line: #dbe7e4;
+  --color-warm: #ffca6a;
+  --shadow-card: 0 18px 45px rgba(25, 74, 68, 0.1);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 4%, rgba(91, 206, 187, 0.22), transparent 24rem),
+    var(--color-bg);
+  color: var(--color-ink);
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+button, a { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #ffb82e; outline-offset: 3px; }
+.app-shell { width: min(100% - 32px, 720px); margin: 0 auto; padding: 24px 0 56px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--color-brand-dark); font-weight: 900; letter-spacing: -0.04em; }
+.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: var(--color-brand); color: #fff; box-shadow: 0 8px 20px rgba(8,127,115,.24); }
+.brand small { display: block; color: var(--color-muted); font-size: .72rem; font-weight: 700; letter-spacing: .01em; }
+.hero { padding: 56px 0 28px; }
+.eyebrow { color: var(--color-brand); font-size: .82rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 18px; font-size: clamp(2.25rem, 10vw, 4.6rem); line-height: 1.06; letter-spacing: -.065em; }
+h2 { font-size: clamp(1.55rem, 6vw, 2.3rem); line-height: 1.25; letter-spacing: -.035em; }
+h3 { font-size: 1.08rem; }
+.lead { max-width: 34rem; color: var(--color-muted); font-size: 1.05rem; }
+.highlight { position: relative; z-index: 0; white-space: nowrap; }
+.highlight::after { content: ""; position: absolute; z-index: -1; left: -.05em; right: -.05em; bottom: .08em; height: .34em; border-radius: 99px; background: var(--color-warm); opacity: .7; }
+.card { border: 1px solid rgba(203, 222, 218, .9); border-radius: var(--radius-lg); background: rgba(255,255,255,.96); box-shadow: var(--shadow-card); }
+.module-card { padding: 26px; }
+.module-card-spaced { margin-top: 18px; }
+.motivation-module { border-color: #e7c49b; }
+.module-number { display: inline-grid; place-items: center; width: 42px; height: 42px; margin-bottom: 36px; border-radius: 14px; background: var(--color-brand-soft); color: var(--color-brand); font-weight: 900; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
+.chip { display: inline-flex; align-items: center; min-height: 32px; padding: 5px 11px; border-radius: 99px; background: #f0f5f4; color: var(--color-muted); font-size: .82rem; font-weight: 700; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 13px 18px; border: 0; border-radius: 16px; background: var(--color-brand); color: #fff; font-weight: 800; text-decoration: none; transition: transform .15s, background .15s, opacity .15s; }
+@media (hover: hover) and (pointer: fine) { .button:hover { background: var(--color-brand-dark); transform: translateY(-1px); } }
+.button:disabled { cursor: not-allowed; opacity: .42; transform: none; }
+.button.secondary { border: 1px solid var(--color-line); background: #fff; color: var(--color-ink); }
+.button.ghost { background: transparent; color: var(--color-brand-dark); }
+.privacy-note { display: flex; gap: 10px; margin: 26px 0 0; color: var(--color-muted); font-size: .86rem; }
+.footer { padding: 32px 0 12px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.roadmap { margin-top: 44px; }
+.roadmap-list { display: grid; gap: 12px; margin-top: 20px; }
+.roadmap-card { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 18px; box-shadow: none; }
+.roadmap-card .module-number { width: 38px; height: 38px; margin: 0; border-radius: 12px; }
+.roadmap-card strong { color: var(--color-brand); font-size: .76rem; letter-spacing: .08em; }
+.roadmap-card h3 { margin: 2px 0 3px; }
+.roadmap-card p { margin: 0; color: var(--color-muted); font-size: .86rem; }
+.coming-soon { grid-column: 2; justify-self: start; padding: 4px 9px; border-radius: 99px; background: #edf3f2; color: var(--color-muted); font-size: .72rem; font-weight: 900; }
+
+.assessment-header { padding-bottom: 20px; }
+.progress-wrap { margin-top: 22px; }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--color-muted); font-size: .84rem; font-weight: 800; }
+.progress-track { overflow: hidden; height: 8px; border-radius: 99px; background: #dce9e6; }
+.progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-brand), #31b59f); transition: width .28s ease; }
+.panel { padding: 24px; }
+.assessment-title { font-size: clamp(2rem, 9vw, 3.5rem); }
+.intro-icon { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 24px; border-radius: 22px; background: var(--color-brand-soft); color: var(--color-brand); font-size: 1.8rem; }
+.guide { display: grid; gap: 11px; margin: 24px 0; padding: 0; list-style: none; }
+.guide li { display: flex; gap: 11px; align-items: flex-start; color: var(--color-muted); }
+.guide strong { color: var(--color-brand-dark); }
+.question-head { margin-bottom: 20px; }
+.question-head p { color: var(--color-muted); }
+.option-list { display: grid; gap: 11px; }
+.option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 68px; padding: 12px 14px; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s, transform .15s; }
+@media (hover: hover) and (pointer: fine) { .option:hover:not(:disabled) { border-color: #64b9ad; transform: translateY(-1px); } }
+.option:active:not(:disabled) { transform: scale(.985); }
+.scale-option:active { transform: scale(.985); }
+.option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.option:disabled:not(.selected) { cursor: default; opacity: .54; }
+.option.least { border: 2px solid #9aa5a3; background: #f2f4f4; }
+.option.least .rank-badge { background: #7d8b88; color: #fff; }
+.option.least .option-label { color: #55605e; }
+.rank-badge { flex: 0 0 56px; display: grid; place-items: center; width: 56px; height: 42px; white-space: nowrap; border-radius: 13px; background: #edf3f2; color: var(--color-muted); font-size: .8rem; font-weight: 900; }
+.selected .rank-badge { background: var(--color-brand); color: #fff; }
+.option-label { font-size: 1.04rem; font-weight: 800; }
+.rank-meaning { display: block; margin-top: 1px; color: var(--color-muted); font-size: .74rem; font-weight: 700; }
+.actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 24px; }
+.reset-row { margin-top: 10px; text-align: center; }
+.text-button { min-height: 44px; padding: 8px 14px; border: 0; background: transparent; color: var(--color-muted); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.status-message { min-height: 1.5em; color: var(--color-brand-dark); font-size: .82rem; font-weight: 700; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.scale-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.scale-options { display: grid; gap: 10px; }
+.scale-option { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 12px; width: 100%; min-height: 58px; padding: 9px 13px; border: 1px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); font-weight: 800; text-align: left; }
+@media (hover: hover) and (pointer: fine) { .scale-option:hover { border-color: #64b9ad; transform: translateY(-1px); } }
+.scale-option.selected { border: 2px solid var(--color-brand); background: var(--color-brand-soft); }
+.scale-number { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #edf3f2; color: var(--color-muted); }
+.scale-option.selected .scale-number { background: var(--color-brand); color: #fff; }
+
+.result-hero { padding: 28px 24px; background: linear-gradient(145deg, #087f73, #075c55); color: #fff; }
+.result-hero .eyebrow { color: #bcebe4; }
+.result-hero p { color: #d8f3ee; }
+.profile-title { font-size: clamp(2rem, 9vw, 3.8rem); }
+.score-card, .content-card { margin-top: 16px; padding: 22px; }
+.score-list { display: grid; gap: 16px; }
+.score-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-weight: 900; }
+.score-track { overflow: hidden; height: 13px; border-radius: 99px; background: #e8efed; }
+.score-fill { height: 100%; border-radius: inherit; transform-origin: left; animation: grow .7s ease both; }
+@keyframes grow { from { transform: scaleX(0); } }
+.content-grid { display: grid; gap: 16px; margin-top: 16px; }
+.content-card ul { margin: 0; padding-left: 1.25rem; color: var(--color-muted); }
+.content-card li + li { margin-top: 8px; }
+.activity-card { border-color: #efd6a1; background: #fffaf0; }
+.disclaimer { margin: 20px 4px; color: var(--color-muted); font-size: .78rem; text-align: center; }
+.result-actions { display: grid; gap: 10px; margin-top: 20px; }
+.personality-result-hero { background: linear-gradient(145deg, #6857bb, #3f327f); }
+.personality-result-hero .eyebrow { color: #ded8ff; }
+.axis-list { display: grid; gap: 16px; margin-top: 16px; }
+.axis-card { padding: 22px; }
+.axis-heading { display: grid; gap: 12px; margin-bottom: 18px; }
+.axis-heading h2 { margin-bottom: 0; }
+.tendency-badge { justify-self: start; padding: 5px 10px; border-radius: 99px; background: #edeafa; color: #54469f; font-size: .78rem; font-weight: 900; }
+.tendency-badge.balanced { background: #e9f5f2; color: var(--color-brand-dark); }
+.axis-labels, .axis-percentages { display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; }
+.axis-labels { margin-bottom: 7px; }
+.axis-percentages { margin-top: 6px; color: var(--color-muted); font-weight: 800; }
+.axis-track { display: flex; overflow: hidden; height: 16px; border-radius: 99px; background: #edf0ef; }
+.axis-left { background: #ef8c67; }
+.axis-right { background: #6e70c9; }
+.axis-details { margin-top: 18px; border-top: 1px solid var(--color-line); }
+.axis-details summary { min-height: 48px; padding-top: 13px; color: var(--color-brand-dark); font-weight: 800; cursor: pointer; }
+.axis-detail-grid { display: grid; gap: 18px; padding-top: 10px; }
+.axis-detail-grid ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.reflection-card { border-color: #cfc8ef; background: #faf9ff; }
+.reference-code-card { margin-top: 16px; padding: 22px; border-style: dashed; box-shadow: none; }
+.reference-code-card p { color: var(--color-muted); }
+.motivation-intro-icon { background: #fff1dc; color: #a85a16; }
+.motivation-result-hero { background: linear-gradient(145deg, #b96120, #733a12); }
+.motivation-result-hero .eyebrow { color: #ffe3be; }
+.motivation-map-card { margin-top: 16px; padding: 22px; }
+.motivation-map-card > p { color: var(--color-muted); }
+.motivation-map { display: grid; gap: 16px; margin-top: 22px; }
+.motive-score-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+.motive-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.motive-score-head b { min-width: 2ch; color: #7a4519; text-align: right; }
+.motive-track { overflow: hidden; height: 12px; border-radius: 99px; background: #f2ebe4; }
+.motive-fill { display: block; height: 100%; border-radius: inherit; background: #c7b5a5; transform-origin: left; animation: grow .7s ease both; }
+.motive-fill.primary { background: #b85c1b; }
+.motive-fill.supporting { background: #db893d; }
+.motive-fill.potential { background: #e9b678; }
+.motive-role { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border-radius: 99px; background: #f4ece5; color: #75451f; font-size: .7rem; font-weight: 900; }
+.motive-role.primary { background: #8f4513; color: #fff; }
+.motive-role.supporting { background: #d47728; color: #fff; }
+.motive-role.potential { background: #f4d7ad; color: #63380f; }
+.profile-notice { margin-top: 16px; padding: 22px; border-color: #e7c49b; background: #fffaf3; }
+.profile-notice.even-profile { border-color: #b9d9d2; background: #f4fbf9; }
+.profile-notice ul { margin-bottom: 12px; padding-left: 1.2rem; color: var(--color-muted); }
+.top-motive-list { display: grid; gap: 16px; margin-top: 16px; }
+.top-motive-card { padding: 22px; border-top: 5px solid #e9b678; }
+.top-motive-card.primary { border-top-color: #9f4e17; }
+.top-motive-card.supporting { border-top-color: #d47728; }
+.top-motive-heading { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px; }
+.top-motive-heading h2 { margin-bottom: 5px; }
+.motive-score-circle { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 18px; background: #fff1dc; color: #8c4818; font-size: 1.15rem; font-weight: 900; }
+.motive-need { color: #75451f; }
+.combination-card { border-color: #e2bc8d; background: #fffaf4; }
+.combination-card > p { color: var(--color-muted); }
+.ta-intro-icon { background: #e7f0ff; color: #315b9b; }
+.ta-result-hero { background: linear-gradient(145deg, #315b9b, #1f3764); }
+.ta-result-hero .eyebrow { color: #d9e7ff; }
+.transaction-grid { display: grid; gap: 14px; margin-top: 18px; }
+.transaction-card { padding: 18px; border: 1px solid var(--color-line); border-radius: 18px; background: #f8fbff; }
+.transaction-card h3 { margin-bottom: 8px; color: #315b9b; }
+.transaction-card blockquote { margin: 14px 0; padding: 12px 14px; border-left: 4px solid #6d8fc3; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.repair-line { padding: 12px 14px; border-radius: 12px; background: #eaf6f2; color: var(--color-brand-dark); }
+.scenario-list { display: grid; gap: 10px; margin-top: 16px; }
+.scenario-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.scenario-card summary { padding: 14px 16px; color: #315b9b; font-weight: 900; cursor: pointer; }
+.scenario-card p { margin: 0 16px 12px; color: var(--color-muted); }
+.top-motive-card.less-used { margin-top: 16px; border-top-color: #7795ba; }
+.motive-score-head small, .top-motive-heading small { color: var(--color-muted); font-size: .7em; }
+.stroke-intro-icon { background: #fff0f1; color: #b33b55; }
+.stroke-result-hero { background: linear-gradient(145deg, #b33b55, #71253a); }
+.stroke-result-hero .eyebrow { color: #ffdce4; }
+.stroke-options .scale-option { grid-template-columns: 42px 1fr; min-height: 66px; }
+.stroke-code { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 8px; border-radius: 9px; background: #eff2f5; color: #576f88; font-size: .76rem; }
+/* 색은 '주고받는 방향'이 아니라 '긍정(핑크) · 부정(블루) · 신호(회색)'를 뜻한다.
+   다섯 색의 상대휘도를 0.255로 맞춰(3.05:1) 톤 통일감과 밝은 강의장 가독성을 함께 확보했다. */
+.stroke-row.tone-a .stroke-code { background: #fbe9ef; color: #c82858; }
+.stroke-row.tone-c .stroke-code { background: #faeaf6; color: #bc2e92; }
+.stroke-row.tone-b .stroke-code { background: #eaf5fb; color: #23759b; }
+.stroke-row.tone-d .stroke-code { background: #eaeefa; color: #3d64d0; }
+.stroke-row.tone-e .stroke-code { background: #eff2f5; color: #576f88; }
+.stroke-row .motive-score-head b { color: #8a2c42; }
+.stroke-row .motive-score-head b small { margin-left: 2px; color: var(--color-muted); font-size: .7em; }
+.stroke-fill-a { background: #d06a89; }   /* 긍정 · 핑크 */
+.stroke-fill-c { background: #c86aac; }   /* 긍정 · 핑크(연보라) */
+.stroke-fill-b { background: #4193b9; }   /* 부정 · 블루(하늘) */
+.stroke-fill-d { background: #7189ca; }   /* 부정 · 블루(연청) */
+.stroke-fill-e { background: #838b94; }   /* 신호 · 연회색 */
+.stroke-flow-grid { display: grid; gap: 16px; }
+.stroke-flow-card { border-top: 5px solid #d95773; }
+.stroke-flow-card.negative-flow { border-top-color: #7b719b; }
+.stroke-flow-card.withdrawal-flow { border-top-color: #6f8792; }
+.stroke-pattern-list { display: grid; gap: 16px; margin-top: 16px; }
+.stroke-pattern-card { padding: 22px; }
+.role-guide-grid { display: grid; gap: 12px; margin-top: 18px; }
+.role-guide-card { padding: 16px; border: 1px solid var(--color-line); border-radius: 16px; background: #fffafb; }
+.role-guide-card h3 { color: #9c3049; }
+.role-guide-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #d95773; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-module { border-color: #9ec9c0; }
+.stress-intro-icon { background: #e5f5ee; color: #25745e; }
+.safety-note { margin: 22px 0; padding: 16px; border: 1px solid #c7ded8; border-radius: 16px; background: #f4faf8; }
+.safety-note strong { color: var(--color-brand-dark); }
+.safety-note p { margin: 5px 0 0; color: var(--color-muted); font-size: .88rem; }
+.stress-result-hero { background: linear-gradient(145deg, #347b67, #1f5044); }
+.stress-result-hero .eyebrow { color: #d8f3e9; }
+.stress-map-card { margin-top: 16px; padding: 22px; }
+.stress-map-card > p { color: var(--color-muted); }
+.stress-map { display: grid; gap: 17px; margin-top: 22px; }
+.stress-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.stress-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.stress-score-head b { min-width: 2ch; color: #2a6a58; text-align: right; }
+.stress-score-head em { padding: 2px 7px; border-radius: 99px; background: #e4f3ee; color: #226450; font-size: .68rem; font-style: normal; font-weight: 900; }
+.stress-track { overflow: hidden; height: 12px; border-radius: 99px; background: #e6efec; }
+.stress-fill { display: block; height: 100%; border-radius: inherit; background: #77aa9b; transform-origin: left; animation: grow .7s ease both; }
+.stress-row.priority .stress-fill { background: #347b67; }
+.stress-priority-list { margin-top: 28px; }
+.stress-priority-list > h2 { margin-bottom: 16px; }
+.stress-priority-card { margin-top: 16px; padding: 22px; border-top: 5px solid #347b67; }
+.stress-priority-card > p { color: var(--color-muted); }
+.stress-priority-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.stress-priority-heading h2 { margin-bottom: 5px; }
+.stress-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; background: #e5f5ee; color: #246552; font-size: 1.15rem; font-weight: 900; }
+.stress-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.stress-action-card { padding: 16px; border: 1px solid #cfe2dc; border-radius: 16px; background: #f7fbfa; }
+.stress-action-card.organization { border-color: #d9d8ea; background: #f9f8fd; }
+.stress-action-card h3 { color: #286b58; }
+.stress-action-card.organization h3 { color: #57508a; }
+.stress-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.stress-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.stress-reflection blockquote, .stress-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #4b907d; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.stress-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.stress-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.stress-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #286b58; font-weight: 900; cursor: pointer; }
+.stress-domain-card > p, .stress-domain-card > h3, .stress-domain-card > ul, .stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-left: 16px; margin-right: 16px; }
+.stress-domain-card > p, .stress-domain-card > ul { color: var(--color-muted); }
+.stress-domain-card > blockquote, .stress-domain-card > .stress-action-grid { margin-bottom: 16px; }
+.support-card { border-color: #bcd6cf; background: #f5fbf9; }
+.resilience-module { border-color: #e3cf9a; }
+.resilience-intro-icon { background: #fdf3da; color: #8a6115; }
+.resilience-result-hero { background: linear-gradient(145deg, #a8791f, #6d4c10); }
+.resilience-result-hero .eyebrow { color: #fbe9c4; }
+.resilience-map-card { margin-top: 16px; padding: 22px; }
+.resilience-map-card > p { color: var(--color-muted); }
+.resilience-map { display: grid; gap: 17px; margin-top: 22px; }
+.resilience-score-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.resilience-score-head > span { display: inline-flex; align-items: center; gap: 7px; }
+.resilience-score-head b { min-width: 2ch; color: #7d5a14; text-align: right; }
+.resilience-score-head em { padding: 2px 7px; border-radius: 99px; font-size: .68rem; font-style: normal; font-weight: 900; }
+.resilience-score-head em.tag-strength { background: #e6f2ea; color: #256349; }
+.resilience-score-head em.tag-growth { background: #fbeedb; color: #8a6115; }
+.resilience-track { overflow: hidden; height: 12px; border-radius: 99px; background: #eeeae0; }
+.resilience-fill { display: block; height: 100%; border-radius: inherit; background: #cbb277; transform-origin: left; animation: grow .7s ease both; }
+.resilience-row.strength .resilience-fill { background: #3d8a6c; }
+.resilience-row.growth .resilience-fill { background: #a8791f; }
+.resilience-strength-list, .resilience-growth-list { margin-top: 28px; }
+.resilience-strength-list > h2, .resilience-growth-list > h2 { margin-bottom: 16px; }
+.resilience-strength-card { margin-top: 16px; padding: 22px; border-top: 5px solid #3d8a6c; }
+.resilience-growth-card { margin-top: 16px; padding: 22px; border-top: 5px solid #a8791f; }
+.resilience-strength-card > p, .resilience-growth-card > p { color: var(--color-muted); }
+.resilience-card-heading { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.resilience-card-heading h2 { margin-bottom: 5px; }
+.resilience-score-circle { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; font-size: 1.15rem; font-weight: 900; }
+.resilience-score-circle.strength { background: #e6f2ea; color: #256349; }
+.resilience-score-circle.growth { background: #fdf3da; color: #7d5a14; }
+.resilience-action-grid { display: grid; gap: 12px; margin-top: 16px; }
+.resilience-action-card { padding: 16px; border: 1px solid #e6dcc4; border-radius: 16px; background: #fdfaf3; }
+.resilience-action-card.support { border-color: #d9d8ea; background: #f9f8fd; }
+.resilience-action-card h3 { color: #7d5a14; }
+.resilience-action-card.support h3 { color: #57508a; }
+.resilience-action-card ul { margin: 0; padding-left: 1.2rem; color: var(--color-muted); }
+.resilience-environment { margin-top: 16px; padding: 16px; border-radius: 16px; background: #f4f8f7; border-left: 4px solid #3d8a6c; }
+.resilience-environment p { color: var(--color-muted); }
+.resilience-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #fffaf0; }
+.resilience-reflection blockquote, .resilience-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #a8791f; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.resilience-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.resilience-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.resilience-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #7d5a14; font-weight: 900; cursor: pointer; }
+.resilience-domain-card > p, .resilience-domain-card > h3, .resilience-domain-card > ul, .resilience-domain-card > blockquote { margin-left: 16px; margin-right: 16px; }
+.resilience-domain-card > p, .resilience-domain-card > ul { color: var(--color-muted); }
+.resilience-domain-card > blockquote { margin-bottom: 16px; }
+
+.hidden { display: none !important; }
+
+@media (min-width: 640px) {
+  .app-shell { padding-top: 34px; }
+  .module-card, .panel { padding: 34px; }
+  .content-grid { grid-template-columns: 1fr 1fr; }
+  .axis-heading { grid-template-columns: 1fr auto; align-items: start; }
+  .axis-detail-grid { grid-template-columns: 1fr 1fr; }
+  .transaction-grid { grid-template-columns: repeat(3, 1fr); }
+  .stroke-flow-grid { grid-template-columns: 1fr 1fr; }
+  .stroke-flow-card.withdrawal-flow { grid-column: 1 / -1; }
+  .role-guide-grid { grid-template-columns: 1fr 1fr; }
+  .stress-action-grid { grid-template-columns: 1fr 1fr; }
+  .resilience-action-grid { grid-template-columns: 1fr 1fr; }
+  .result-actions { grid-template-columns: 1fr 1fr; }
+  .roadmap-card { grid-template-columns: auto 1fr auto; align-items: center; }
+  .coming-soon { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+
+/* 양극 선택 진행 안내 — 선택지가 아니라 '읽는 안내'로 보이게 한다 */
+.status-message.step-most,
+.status-message.step-least,
+.status-message.step-done {
+  display: block;
+  margin: 2px 0 16px;
+  padding: 11px 16px;
+  border: 0;
+  border-left: 5px solid transparent;
+  border-radius: 4px 14px 14px 4px;
+  text-align: left;
+  min-height: 0;
+}
+.status-message .step-tag {
+  display: block;
+  margin-bottom: 3px;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  opacity: .72;
+}
+.status-message .step-text {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: .015em;
+  line-height: 1.4;
+}
+.status-message.step-most {
+  background: var(--color-brand-soft);
+  border-left-color: var(--color-brand);
+  color: var(--color-brand-dark);
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-least {
+  background: #eef1f0;
+  border-left-color: #7d8b88;
+  color: #3d4946;
+  animation: step-glow 2s ease-in-out infinite;
+}
+.status-message.step-done {
+  background: transparent;
+  border-left-color: #cfd8d6;
+  color: var(--color-muted);
+  animation: none;
+}
+.status-message.step-done .step-text { font-weight: 600; }
+@keyframes step-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .58; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-message.step-most,
+  .status-message.step-least { animation: none; }
+}
+
+
+/* 진행 버튼 하단 고정 — 묶음마다 스크롤해서 누르지 않도록 (DISC 전용) */
+.actions.actions-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  margin: 18px -24px -24px;
+  padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  border-top: 1px solid rgba(203, 222, 218, .9);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 -10px 22px -14px rgba(15, 50, 45, .3);
+}
+/* 마지막 선택지가 고정 버튼에 가리지 않도록 여백 */
+#question-view .option-list { padding-bottom: 4px; }
+.reset-row { margin-top: 10px; text-align: center; }
+
+
+/* 2묶음부터는 머리말을 줄여 선택지 공간을 확보한다 (DISC 전용) */
+.question-head.compact { margin-bottom: 12px; }
+.question-head.compact .eyebrow { display: none; }
+.question-head.compact h2 { font-size: 1.22rem; line-height: 1.3; margin: 0; }
+
+
+/* 결과 저장 — 교육 후에도 남는 자산 */
+.save-card { margin-top: 16px; padding: 22px; }
+.save-card h3 { margin: 0 0 6px; }
+.save-card p { margin: 0 0 14px; color: var(--color-muted); }
+.copy-status { min-height: 1.4em; margin: 10px 0 0; font-weight: 700; }
+.copy-status.done { color: var(--color-brand-dark); }
+.copy-status.fail { color: #b4593f; }
+.copy-fallback { margin-top: 8px; }
+.copy-fallback summary { color: var(--color-muted); font-size: .88rem; cursor: pointer; }
+.copy-fallback textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+
+/* 쌍 비교 선택 (성격 선호도 4축) */
+.pair-option { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 78px; padding: 16px; border: 1.5px solid var(--color-line); border-radius: 16px; background: #fff; color: var(--color-ink); text-align: left; transition: border .15s, background .15s; }
+.pair-option.selected { border-color: var(--color-brand); background: var(--color-brand-soft); }
+.pair-option:active { transform: scale(.985); }
+.pair-mark { flex: 0 0 36px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: #eef3f2; color: var(--color-muted); font-weight: 900; }
+.pair-option.selected .pair-mark { background: var(--color-brand); color: #fff; }
+.pair-text { font-size: 1.06rem; font-weight: 750; line-height: 1.35; }
+.scale-options.pair-mode { gap: 8px; }
+@media (hover: hover) and (pointer: fine) { .pair-option:hover { border-color: #64b9ad; } }
+
+/* ── 결과 내보내기 (PDF · PNG) ── */
+.save-actions { display: grid; gap: 10px; }
+.save-actions .button { width: 100%; }
+
+.export-overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 32, 30, .62); overflow: auto; }
+.export-sheet { width: min(100%, 560px); max-height: 92vh; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px; background: #fff; }
+.export-hint { margin: 0; color: var(--color-muted); font-size: .92rem; line-height: 1.5; }
+.export-preview { flex: 1 1 auto; min-height: 0; overflow: auto; border: 1px solid var(--color-line); border-radius: 12px; background: #fff; -webkit-overflow-scrolling: touch; }
+.export-preview img { display: block; width: 100%; height: auto; }
+.export-title { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.export-url { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--color-line); border-radius: 12px; background: #f7faf9; color: var(--color-ink); font-size: .9rem; }
+/* 화면 밖 임시 무대 — 이미지 저장용으로만 쓰고 바로 지운다. */
+.export-stage { box-sizing: border-box; }
+/* 막대가 자라나는 등장 애니메이션을 끈다.
+   복제하면 애니메이션이 처음부터 다시 시작하는데, 그 시작 시점(높이 0)이 그대로 찍혀
+   그래프가 텅 빈 이미지가 나온다. */
+.export-stage, .export-stage *, .export-stage *::before, .export-stage *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ── 인쇄(PDF 저장) ── */
+@media print {
+  :root { --color-brand-soft: #f4f4f4; }
+  body { background: #fff; }
+  .assessment-header,
+  #intro-view,
+  #question-view,
+  .save-card,
+  .export-stage,
+  .export-holder,
+  .export-overlay,
+  .actions,
+  .actions-sticky { display: none !important; }
+  #result-view:not(.hidden) { display: block !important; }
+  .app-shell { width: 100%; padding: 0; }
+  .card { break-inside: avoid; page-break-inside: avoid; box-shadow: none !important; border: 1px solid #d9dedd; }
+  details > summary { display: none !important; }
+  a[href]::after { content: none !important; }
+  @page { margin: 12mm; }
+}
+
+/* ── 가독성 보강 (2026-08-22 접근성 점검) ──
+   강의장 조명·노안 사용자를 기준으로 작은 라벨의 대비와 크기를 올린다. */
+body { overscroll-behavior-y: contain; }
+
+.rank-badge, .scale-number, .pair-mark, .chip { color: var(--color-muted-strong); }
+
+.eyebrow { font-size: .88rem; }
+.motive-role { font-size: .82rem; min-height: 28px; padding: 3px 10px; }
+.motive-role.supporting { background: #b0601c; }
+.stress-score-head em, .resilience-score-head em { font-size: .8rem; padding: 3px 9px; }
+.axis-labels, .axis-percentages, .tendency-badge { font-size: .84rem; }
+
+/* 결과 상단 문구는 밝은 조명에서도 읽히도록 흰색에 가깝게 */
+.result-hero .eyebrow,
+.personality-result-hero .eyebrow,
+.motivation-result-hero .eyebrow,
+.ta-result-hero .eyebrow,
+.stroke-result-hero .eyebrow,
+.stress-result-hero .eyebrow,
+.resilience-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+.result-hero p { color: rgba(255, 255, 255, .93); }
+
+/* 복사 실패 시 유일한 복구 경로 — 손가락으로 눌리는 크기로 */
+.copy-fallback summary {
+  display: flex; align-items: center; min-height: 48px; padding: 10px 4px;
+  color: var(--color-muted-strong); font-size: .95rem; font-weight: 700;
+}
+
+/* 포커스 표시를 어두운 링으로 (흰 배경 대비 확보) */
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid #18322f;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 184, 46, .55);
+}
+
+@media (max-width: 360px) {
+  h1 { font-size: clamp(1.9rem, 9vw, 4.6rem); }
+  .highlight { white-space: normal; }
+}
+
+/* 결과를 읽는 순서 안내 */
+.stability-card h3 { margin: 14px 0 6px; font-size: .95rem; color: var(--color-brand-dark); }
+.stability-card h3:first-of-type { margin-top: 4px; }
+.stability-card p { color: var(--color-muted); }
+
+/* Stroke — 내가 하는 행동(A·B) / 내가 놓인 환경(C·D) 분리 */
+/* 블록 구분은 제목이 하고, 색은 긍정·부정 구분에만 쓴다. 테두리는 중립으로. */
+.stroke-give-card, .stroke-receive-card, .stroke-signal-card { border-left: 4px solid var(--color-line); }
+.stroke-signal-card h2 small { color: var(--color-muted-strong); font-weight: 700; }
+.stroke-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 4px; padding: 0; list-style: none; font-size: .84rem; color: var(--color-muted-strong); }
+.stroke-legend li { display: flex; align-items: center; gap: 6px; }
+.stroke-legend i { width: 14px; height: 14px; border-radius: 5px; }
+
+/* ── 결과 화면: 결과만 보기 / 자세히 보기 ── */
+.result-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 14px; padding: 6px; border-radius: 16px; background: var(--color-brand-soft); }
+.result-tab { min-height: 48px; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--color-brand-dark); font-weight: 800; font-size: .98rem; }
+.result-tab.active { background: #fff; color: var(--color-ink); box-shadow: 0 2px 10px rgba(25, 74, 68, .12); }
+.result-panel:focus { outline: none; }
+.result-panel-hint { margin: 18px 4px 0; color: var(--color-muted-strong); font-size: .9rem; line-height: 1.6; }
+@media (hover: hover) and (pointer: fine) { .result-tab:not(.active):hover { background: rgba(255, 255, 255, .6); } }
+@media print {
+  .result-tabs, .result-panel-hint { display: none !important; }
+  .result-panel, .result-panel.hidden { display: block !important; }
+}
+
+/* 전체 수준 — 상대 순위보다 먼저 읽는 결과값 */
+.overall-level-card { padding: 24px; border-left: 5px solid var(--color-line); }
+.overall-level-card h2 { margin: 4px 0 2px; }
+.overall-level-card h2 strong { color: var(--color-brand-dark); }
+/* 문장이 주인공, 숫자는 보조. 크게 띄우면 성적표처럼 읽힌다. */
+.overall-figure { margin: 8px 0 12px; color: var(--color-muted-strong); font-size: .92rem; font-weight: 700; }
+.overall-figure b { margin-left: 4px; color: var(--color-ink); font-size: 1.5rem; font-weight: 900; }
+.overall-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-line); color: var(--color-muted-strong); font-size: .84rem; line-height: 1.65; }
+/* 색은 점수의 높낮이가 아니라 상태를 뜻한다. 두 모듈은 방향이 반대여서
+   스트레스는 낮을수록, 회복탄력성은 높을수록 tone-good 이 된다. */
+.overall-level-card.tone-good { border-left-color: #4f8f78; }
+.overall-level-card.tone-watch { border-left-color: #c08a2e; }
+.overall-level-card.tone-alert { border-left-color: #b0601c; }
+.overall-level-card.tone-good h2 strong { color: #35705c; }
+.overall-level-card.tone-watch h2 strong { color: #8a6115; }
+.overall-level-card.tone-alert h2 strong { color: #8a4a12; }
+
+/* ── 감성지수(EQ) 5영역 ── */
+.eq-module { border-color: #d3bcdd; }
+.eq-intro-icon { background: #f6ecfa; color: #7a3f8a; }
+.eq-result-hero { background: linear-gradient(145deg, #8e4f9e, #58306b); }
+.eq-result-hero .eyebrow { color: rgba(255, 255, 255, .94); }
+
+/* 막대그래프 — 종이 실습지 2페이지 서식과 같은 0~20 눈금.
+   손으로 옮겨 그린 그래프와 모양이 같아야 강의장에서 나란히 놓고 볼 수 있다. */
+.eq-chart-card { margin-top: 16px; padding: 22px 18px; }
+.eq-chart-card > p { color: var(--color-muted); }
+.eq-chart { margin-top: 22px; }
+
+/* 좌·우 눈금 라벨(각 28px)을 뺀 안쪽이 막대 영역. 머리·발 라벨도 같은 폭을 쓴다. */
+.eq-chart-heads, .eq-chart-foots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 28px; }
+.eq-chart-heads { align-items: stretch; margin-bottom: 8px; }
+.eq-head { display: flex; overflow: hidden; align-items: center; justify-content: center; justify-self: center; width: 100%; max-width: 64px; min-height: 2.9em; padding: 5px 2px; border: 1px solid var(--color-line); border-radius: 10px; background: #fbfdfc; color: var(--color-muted-strong); font-size: .76rem; font-weight: 800; line-height: 1.25; text-align: center; }
+.eq-chart-foots { margin-top: 10px; }
+.eq-foot { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 7px; width: 100%; max-width: 64px; min-height: 42px; border: 1px solid var(--color-line); border-radius: 10px; background: #f7faf9; }
+.eq-foot b { font-size: 1rem; font-weight: 900; }
+.eq-foot span { color: var(--color-ink); font-size: 1.08rem; font-weight: 900; }
+
+.eq-chart-body { position: relative; height: 240px; }
+.eq-gridlines { position: absolute; inset: 0; }
+.eq-grid-row { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 4px; transform: translateY(50%); }
+.eq-grid-row span { flex: 0 0 24px; color: var(--color-muted-strong); font-size: .68rem; font-weight: 700; text-align: center; }
+.eq-grid-row i { flex: 1 1 auto; border-top: 1px dashed #d5e2df; }
+.eq-grid-row.base i { border-top: 2px solid #9fb3af; }
+
+.eq-chart-plot { position: absolute; top: 0; right: 28px; bottom: 0; left: 28px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.eq-col { display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+/* 다섯 색은 상대휘도를 0.254~0.257로 맞춰 어느 한 칸도 튀어 보이지 않게 했다. */
+.eq-bar { display: block; width: 100%; max-width: 64px; min-height: 3px; border-radius: 7px 7px 0 0; transform-origin: bottom; animation: eq-rise .7s ease backwards; }
+@keyframes eq-rise { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .eq-bar { animation: none; } }
+
+@media (max-width: 380px) {
+  .eq-chart-heads, .eq-chart-foots { margin: 0 22px; gap: 5px; }
+  .eq-chart-plot { right: 22px; left: 22px; gap: 5px; }
+  .eq-grid-row span { flex-basis: 18px; font-size: .62rem; }
+  .eq-head { font-size: .7rem; }
+}
+
+/* 결과 카드 */
+.eq-strength-list, .eq-growth-list { margin-top: 22px; }
+.eq-strength-card, .eq-growth-card { margin-top: 16px; padding: 22px; }
+.eq-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.eq-card-heading h2 { margin: 2px 0 0; }
+.eq-score-circle { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #fff; font-size: 1.15rem; font-weight: 900; }
+.eq-score-circle.muted { background: #eef2f1; color: var(--color-muted-strong); }
+.eq-reflection { margin-top: 16px; padding: 16px; border-radius: 16px; background: #faf5fc; }
+.eq-reflection blockquote, .eq-domain-card blockquote { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #8e4f9e; border-radius: 0 12px 12px 0; background: #fff; color: var(--color-muted); }
+.eq-emphasis { color: var(--color-muted-strong); font-size: .9rem; }
+.eq-domain-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: #f4f7f6; color: var(--color-muted-strong); font-size: .88rem; line-height: 1.6; }
+
+.eq-domain-list { display: grid; gap: 10px; margin-top: 18px; }
+.eq-domain-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.eq-domain-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #6d3a7c; font-weight: 900; cursor: pointer; }
+.eq-domain-card summary span { display: flex; align-items: center; gap: 9px; }
+.eq-domain-card summary i { flex: 0 0 auto; width: 14px; height: 14px; border-radius: 5px; }
+.eq-domain-card > p, .eq-domain-card > h3, .eq-domain-card > ul, .eq-domain-card > blockquote { margin-right: 16px; margin-left: 16px; }
+.eq-domain-card > p, .eq-domain-card > ul { color: var(--color-muted); }
+.eq-domain-card > blockquote { margin-bottom: 16px; }
+
+/* 인쇄(PDF 저장) 때 막대 색이 빠지면 그래프가 빈 칸이 된다. */
+@media print {
+  .eq-bar, .eq-foot, .eq-head, .eq-domain-card summary i {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .eq-bar { animation: none; }
+}
+
+/* 성격 — 자세히 탭의 축별 상세 안내 */
+.axis-guide-list { display: grid; gap: 10px; margin-top: 18px; }
+.axis-guide-card { border: 1px solid var(--color-line); border-radius: 16px; background: #fff; }
+.axis-guide-card summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; color: #4b3f96; font-weight: 900; cursor: pointer; }
+.axis-guide-card .axis-detail-grid { margin: 0 16px 16px; }
+
+/* 행동경향(DISC) — 자세히 탭의 경향별 안내 묶음 */
+.disc-guide-section { margin-top: 22px; }
+.disc-guide-section > h2 { margin-bottom: 4px; }
+
+/* 배포 버전 표시 — 폰에서 지금 보고 있는 파일이 최신인지 눈으로 확인하는 용도 */
+.build-stamp {
+  margin: 0; padding: 10px 16px 24px;
+  color: var(--color-muted); font-size: .72rem; text-align: center; letter-spacing: .02em;
+}
+@media print { .build-stamp { display: none !important; } }
+
+</style>
+</head>
+<body>
+  <noscript>
+    <div class="app-shell"><div class="safety-note"><strong>브라우저 확인이 필요합니다</strong>
+      <p>이 체크는 자바스크립트가 켜져 있어야 동작합니다. 크롬이나 사파리로 다시 열어 주시고, 그래도 화면이 넘어가지 않으면 강사에게 알려 주세요.</p></div></div>
+  </noscript>
+  <main class="app-shell">
+    <header class="assessment-header">
+      <a class="brand" href="./index.html" aria-label="DAWIN I:ON Lab 홈"><span class="brand-mark">I:ON</span><span>DAWIN I:ON Lab<small>지금의 나</small></span></a>
+      <div id="progress" class="progress-wrap hidden" aria-label="진단 진행률">
+        <div class="progress-info"><span id="progress-label">1 / 32</span><span id="progress-percent">3%</span></div>
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+    </header>
+
+    <section id="intro-view" class="card panel">
+      <div class="intro-icon stress-intro-icon" aria-hidden="true">◌</div>
+      <p class="eyebrow">지금의 나 · 직무스트레스 요인 체크</p>
+      <h1 class="assessment-title">내가 버텨야 할 문제가 아니라,<br>함께 조정할 조건을 살펴보세요.</h1>
+      <p class="lead">최근 한 달 동안 실제 업무에서 반복된 경험을 떠올려 8가지 업무환경 요인을 점검합니다.</p>
+      <ul class="guide">
+        <li><strong>8가지 환경</strong><span>작업환경부터 업무부담, 지원, 공정성, 인정과 문화까지 살펴봅니다.</span></li>
+        <li><strong>영역별 지도</strong><span>총점 등급 대신 각 영역의 상대적 부담과 보호자원을 따로 보여줍니다.</span></li>
+        <li><strong>공동 개선</strong><span>개인 실천과 조직의 개선 과제를 함께 찾습니다.</span></li>
+      </ul>
+      <div class="safety-note"><strong>교육용 자기점검</strong><p>정신건강 상태를 진단하거나 채용·인사평가에 사용하는 검사가 아닙니다. 공식 KOSS 문항·채점표·규준을 사용하지 않은 DAWIN 독자 도구입니다.</p></div>
+      <button id="start-button" class="button" type="button">체크 시작하기</button>
+      <p class="privacy-note"><span aria-hidden="true">🔒</span><span>응답은 현재 화면에서만 계산되며 저장되거나 전송되지 않습니다.</span></p>
+    </section>
+
+    <section id="question-view" class="card panel hidden" aria-labelledby="question-title">
+      <div class="question-head"><p class="eyebrow">최근 한 달의 실제 업무 경험</p><h2 id="question-title"></h2><p>바람직한 모습보다 실제로 얼마나 자주 그렇게 느꼈는지 선택해 주세요.</p></div>
+      <fieldset class="scale-fieldset"><legend class="sr-only">동의 정도 선택</legend><div id="scale-options" class="scale-options"></div></fieldset>
+      <p id="status-message" class="status-message" aria-live="polite">한 가지 응답을 선택해 주세요.</p>
+      <div class="actions"><button id="previous-button" class="button secondary" type="button">이전</button><button id="next-button" class="button" type="button" disabled>다음</button></div>
+    </section>
+
+    <section id="result-view" class="hidden" aria-live="polite"></section>
+  </main>
+  <script>/*! html-to-image v1.11.11 | (c) 2017-2026 W.Y. | MIT License | https://github.com/bubkoo/html-to-image */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).htmlToImage={})}(this,(function(t){"use strict";function e(t,e,n,r){return new(n||(n=Promise))((function(i,o){function u(t){try{a(r.next(t))}catch(t){o(t)}}function c(t){try{a(r.throw(t))}catch(t){o(t)}}function a(t){var e;t.done?i(t.value):(e=t.value,e instanceof n?e:new n((function(t){t(e)}))).then(u,c)}a((r=r.apply(t,e||[])).next())}))}function n(t,e){var n,r,i,o,u={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return o={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function c(c){return function(a){return function(c){if(n)throw new TypeError("Generator is already executing.");for(;o&&(o=0,c[0]&&(u=0)),u;)try{if(n=1,r&&(i=2&c[0]?r.return:c[0]?r.throw||((i=r.return)&&i.call(r),0):r.next)&&!(i=i.call(r,c[1])).done)return i;switch(r=0,i&&(c=[2&c[0],i.value]),c[0]){case 0:case 1:i=c;break;case 4:return u.label++,{value:c[1],done:!1};case 5:u.label++,r=c[1],c=[0];continue;case 7:c=u.ops.pop(),u.trys.pop();continue;default:if(!(i=u.trys,(i=i.length>0&&i[i.length-1])||6!==c[0]&&2!==c[0])){u=0;continue}if(3===c[0]&&(!i||c[1]>i[0]&&c[1]<i[3])){u.label=c[1];break}if(6===c[0]&&u.label<i[1]){u.label=i[1],i=c;break}if(i&&u.label<i[2]){u.label=i[2],u.ops.push(c);break}i[2]&&u.ops.pop(),u.trys.pop();continue}c=e.call(t,u)}catch(t){c=[6,t],r=0}finally{n=i=0}if(5&c[0])throw c[1];return{value:c[0]?c[1]:void 0,done:!0}}([c,a])}}}var r,i=(r=0,function(){return r+=1,"u".concat("0000".concat((Math.random()*Math.pow(36,4)<<0).toString(36)).slice(-4)).concat(r)});function o(t){for(var e=[],n=0,r=t.length;n<r;n++)e.push(t[n]);return e}function u(t,e){var n=(t.ownerDocument.defaultView||window).getComputedStyle(t).getPropertyValue(e);return n?parseFloat(n.replace("px","")):0}function c(t,e){void 0===e&&(e={});var n,r,i,o=e.width||(r=u(n=t,"border-left-width"),i=u(n,"border-right-width"),n.clientWidth+r+i),c=e.height||function(t){var e=u(t,"border-top-width"),n=u(t,"border-bottom-width");return t.clientHeight+e+n}(t);return{width:o,height:c}}var a=16384;function s(t,e){return void 0===e&&(e={}),t.toBlob?new Promise((function(n){t.toBlob(n,e.type?e.type:"image/png",e.quality?e.quality:1)})):new Promise((function(n){for(var r=window.atob(t.toDataURL(e.type?e.type:void 0,e.quality?e.quality:void 0).split(",")[1]),i=r.length,o=new Uint8Array(i),u=0;u<i;u+=1)o[u]=r.charCodeAt(u);n(new Blob([o],{type:e.type?e.type:"image/png"}))}))}function l(t){return new Promise((function(e,n){var r=new Image;r.decode=function(){return e(r)},r.onload=function(){return e(r)},r.onerror=n,r.crossOrigin="anonymous",r.decoding="async",r.src=t}))}function f(t){return e(this,void 0,void 0,(function(){return n(this,(function(e){return[2,Promise.resolve().then((function(){return(new XMLSerializer).serializeToString(t)})).then(encodeURIComponent).then((function(t){return"data:image/svg+xml;charset=utf-8,".concat(t)}))]}))}))}function h(t,r,i){return e(this,void 0,void 0,(function(){var e,o,u;return n(this,(function(n){return e="http://www.w3.org/2000/svg",o=document.createElementNS(e,"svg"),u=document.createElementNS(e,"foreignObject"),o.setAttribute("width","".concat(r)),o.setAttribute("height","".concat(i)),o.setAttribute("viewBox","0 0 ".concat(r," ").concat(i)),u.setAttribute("width","100%"),u.setAttribute("height","100%"),u.setAttribute("x","0"),u.setAttribute("y","0"),u.setAttribute("externalResourcesRequired","true"),o.appendChild(u),u.appendChild(t),[2,f(o)]}))}))}var d=function(t,e){if(t instanceof e)return!0;var n=Object.getPrototypeOf(t);return null!==n&&(n.constructor.name===e.name||d(n,e))};function v(t,e,n){var r=".".concat(t,":").concat(e),i=n.cssText?function(t){var e=t.getPropertyValue("content");return"".concat(t.cssText," content: '").concat(e.replace(/'|"/g,""),"';")}(n):function(t){return o(t).map((function(e){var n=t.getPropertyValue(e),r=t.getPropertyPriority(e);return"".concat(e,": ").concat(n).concat(r?" !important":"",";")})).join(" ")}(n);return document.createTextNode("".concat(r,"{").concat(i,"}"))}function p(t,e,n){var r=window.getComputedStyle(t,n),o=r.getPropertyValue("content");if(""!==o&&"none"!==o){var u=i();try{e.className="".concat(e.className," ").concat(u)}catch(t){return}var c=document.createElement("style");c.appendChild(v(u,n,r)),e.appendChild(c)}}var g="application/font-woff",m="image/jpeg",w={woff:g,woff2:g,ttf:"application/font-truetype",eot:"application/vnd.ms-fontobject",png:"image/png",jpg:m,jpeg:m,gif:"image/gif",tiff:"image/tiff",svg:"image/svg+xml",webp:"image/webp"};function b(t){var e=function(t){var e=/\.([^./]*?)$/g.exec(t);return e?e[1]:""}(t).toLowerCase();return w[e]||""}function y(t){return-1!==t.search(/^(data:)/)}function x(t,e){return"data:".concat(e,";base64,").concat(t)}function S(t,r,i){return e(this,void 0,void 0,(function(){var e,o;return n(this,(function(n){switch(n.label){case 0:return[4,fetch(t,r)];case 1:if(404===(e=n.sent()).status)throw new Error('Resource "'.concat(e.url,'" not found'));return[4,e.blob()];case 2:return o=n.sent(),[2,new Promise((function(t,n){var r=new FileReader;r.onerror=n,r.onloadend=function(){try{t(i({res:e,result:r.result}))}catch(t){n(t)}},r.readAsDataURL(o)}))]}}))}))}var E={};function C(t,r,i){return e(this,void 0,void 0,(function(){var e,o,u,c,a;return n(this,(function(n){switch(n.label){case 0:if(e=function(t,e,n){var r=t.replace(/\?.*/,"");return n&&(r=t),/ttf|otf|eot|woff2?/i.test(r)&&(r=r.replace(/.*\//,"")),e?"[".concat(e,"]").concat(r):r}(t,r,i.includeQueryParams),null!=E[e])return[2,E[e]];i.cacheBust&&(t+=(/\?/.test(t)?"&":"?")+(new Date).getTime()),n.label=1;case 1:return n.trys.push([1,3,,4]),[4,S(t,i.fetchRequestInit,(function(t){var e=t.res,n=t.result;return r||(r=e.headers.get("Content-Type")||""),function(t){return t.split(/,/)[1]}(n)}))];case 2:return u=n.sent(),o=x(u,r),[3,4];case 3:return c=n.sent(),o=i.imagePlaceholder||"",a="Failed to fetch resource: ".concat(t),c&&(a="string"==typeof c?c:c.message),a&&console.warn(a),[3,4];case 4:return E[e]=o,[2,o]}}))}))}function P(t){return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){return"data:,"===(e=t.toDataURL())?[2,t.cloneNode(!1)]:[2,l(e)]}))}))}function R(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return t.currentSrc?(e=document.createElement("canvas"),i=e.getContext("2d"),e.width=t.clientWidth,e.height=t.clientHeight,null==i||i.drawImage(t,0,0,e.width,e.height),[2,l(e.toDataURL())]):(o=t.poster,u=b(o),[4,C(o,u,r)]);case 1:return[2,l(n.sent())]}}))}))}function T(t){var r;return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return e.trys.push([0,3,,4]),(null===(r=null==t?void 0:t.contentDocument)||void 0===r?void 0:r.body)?[4,L(t.contentDocument.body,{},!0)]:[3,2];case 1:return[2,e.sent()];case 2:return[3,4];case 3:return e.sent(),[3,4];case 4:return[2,t.cloneNode(!1)]}}))}))}function A(t,e){return d(e,Element)&&(function(t,e){var n=e.style;if(n){var r=window.getComputedStyle(t);r.cssText?(n.cssText=r.cssText,n.transformOrigin=r.transformOrigin):o(r).forEach((function(i){var o=r.getPropertyValue(i);if("font-size"===i&&o.endsWith("px")){var u=Math.floor(parseFloat(o.substring(0,o.length-2)))-.1;o="".concat(u,"px")}d(t,HTMLIFrameElement)&&"display"===i&&"inline"===o&&(o="block"),"d"===i&&e.getAttribute("d")&&(o="path(".concat(e.getAttribute("d"),")")),n.setProperty(i,o,r.getPropertyPriority(i))}))}}(t,e),function(t,e){p(t,e,":before"),p(t,e,":after")}(t,e),function(t,e){d(t,HTMLTextAreaElement)&&(e.innerHTML=t.value),d(t,HTMLInputElement)&&e.setAttribute("value",t.value)}(t,e),function(t,e){if(d(t,HTMLSelectElement)){var n=e,r=Array.from(n.children).find((function(e){return t.value===e.getAttribute("value")}));r&&r.setAttribute("selected","")}}(t,e)),e}function L(t,r,i){return e(this,void 0,void 0,(function(){return n(this,(function(u){return i||!r.filter||r.filter(t)?[2,Promise.resolve(t).then((function(t){return function(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){return d(t,HTMLCanvasElement)?[2,P(t)]:d(t,HTMLVideoElement)?[2,R(t,r)]:d(t,HTMLIFrameElement)?[2,T(t)]:[2,t.cloneNode(!1)]}))}))}(t,r)})).then((function(i){return function(t,r,i){var u,c;return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){switch(n.label){case 0:return e=[],0===(e=null!=(a=t).tagName&&"SLOT"===a.tagName.toUpperCase()&&t.assignedNodes?o(t.assignedNodes()):d(t,HTMLIFrameElement)&&(null===(u=t.contentDocument)||void 0===u?void 0:u.body)?o(t.contentDocument.body.childNodes):o((null!==(c=t.shadowRoot)&&void 0!==c?c:t).childNodes)).length||d(t,HTMLVideoElement)?[2,r]:[4,e.reduce((function(t,e){return t.then((function(){return L(e,i)})).then((function(t){t&&r.appendChild(t)}))}),Promise.resolve())];case 1:return n.sent(),[2,r]}var a}))}))}(t,i,r)})).then((function(e){return A(t,e)})).then((function(t){return function(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u,c,a,s,l,f,h,d,v,p;return n(this,(function(n){switch(n.label){case 0:if(0===(e=t.querySelectorAll?t.querySelectorAll("use"):[]).length)return[2,t];i={},p=0,n.label=1;case 1:return p<e.length?(o=e[p],(u=o.getAttribute("xlink:href"))?(c=t.querySelector(u),a=document.querySelector(u),c||!a||i[u]?[3,3]:(s=i,l=u,[4,L(a,r,!0)])):[3,3]):[3,4];case 2:s[l]=n.sent(),n.label=3;case 3:return p++,[3,1];case 4:if((f=Object.values(i)).length){for(h="http://www.w3.org/1999/xhtml",(d=document.createElementNS(h,"svg")).setAttribute("xmlns",h),d.style.position="absolute",d.style.width="0",d.style.height="0",d.style.overflow="hidden",d.style.display="none",v=document.createElementNS(h,"defs"),d.appendChild(v),p=0;p<f.length;p++)v.appendChild(f[p]);t.appendChild(d)}return[2,t]}}))}))}(t,r)}))]:[2,null]}))}))}var N=/url\((['"]?)([^'"]+?)\1\)/g,k=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,I=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function D(t,r,i,o,u){return e(this,void 0,void 0,(function(){var e,c,a,s;return n(this,(function(n){switch(n.label){case 0:return n.trys.push([0,5,,6]),e=i?function(t,e){if(t.match(/^[a-z]+:\/\//i))return t;if(t.match(/^\/\//))return window.location.protocol+t;if(t.match(/^[a-z]+:/i))return t;var n=document.implementation.createHTMLDocument(),r=n.createElement("base"),i=n.createElement("a");return n.head.appendChild(r),n.body.appendChild(i),e&&(r.href=e),i.href=t,i.href}(r,i):r,c=b(r),a=void 0,u?[4,u(e)]:[3,2];case 1:return s=n.sent(),a=x(s,c),[3,4];case 2:return[4,C(e,c,o)];case 3:a=n.sent(),n.label=4;case 4:return[2,t.replace((l=r,f=l.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1"),new RegExp("(url\\(['\"]?)(".concat(f,")(['\"]?\\))"),"g")),"$1".concat(a,"$3"))];case 5:return n.sent(),[3,6];case 6:return[2,t]}var l,f}))}))}function M(t){return-1!==t.search(N)}function H(t,r,i){return e(this,void 0,void 0,(function(){var e,o;return n(this,(function(n){return M(t)?(e=function(t,e){var n=e.preferredFontFormat;return n?t.replace(I,(function(t){for(;;){var e=k.exec(t)||[],r=e[0],i=e[2];if(!i)return"";if(i===n)return"src: ".concat(r,";")}})):t}(t,i),o=function(t){var e=[];return t.replace(N,(function(t,n,r){return e.push(r),t})),e.filter((function(t){return!y(t)}))}(e),[2,o.reduce((function(t,e){return t.then((function(t){return D(t,e,r,i)}))}),Promise.resolve(e))]):[2,t]}))}))}function V(t,r,i){var o;return e(this,void 0,void 0,(function(){var e,u;return n(this,(function(n){switch(n.label){case 0:return(e=null===(o=r.style)||void 0===o?void 0:o.getPropertyValue(t))?[4,H(e,null,i)]:[3,2];case 1:return u=n.sent(),r.style.setProperty(t,u,r.style.getPropertyPriority(t)),[2,!0];case 2:return[2,!1]}}))}))}function F(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,V("background",t,r)];case 1:return e.sent()?[3,3]:[4,V("background-image",t,r)];case 2:e.sent(),e.label=3;case 3:return[4,V("mask",t,r)];case 4:return e.sent()?[3,6]:[4,V("mask-image",t,r)];case 5:e.sent(),e.label=6;case 6:return[2]}}))}))}function j(t,r){return e(this,void 0,void 0,(function(){var e,i,o;return n(this,(function(n){switch(n.label){case 0:return(e=d(t,HTMLImageElement))&&!y(t.src)||d(t,SVGImageElement)&&!y(t.href.baseVal)?[4,C(i=e?t.src:t.href.baseVal,b(i),r)]:[2];case 1:return o=n.sent(),[4,new Promise((function(n,r){t.onload=n,t.onerror=r;var i=t;i.decode&&(i.decode=n),"lazy"===i.loading&&(i.loading="eager"),e?(t.srcset="",t.src=o):t.href.baseVal=o}))];case 2:return n.sent(),[2]}}))}))}function q(t,r){return e(this,void 0,void 0,(function(){var e,i;return n(this,(function(n){switch(n.label){case 0:return e=o(t.childNodes),i=e.map((function(t){return U(t,r)})),[4,Promise.all(i).then((function(){return t}))];case 1:return n.sent(),[2]}}))}))}function U(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return d(t,Element)?[4,F(t,r)]:[3,4];case 1:return e.sent(),[4,j(t,r)];case 2:return e.sent(),[4,q(t,r)];case 3:e.sent(),e.label=4;case 4:return[2]}}))}))}var O={};function B(t){return e(this,void 0,void 0,(function(){var e,r;return n(this,(function(n){switch(n.label){case 0:return null!=(e=O[t])?[2,e]:[4,fetch(t)];case 1:return[4,n.sent().text()];case 2:return r=n.sent(),e={url:t,cssText:r},O[t]=e,[2,e]}}))}))}function z(t,r){return e(this,void 0,void 0,(function(){var i,o,u,c,a=this;return n(this,(function(s){return i=t.cssText,o=/url\(["']?([^"')]+)["']?\)/g,u=i.match(/url\([^)]+\)/g)||[],c=u.map((function(u){return e(a,void 0,void 0,(function(){var e;return n(this,(function(n){return(e=u.replace(o,"$1")).startsWith("https://")||(e=new URL(e,t.url).href),[2,S(e,r.fetchRequestInit,(function(t){var e=t.result;return i=i.replace(u,"url(".concat(e,")")),[u,e]}))]}))}))})),[2,Promise.all(c).then((function(){return i}))]}))}))}function W(t){if(null==t)return[];for(var e=[],n=t.replace(/(\/\*[\s\S]*?\*\/)/gi,""),r=new RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){if(null===(u=r.exec(n)))break;e.push(u[0])}n=n.replace(r,"");for(var i=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi,o=new RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){var u;if(null===(u=i.exec(n))){if(null===(u=o.exec(n)))break;i.lastIndex=o.lastIndex}else o.lastIndex=i.lastIndex;e.push(u[0])}return e}function $(t,r){return e(this,void 0,void 0,(function(){var e,i;return n(this,(function(n){return e=[],i=[],t.forEach((function(e){if("cssRules"in e)try{o(e.cssRules||[]).forEach((function(t,n){if(t.type===CSSRule.IMPORT_RULE){var o=n+1,u=B(t.href).then((function(t){return z(t,r)})).then((function(t){return W(t).forEach((function(t){try{e.insertRule(t,t.startsWith("@import")?o+=1:e.cssRules.length)}catch(e){console.error("Error inserting rule from remote css",{rule:t,error:e})}}))})).catch((function(t){console.error("Error loading remote css",t.toString())}));i.push(u)}}))}catch(o){var n=t.find((function(t){return null==t.href}))||document.styleSheets[0];null!=e.href&&i.push(B(e.href).then((function(t){return z(t,r)})).then((function(t){return W(t).forEach((function(t){n.insertRule(t,e.cssRules.length)}))})).catch((function(t){console.error("Error loading remote stylesheet",t)}))),console.error("Error inlining remote css file",o)}})),[2,Promise.all(i).then((function(){return t.forEach((function(t){if("cssRules"in t)try{o(t.cssRules||[]).forEach((function(t){e.push(t)}))}catch(e){console.error("Error while reading CSS rules from ".concat(t.href),e)}})),e}))]}))}))}function _(t){return t.filter((function(t){return t.type===CSSRule.FONT_FACE_RULE})).filter((function(t){return M(t.style.getPropertyValue("src"))}))}function G(t,r){return e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:if(null==t.ownerDocument)throw new Error("Provided element is not within a Document");return[4,$(o(t.ownerDocument.styleSheets),r)];case 1:return[2,_(e.sent())]}}))}))}function J(t,r){return e(this,void 0,void 0,(function(){var e;return n(this,(function(n){switch(n.label){case 0:return[4,G(t,r)];case 1:return e=n.sent(),[4,Promise.all(e.map((function(t){var e=t.parentStyleSheet?t.parentStyleSheet.href:null;return H(t.cssText,e,r)})))];case 2:return[2,n.sent().join("\n")]}}))}))}function Q(t,r){return e(this,void 0,void 0,(function(){var e,i,o,u,c;return n(this,(function(n){switch(n.label){case 0:return null==r.fontEmbedCSS?[3,1]:(i=r.fontEmbedCSS,[3,5]);case 1:return r.skipFonts?(o=null,[3,4]):[3,2];case 2:return[4,J(t,r)];case 3:o=n.sent(),n.label=4;case 4:i=o,n.label=5;case 5:return(e=i)&&(u=document.createElement("style"),c=document.createTextNode(e),u.appendChild(c),t.firstChild?t.insertBefore(u,t.firstChild):t.appendChild(u)),[2]}}))}))}function X(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,L(t,r,!0)];case 1:return[4,Q(u=n.sent(),r)];case 2:return n.sent(),[4,U(u,r)];case 3:return n.sent(),function(t,e){var n=t.style;e.backgroundColor&&(n.backgroundColor=e.backgroundColor),e.width&&(n.width="".concat(e.width,"px")),e.height&&(n.height="".concat(e.height,"px"));var r=e.style;null!=r&&Object.keys(r).forEach((function(t){n[t]=r[t]}))}(u,r),[4,h(u,i,o)];case 4:return[2,n.sent()]}}))}))}function K(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u,s,f,h,d,v;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,X(t,r)];case 1:return[4,l(n.sent())];case 2:return u=n.sent(),s=document.createElement("canvas"),f=s.getContext("2d"),h=r.pixelRatio||function(){var t,e;try{e=process}catch(t){}var n=e&&e.env?e.env.devicePixelRatio:null;return n&&(t=parseInt(n,10),Number.isNaN(t)&&(t=1)),t||window.devicePixelRatio||1}(),d=r.canvasWidth||i,v=r.canvasHeight||o,s.width=d*h,s.height=v*h,r.skipAutoScale||function(t){(t.width>a||t.height>a)&&(t.width>a&&t.height>a?t.width>t.height?(t.height*=a/t.width,t.width=a):(t.width*=a/t.height,t.height=a):t.width>a?(t.height*=a/t.width,t.width=a):(t.width*=a/t.height,t.height=a))}(s),s.style.width="".concat(d),s.style.height="".concat(v),r.backgroundColor&&(f.fillStyle=r.backgroundColor,f.fillRect(0,0,s.width,s.height)),f.drawImage(u,0,0,s.width,s.height),[2,s]}}))}))}t.getFontEmbedCSS=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){return[2,J(t,r)]}))}))},t.toBlob=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[4,s(e.sent())];case 2:return[2,e.sent()]}}))}))},t.toCanvas=K,t.toJpeg=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[2,e.sent().toDataURL("image/jpeg",r.quality||1)]}}))}))},t.toPixelData=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){var e,i,o,u;return n(this,(function(n){switch(n.label){case 0:return e=c(t,r),i=e.width,o=e.height,[4,K(t,r)];case 1:return u=n.sent(),[2,u.getContext("2d").getImageData(0,0,i,o).data]}}))}))},t.toPng=function(t,r){return void 0===r&&(r={}),e(this,void 0,void 0,(function(){return n(this,(function(e){switch(e.label){case 0:return[4,K(t,r)];case 1:return[2,e.sent().toDataURL()]}}))}))},t.toSvg=X}));
+//# sourceMappingURL=html-to-image.js.map
+</script>
+  <script>(() => {
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/data/stress.js
+  var domain = (label, shortLabel, summary, signals, personalActions, organizationActions, reflection, conversationStarter) => ({
+    label,
+    shortLabel,
+    summary,
+    signals,
+    personalActions,
+    organizationActions,
+    reflection,
+    conversationStarter
+  });
+  var STRESS_DOMAINS = [
+    "environment",
+    "demand",
+    "autonomy",
+    "support",
+    "stability",
+    "system",
+    "reward",
+    "culture"
+  ];
+  var stressAssessment = {
+    id: "work-stress-factors",
+    responseMode: "scale",
+    title: "지금의 나 · 직무스트레스 요인 체크",
+    subtitle: "개인의 취약함이 아니라 조정 가능한 업무환경 요인을 살펴보는 시간",
+    duration: "약 6~8분",
+    timeframe: "최근 한 달",
+    responseOptions: [
+      { value: 1, label: "전혀 그렇지 않다" },
+      { value: 2, label: "그렇지 않은 편이다" },
+      { value: 3, label: "보통이다" },
+      { value: 4, label: "그런 편이다" },
+      { value: 5, label: "매우 그렇다" }
+    ],
+    questions: [
+      { id: "j01", domain: "environment", direction: "risk", text: "작업 공간의 소음·온도·공기·안전 조건이 집중하거나 편안하게 일하는 데 방해가 된다." },
+      { id: "j02", domain: "demand", direction: "risk", text: "정해진 시간 안에 감당하기 어렵다고 느낄 만큼 많은 업무를 처리해야 할 때가 잦다." },
+      { id: "j03", domain: "autonomy", direction: "risk", text: "업무 방법이나 순서를 내 상황에 맞게 조정할 수 있는 여지가 거의 없다고 느낀다." },
+      { id: "j04", domain: "support", direction: "risk", text: "업무가 막히거나 어려워져도 동료나 리더에게 도움을 요청하기가 쉽지 않다." },
+      { id: "j05", domain: "stability", direction: "risk", text: "조직 변화나 역할 변동에 관한 정보가 부족해 앞으로의 상황을 예측하기 어렵다." },
+      { id: "j06", domain: "system", direction: "risk", text: "부서나 사람에 따라 업무 기준이 달라 무엇을 따라야 할지 혼란스러울 때가 있다." },
+      { id: "j07", domain: "reward", direction: "risk", text: "내가 들인 노력과 기여에 비해 인정·보상·성장 기회가 충분하지 않다고 느낀다." },
+      { id: "j08", domain: "culture", direction: "risk", text: "의견을 다르게 말하거나 실수를 공유하면 불이익을 받을까 걱정되는 분위기가 있다." },
+      { id: "j09", domain: "environment", direction: "resource", text: "필요한 장비·공간·휴식 여건이 업무를 안전하고 편안하게 수행하도록 지원한다." },
+      { id: "j10", domain: "demand", direction: "resource", text: "업무의 우선순위와 마감이 명확하고, 필요하면 업무량을 현실적으로 조정할 수 있다." },
+      { id: "j11", domain: "autonomy", direction: "resource", text: "합의한 목표 안에서 업무 방법과 순서를 스스로 선택할 수 있는 재량이 있다." },
+      { id: "j12", domain: "support", direction: "resource", text: "어려움이 생겼을 때 내 상황을 듣고 실질적으로 도와줄 동료나 리더가 있다." },
+      { id: "j13", domain: "stability", direction: "resource", text: "중요한 변화가 생기면 이유와 일정, 내 업무에 미칠 영향을 제때 안내받는다." },
+      { id: "j14", domain: "system", direction: "resource", text: "역할과 책임, 의사결정 절차가 분명하고 실제 업무에서도 일관되게 적용된다." },
+      { id: "j15", domain: "reward", direction: "resource", text: "내 노력과 성과가 구체적으로 인정되고 배우거나 성장할 기회가 제공된다." },
+      { id: "j16", domain: "culture", direction: "resource", text: "직급이나 배경과 관계없이 존중받으며 필요한 의견을 안전하게 말할 수 있다." },
+      { id: "j17", domain: "environment", direction: "risk", text: "불편한 자세나 반복 동작 같은 신체 부담을 충분한 회복 없이 계속해야 한다." },
+      { id: "j18", domain: "demand", direction: "risk", text: "예상하지 못한 업무와 잦은 중단 때문에 계획했던 일을 마치기 어렵다." },
+      { id: "j19", domain: "autonomy", direction: "risk", text: "필요한 정보나 권한은 충분하지 않은데 결과에 대한 책임을 먼저 요구받는 경우가 많다." },
+      { id: "j20", domain: "support", direction: "risk", text: "갈등이나 문제가 생기면 비난받지 않으려고 혼자 해결하려는 경우가 많다." },
+      { id: "j21", domain: "stability", direction: "risk", text: "현재 역할이나 직무가 어떻게 달라질지 예측하기 어려워 장기 계획을 세우기 힘들다." },
+      { id: "j22", domain: "system", direction: "risk", text: "평가·업무 배분·승진과 같은 결정의 기준이나 이유가 충분히 설명되지 않는다." },
+      { id: "j23", domain: "reward", direction: "risk", text: "잘한 일은 당연하게 여겨지고 부족하거나 잘못된 점만 주로 지적받는다고 느낀다." },
+      { id: "j24", domain: "culture", direction: "risk", text: "퇴근 후나 휴일에도 업무 연락과 빠른 응답을 당연하게 기대하는 분위기가 있다." },
+      { id: "j25", domain: "environment", direction: "resource", text: "신체나 작업환경의 불편을 말하면 개선 요청을 검토하고 조치하는 통로가 있다." },
+      { id: "j26", domain: "demand", direction: "resource", text: "일이 몰릴 때 일정·범위·인력을 관계자와 협의해 현실적으로 조정할 수 있다." },
+      { id: "j27", domain: "autonomy", direction: "resource", text: "내 역할의 경계와 기대 결과를 알고 있어 업무 변동을 어느 정도 미리 예측할 수 있다." },
+      { id: "j28", domain: "support", direction: "resource", text: "우리 팀에서는 도움 요청이나 실수 공유를 무능함의 표시로 여기지 않는다." },
+      { id: "j29", domain: "stability", direction: "resource", text: "변화 상황에서 내 역할과 준비해야 할 일을 질문하고 확인할 수 있는 기회가 있다." },
+      { id: "j30", domain: "system", direction: "resource", text: "부서 간 협업 문제를 해결할 공식적인 절차와 담당 책임자가 분명히 있다." },
+      { id: "j31", domain: "reward", direction: "resource", text: "현재 역할에서 새로운 것을 배우고 내 능력을 충분히 발휘할 기회가 있다고 느낀다." },
+      { id: "j32", domain: "culture", direction: "resource", text: "휴식·휴가·개인 시간을 존중하며 이를 사용하는 데 불필요한 눈치를 주지 않는다." }
+    ],
+    domains: {
+      environment: domain(
+        "작업환경과 신체 부담",
+        "작업환경",
+        "소음·온도·안전·자세·장비·휴식 여건처럼 몸과 집중에 직접 영향을 주는 업무 조건입니다.",
+        ["업무 뒤 신체 피로가 오래 남거나 집중이 자주 끊깁니다.", "불편을 참고 버티는 일이 반복되며 회복 시간이 부족합니다."],
+        ["하루 중 불편이 커지는 시간과 작업을 간단히 기록합니다.", "가능한 범위에서 자세·동선·도구 배치를 조정합니다.", "개선 요청 시 느낌과 함께 구체적인 장면·빈도·영향을 전달합니다."],
+        ["소음·온도·조명·안전·인체공학 조건을 정기적으로 점검합니다.", "장비 교체와 휴식·작업 전환 요청을 받을 공식 통로를 둡니다.", "현장 구성원이 개선 결과를 확인할 수 있도록 조치 일정과 담당자를 공유합니다."],
+        "몸과 집중이 가장 힘들어지는 작업 조건은 무엇이며, 작은 조정으로 달라질 부분은 무엇인가요?",
+        "최근 이 작업에서 이런 불편이 반복되었습니다. 안전하고 지속 가능하게 일하려면 이 조건을 함께 조정할 수 있을까요?"
+      ),
+      demand: domain(
+        "업무량과 시간 압박",
+        "업무부담",
+        "업무량·속도·마감·중단·인력 조건이 현재 사용할 수 있는 시간과 에너지를 얼마나 넘어서는지 살펴봅니다.",
+        ["급한 일에 밀려 중요한 일을 계속 미루거나 동시에 여러 일을 붙듭니다.", "업무를 마쳐도 회복되지 않고 다음 마감을 계속 걱정합니다."],
+        ["업무를 필수·조정 가능·보류 가능으로 나누어 우선순위를 확인합니다.", "예상 소요시간과 현재 용량을 근거로 일정 조정을 요청합니다.", "집중 시간과 짧은 회복 시간을 일정에 함께 확보합니다."],
+        ["반복되는 초과업무를 개인의 시간관리 문제로만 해석하지 않습니다.", "업무량·기한·인력 중 무엇을 조정할지 책임 있게 결정합니다.", "갑작스러운 추가 업무가 생기면 기존 우선순위를 공식적으로 다시 합의합니다."],
+        "내 부담을 가장 크게 만드는 것은 업무의 양, 촉박한 시간, 잦은 중단 중 무엇인가요?",
+        "현재 업무 용량으로는 세 과제를 모두 같은 기한에 끝내기 어렵습니다. 우선순위와 조정할 범위를 함께 정해 주세요."
+      ),
+      autonomy: domain(
+        "결정권과 업무 예측 가능성",
+        "결정·예측",
+        "기대 결과와 역할이 분명한지, 필요한 정보·권한을 갖고 방법과 순서를 조정할 수 있는지를 살펴봅니다.",
+        ["결과 책임은 크지만 선택할 수 있는 방법이나 권한은 매우 제한적입니다.", "업무 지시가 자주 바뀌는데 이유나 완료 기준을 알기 어렵습니다."],
+        ["과제를 받을 때 목적·완료 기준·결정 가능 범위를 확인합니다.", "내가 결정할 일과 승인받을 일을 구분해 적습니다.", "변경이 생기면 새 요구와 기존 약속의 차이를 다시 확인합니다."],
+        ["역할별 결정권과 승인 범위를 문서와 실제 운영에서 일치시킵니다.", "결과 책임에 필요한 정보·도구·권한을 함께 제공합니다.", "업무 변경의 이유와 영향, 새 완료 기준을 당사자와 조기에 공유합니다."],
+        "내가 스스로 결정해도 되는 범위와 반드시 확인해야 하는 범위가 분명한가요?",
+        "기대 결과는 이해했습니다. 제가 조정할 수 있는 범위와 추가로 필요한 정보·권한을 함께 확인하고 싶습니다."
+      ),
+      support: domain(
+        "관계와 사회적 지원",
+        "관계·지원",
+        "어려움과 갈등을 안전하게 말하고 동료·리더에게 정서적·실질적 도움을 받을 수 있는지를 살펴봅니다.",
+        ["문제가 생겨도 비난이나 평가가 걱정되어 도움 요청을 늦춥니다.", "팀 안에 있어도 중요한 부담을 혼자 감당한다고 느낍니다."],
+        ["도움이 필요한 지점과 원하는 지원 방식을 구체적으로 말합니다.", "조언·공감·업무 분담 중 지금 필요한 것을 구분해 요청합니다.", "나도 동료의 기여와 도움을 구체적으로 인정하고 감사를 표현합니다."],
+        ["도움 요청과 실수 공유를 학습 행동으로 인정하는 규칙을 만듭니다.", "리더가 정기적으로 업무 장애와 필요한 지원을 묻습니다.", "갈등을 개인 성격 문제가 아니라 역할·자원·정보의 문제와 함께 검토합니다."],
+        "도움을 요청하지 못하게 만드는 걱정은 무엇이며, 누구에게 어떤 지원을 요청할 수 있나요?",
+        "이 부분에서 혼자 해결하기 어려움을 느낍니다. 잠시 들어주기, 방법 조언, 일부 분담 중 가능한 지원을 함께 정할 수 있을까요?"
+      ),
+      stability: domain(
+        "변화와 직무 안정감",
+        "변화·안정",
+        "조직과 역할의 변화가 얼마나 예측 가능하게 안내되고, 준비할 시간과 참여 기회가 주어지는지를 살펴봅니다.",
+        ["변화 소문은 들리지만 공식 정보가 늦어 불확실성이 커집니다.", "내 역할이 어떻게 달라질지 몰라 장기적인 계획과 준비가 어렵습니다."],
+        ["확인된 사실과 추측을 구분해 불확실성의 범위를 적습니다.", "변화에 대해 내가 확인할 질문과 준비 가능한 행동을 정합니다.", "공식 정보와 점검 시점을 요청해 걱정을 혼자 키우지 않습니다."],
+        ["변화의 이유·일정·영향·미정 사항을 가능한 범위에서 투명하게 공유합니다.", "당사자가 질문하고 의견을 낼 수 있는 설명과 피드백 시간을 마련합니다.", "역할 전환에 필요한 학습·인수인계·적응 기간을 실제 계획에 반영합니다."],
+        "현재 변화에서 확인된 사실과 아직 정해지지 않은 것은 각각 무엇인가요?",
+        "변화 자체보다 정보가 부족해 준비하기 어렵습니다. 확정된 내용, 미정인 내용, 다음 안내 시점을 알려 주실 수 있을까요?"
+      ),
+      system: domain(
+        "조직체계와 공정성",
+        "체계·공정",
+        "역할·절차·의사결정·평가 기준이 명확하고 사람과 부서에 따라 일관되게 적용되는지를 살펴봅니다.",
+        ["같은 상황에도 담당자나 부서에 따라 기준이 달라 반복 확인이 필요합니다.", "평가나 배분 결정의 이유를 몰라 결과를 수용하기 어렵습니다."],
+        ["모호한 지시는 목적·담당·기한·완료 기준으로 나누어 확인합니다.", "사례와 영향, 필요한 기준을 정리해 공식 채널로 질문합니다.", "부서 간 합의는 구두에 그치지 않고 결정 내용과 책임자를 남깁니다."],
+        ["핵심 업무의 역할·절차·예외 기준을 구성원이 찾기 쉽게 정리합니다.", "평가와 자원 배분의 기준 및 결정 이유를 설명합니다.", "부서 간 문제를 조정할 책임자와 이견 해결 절차를 분명히 둡니다."],
+        "내가 겪는 혼란은 역할, 절차, 기준, 의사결정 중 어디에서 가장 자주 생기나요?",
+        "현재는 상황마다 기준이 다르게 적용되어 재작업이 생깁니다. 공통 기준과 예외 처리 절차를 함께 정리할 수 있을까요?"
+      ),
+      reward: domain(
+        "인정·보상·성장 기회",
+        "인정·성장",
+        "노력과 기여가 존중받고 공정하게 보상되며, 배우고 역량을 발휘할 기회로 이어지는지를 살펴봅니다.",
+        ["결과를 내도 구체적인 인정이나 유용한 피드백을 받기 어렵습니다.", "현재 역할이 성장이나 역량 발휘와 연결되지 않는다고 느낍니다."],
+        ["내 기여와 배운 점을 사실 중심으로 기록해 피드백 대화에 활용합니다.", "원하는 성장 방향과 필요한 경험을 구체적으로 요청합니다.", "동료가 기여한 행동과 그 영향을 구체적으로 인정하고 감사를 표현합니다."],
+        ["결과뿐 아니라 과정·협업·개선 기여를 구체적으로 인정합니다.", "보상과 성장 기회의 기준을 투명하게 설명하고 일관되게 적용합니다.", "구성원의 강점과 희망을 반영한 학습·도전 과제·경력 대화를 제공합니다."],
+        "내가 기대하는 인정은 말, 피드백, 기회, 보상 중 무엇이며 현재 무엇이 부족한가요?",
+        "제가 기여한 부분과 앞으로 더 성장하고 싶은 방향을 함께 점검하고 싶습니다. 필요한 피드백과 기회를 논의할 수 있을까요?"
+      ),
+      culture: domain(
+        "직장문화와 존중",
+        "문화·존중",
+        "의견·실수·경계를 안전하게 말하고, 서로의 존엄과 휴식 시간을 존중하는 문화인지 살펴봅니다.",
+        ["반대 의견이나 실수를 숨기게 만드는 비난·조롱·보복의 걱정이 있습니다.", "퇴근 뒤 연락과 과도한 헌신을 당연하게 여기는 압력이 있습니다."],
+        ["불편한 장면을 사람 평가보다 관찰한 말·행동·영향으로 정리합니다.", "응답 가능한 시간과 어려운 범위를 분명하고 존중 있게 알립니다.", "동료의 의견을 먼저 확인하고 지지·격려·감사·관심과 인정을 구체적으로 표현합니다."],
+        ["모욕·괴롭힘·보복을 금지하고 안전한 신고·보호·조치 절차를 운영합니다.", "회의 발언권과 정보 접근이 직급·성별·고용형태에 따라 달라지지 않는지 점검합니다.", "휴가·휴식·업무 외 시간을 존중하는 연락 원칙을 리더가 먼저 실천합니다."],
+        "우리 팀에서 말하기 가장 어려운 주제는 무엇이며, 더 안전하게 말하려면 어떤 약속이 필요한가요?",
+        "이 말과 방식이 존중받지 못한다고 느끼게 했습니다. 사람을 평가하지 않고 사실과 요청을 중심으로 다시 이야기하고 싶습니다."
+      )
+    },
+    activity: {
+      title: "업무환경 개선 한 걸음",
+      steps: [
+        "우선 살펴볼 업무환경 요인 중 한 가지를 선택합니다.",
+        "최근 한 달에 반복된 구체적인 장면과 업무 영향을 적습니다.",
+        "내가 바로 시도할 수 있는 작은 행동 한 가지를 정합니다.",
+        "조직·리더·동료에게 필요한 지원이나 조건을 한 문장으로 씁니다.",
+        "누구와 언제 점검할지 정하고, 실행 뒤 달라진 점을 확인합니다."
+      ],
+      choiceNotice: "개인 경험이나 결과를 공개할지는 참여자가 선택합니다. 결과 공개를 교육 참여나 평가의 조건으로 만들지 않습니다."
+    },
+    supportResources: [
+      "부담이 오래 지속되거나 일상 기능에 큰 어려움이 생기면 사내 EAP·보건관리자·근로자건강센터 등 이용 가능한 전문 지원을 확인하세요.",
+      "자신이나 다른 사람의 안전이 걱정되는 급박한 상황이라면 혼자 버티지 말고 가까운 사람과 지역의 응급·정신건강 지원기관에 즉시 도움을 요청하세요."
+    ],
+    methodNotice: "직무스트레스 연구의 업무환경 관점을 참고하되, 공식 검사 문항·채점표·규준을 사용하지 않고 DAWIN이 문항·채점·교육 해석을 새로 구성한 독자 자기성찰 도구입니다.",
+    disclaimer: "이 결과는 정신건강 상태나 질병을 판정하는 의학적 진단이 아니며, 개인의 나약함이나 능력의 우열을 뜻하지 않습니다. 채용·인사평가·배치·징계의 근거로 사용하거나 결과 공개를 강요하지 마세요. 개인의 대처만 떠올리기보다, 업무 조건과 지원 체계까지 함께 살펴보는 대화의 재료로 사용하세요."
+  };
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-export.js
+  var VENDOR_SRC = "./assets/vendor/html-to-image.js";
+  var MAX_SIDE = 8192;
+  var MAX_AREA = 16e6;
+  var EXPORT_WIDTH = 720;
+  var MAX_RATIO = 3;
+  var vendorPromise = null;
+  function loadVendor() {
+    if (window.htmlToImage) return Promise.resolve(window.htmlToImage);
+    if (vendorPromise) return vendorPromise;
+    vendorPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = VENDOR_SRC;
+      script.onload = () => window.htmlToImage ? resolve(window.htmlToImage) : reject(new Error("vendor missing"));
+      script.onerror = () => reject(new Error("vendor load failed"));
+      document.head.appendChild(script);
+    });
+    return vendorPromise;
+  }
+  function looksLikeInAppBrowser() {
+    const ua = String(navigator.userAgent || "");
+    return /KAKAOTALK|kakaostory|NAVER\(|DaumApps|FBAN|FBAV|FB_IAB|Instagram|Line\/|everytimeApp|zumapp|whale\/.*inapp/i.test(ua);
+  }
+  function openAllDetails(root) {
+    const closed = Array.from(root.querySelectorAll("details")).filter((item) => !item.open);
+    closed.forEach((item) => {
+      item.open = true;
+    });
+    let restored = false;
+    return () => {
+      if (restored) return;
+      restored = true;
+      closed.forEach((item) => {
+        item.open = false;
+      });
+    };
+  }
+  function stampedName(title) {
+    const now = /* @__PURE__ */ new Date();
+    const pad = (value) => String(value).padStart(2, "0");
+    const date = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
+    const safe = String(title || "진단결과").replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_").slice(0, 40);
+    return `${safe}_${date}`;
+  }
+  function openSheet(label, innerHtml, onClose) {
+    const overlay = document.createElement("div");
+    overlay.className = "export-overlay";
+    overlay.innerHTML = `<div class="export-sheet" role="dialog" aria-modal="true" aria-label="${label}">${innerHtml}</div>`;
+    const sheet = overlay.querySelector(".export-sheet");
+    const opener = document.activeElement;
+    const close = () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+      overlay.remove();
+      if (typeof onClose === "function") onClose();
+      if (opener && typeof opener.focus === "function") opener.focus();
+    };
+    function onKey(event) {
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = sheet.querySelectorAll('a[href], button, input, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close();
+    });
+    document.body.style.overflow = "hidden";
+    document.body.appendChild(overlay);
+    const closer = sheet.querySelector(".export-close");
+    if (closer) closer.addEventListener("click", close);
+    const firstFocusable = sheet.querySelector("button, a[href]");
+    if (firstFocusable) firstFocusable.focus();
+    return { overlay, sheet, close };
+  }
+  function saveAsPdf(root, setStatus) {
+    const canPrint = typeof window.print === "function";
+    if (!canPrint || looksLikeInAppBrowser()) {
+      const url = String(location.href);
+      openSheet("PDF로 저장", `
+      <h3 class="export-title">PDF로 저장하기</h3>
+      <p class="export-hint">지금 보고 계신 화면은 <strong>앱 안에 들어 있는 브라우저</strong>로 보입니다. 이런 화면에서는 인쇄(PDF 저장) 창이 열리지 않는 경우가 많습니다.</p>
+      <p class="export-hint">아래 주소를 복사해 <strong>크롬이나 사파리</strong>에서 다시 열면 PDF로 저장할 수 있습니다.</p>
+      <input class="export-url" type="text" readonly value="${url}" aria-label="현재 주소">
+      <p class="export-hint">그대로 남기고 싶으시면 <strong>이미지(PNG)로 저장</strong>이나 <strong>결과 텍스트 복사하기</strong>를 쓰셔도 됩니다.</p>
+      <button type="button" class="button secondary export-close">닫기</button>`);
+      setStatus("앱 안 브라우저에서는 인쇄가 열리지 않을 수 있습니다.", "fail");
+      return;
+    }
+    const { sheet, close } = openSheet("PDF로 저장", `
+    <h3 class="export-title">PDF로 저장하기</h3>
+    <p class="export-hint">아래 버튼을 누르면 브라우저 <strong>인쇄 화면</strong>이 열립니다. 거기서 대상(프린터)을 <strong>“PDF로 저장”</strong>으로 바꿔 주세요. 해설까지 전부 담깁니다.</p>
+    <button type="button" class="button export-print">인쇄 화면 열기</button>
+    <p class="export-hint export-after" hidden>인쇄 화면이 열리지 않았다면 이 브라우저가 인쇄를 지원하지 않는 것입니다. <strong>이미지(PNG)로 저장</strong>을 이용해 주세요.</p>
+    <button type="button" class="button secondary export-close">닫기</button>`);
+    sheet.querySelector(".export-print").addEventListener("click", () => {
+      sheet.querySelector(".export-after").hidden = false;
+      const restore = openAllDetails(root);
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        restore();
+        window.removeEventListener("afterprint", finish);
+      };
+      window.addEventListener("afterprint", finish);
+      window.setTimeout(finish, 8e3);
+      setStatus("인쇄 화면에서 “PDF로 저장”을 골라 주세요.", "done");
+      window.setTimeout(() => {
+        try {
+          window.print();
+        } catch (error) {
+          finish();
+          close();
+          setStatus("이 브라우저에서는 인쇄를 열 수 없습니다. 이미지로 저장해 주세요.", "fail");
+        }
+      }, 80);
+    });
+  }
+  var DROP_FROM_IMAGE = [".save-card", ".result-actions", ".result-tabs", ".result-panel-hint"];
+  function buildExportStage(root) {
+    const holder = document.createElement("div");
+    holder.className = "export-holder";
+    holder.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;z-index:-1;";
+    const stage = document.createElement("div");
+    stage.className = "export-stage";
+    stage.style.cssText = `width:${EXPORT_WIDTH}px;padding:24px;background:#ffffff;`;
+    holder.appendChild(stage);
+    const hero = root.querySelector(":scope > .result-hero");
+    if (hero) stage.appendChild(hero.cloneNode(true));
+    const summary = root.querySelector("#result-panel-summary");
+    const source = summary || root;
+    Array.from(source.children).forEach((node) => {
+      if (node === hero) return;
+      if (DROP_FROM_IMAGE.some((selector) => node.matches && node.matches(selector))) return;
+      stage.appendChild(node.cloneNode(true));
+    });
+    stage.querySelectorAll(DROP_FROM_IMAGE.join(",")).forEach((node) => node.remove());
+    document.body.appendChild(holder);
+    return holder;
+  }
+  function dataUrlToBlob(dataUrl) {
+    const comma = dataUrl.indexOf(",");
+    const mime = (dataUrl.slice(0, comma).match(/:(.*?);/) || [])[1] || "image/png";
+    const binary = atob(dataUrl.slice(comma + 1));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+    return new Blob([bytes], { type: mime });
+  }
+  function showImageOverlay(dataUrl, filename, title) {
+    const blob = dataUrlToBlob(dataUrl);
+    const objectUrl = URL.createObjectURL(blob);
+    let file = null;
+    try {
+      file = new File([blob], `${filename}.png`, { type: "image/png" });
+    } catch (error) {
+      file = null;
+    }
+    const canShareFile = Boolean(
+      file && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })
+    );
+    const hint = canShareFile ? "아래 <strong>사진 앨범에 저장</strong>을 누르면 공유 창이 열립니다. 거기서 <strong>“이미지 저장”</strong>을 고르면 앨범에 들어갑니다." : "이미지를 <strong>길게 눌러</strong> “사진에 추가”를 고르시거나, 아래 버튼으로 내려받으세요.";
+    const { sheet } = openSheet(
+      "결과 이미지",
+      `
+    <p class="export-hint">${hint} 해설은 담기지 않습니다 — 해설까지 남기시려면 <strong>PDF로 저장</strong>을 쓰세요.</p>
+    <div class="export-preview"><img alt="진단 결과 이미지"></div>
+    ${canShareFile ? '<button type="button" class="button export-share">사진 앨범에 저장</button>' : ""}
+    <a class="button ${canShareFile ? "secondary " : ""}export-download" download="${filename}.png">파일로 내려받기</a>
+    <p class="export-hint export-share-note" hidden>저장이 되지 않았다면 이미지를 <strong>길게 눌러</strong> “사진에 추가”를 골라 주세요.</p>
+    <button type="button" class="button secondary export-close">닫기</button>`,
+      () => URL.revokeObjectURL(objectUrl)
+    );
+    sheet.querySelector("img").src = dataUrl;
+    sheet.querySelector(".export-download").href = objectUrl;
+    const shareButton = sheet.querySelector(".export-share");
+    if (shareButton) {
+      shareButton.addEventListener("click", async () => {
+        try {
+          await navigator.share({ files: [file], title: title || "진단 결과" });
+        } catch (error) {
+          if (error && error.name === "AbortError") return;
+          sheet.querySelector(".export-share-note").hidden = false;
+        }
+      });
+    }
+  }
+  async function saveAsPng(root, title, setStatus, button) {
+    button.disabled = true;
+    setStatus("이미지를 만드는 중입니다. 잠시만 기다려 주세요.", "");
+    let holder = null;
+    try {
+      const lib = await loadVendor();
+      holder = buildExportStage(root);
+      const stage = holder.firstElementChild;
+      const width = stage.offsetWidth;
+      const height = stage.offsetHeight;
+      let ratio = Math.min(MAX_RATIO, MAX_SIDE / Math.max(width, height), Math.sqrt(MAX_AREA / (width * height)));
+      if (!Number.isFinite(ratio) || ratio <= 0) ratio = 1;
+      if (ratio < 0.55) {
+        setStatus("결과가 길어 이미지로 만들기 어렵습니다. PDF로 저장을 이용해 주세요.", "fail");
+        return;
+      }
+      const dataUrl = await lib.toPng(stage, {
+        pixelRatio: ratio,
+        backgroundColor: "#ffffff",
+        skipFonts: true,
+        width,
+        height,
+        // 복제본이 껍데기의 위치를 물려받지 않도록 흐름 위치로 되돌린다.
+        style: { position: "static", margin: "0", top: "0", left: "0", transform: "none" }
+      });
+      showImageOverlay(dataUrl, stampedName(title), title);
+      setStatus("이미지를 만들었습니다.", "done");
+    } catch (error) {
+      setStatus("이미지 저장이 어려운 환경입니다. PDF로 저장을 이용해 주세요.", "fail");
+    } finally {
+      if (holder) holder.remove();
+      button.disabled = false;
+    }
+  }
+  function exportButtonsHtml() {
+    return `
+    <div class="save-actions">
+      <button id="copy-button" class="button" type="button">결과 텍스트 복사하기</button>
+      <button id="png-button" class="button secondary" type="button">이미지(PNG)로 저장</button>
+      <button id="pdf-button" class="button secondary" type="button">PDF로 저장</button>
+    </div>`;
+  }
+  function mountResultExport(root, title, setStatus) {
+    const pdfButton = root.querySelector("#pdf-button");
+    const pngButton = root.querySelector("#png-button");
+    if (pdfButton) pdfButton.addEventListener("click", () => saveAsPdf(root, setStatus));
+    if (pngButton) pngButton.addEventListener("click", () => saveAsPng(root, title, setStatus, pngButton));
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-save.js
+  var HEADINGS = /* @__PURE__ */ new Set(["H1", "H2", "H3", "H4", "H5", "H6"]);
+  var CONTAINERS = /* @__PURE__ */ new Set(["DIV", "SECTION", "ARTICLE", "UL", "OL", "DL", "HEADER", "FOOTER", "MAIN", "ASIDE"]);
+  var SKIP = ["save-card", "result-actions"];
+  function textOf(element) {
+    return Array.from(element.childNodes).map((node) => node.nodeType === 3 ? node.nodeValue : node.nodeType === 1 ? textOf(node) : "").join(" ").replace(/\s+/g, " ").trim();
+  }
+  function walk(node, lines) {
+    for (const element of node.children) {
+      if (SKIP.some((name) => element.classList.contains(name))) continue;
+      const tag = element.tagName;
+      if (HEADINGS.has(tag)) {
+        const text = textOf(element);
+        if (text) lines.push("", tag === "H1" ? `■ ${text}` : `[ ${text} ]`);
+        continue;
+      }
+      if (tag === "LI") {
+        const text = textOf(element);
+        if (text) lines.push(`- ${text}`);
+        continue;
+      }
+      if (tag === "P") {
+        const text = textOf(element);
+        if (text) lines.push(text);
+        continue;
+      }
+      const hasStructure = Array.from(element.children).some((child) => CONTAINERS.has(child.tagName) || HEADINGS.has(child.tagName) || child.tagName === "P" || child.tagName === "LI");
+      if (hasStructure) {
+        walk(element, lines);
+      } else {
+        const text = textOf(element);
+        if (text) lines.push(text);
+      }
+    }
+  }
+  function extractResultText(root, title) {
+    const today = /* @__PURE__ */ new Date();
+    const stamp = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()}.`;
+    const lines = [title, stamp];
+    walk(root, lines);
+    return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  function saveCardHtml() {
+    return `
+    <article class="card save-card">
+      <h3>결과를 남겨 두세요</h3>
+      <p>새로고침하면 결과가 사라집니다. 텍스트로 복사하거나 PDF·이미지로 저장해 두면 교육 후에도 다시 볼 수 있습니다.</p>
+      ${exportButtonsHtml()}
+      <p id="copy-status" class="copy-status" aria-live="polite"></p>
+      <details id="copy-fallback" class="copy-fallback">
+        <summary>복사가 안 되면 여기를 눌러 직접 선택하세요</summary>
+        <textarea id="copy-area" readonly rows="12"></textarea>
+      </details>
+    </article>`;
+  }
+  async function copyToClipboard(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (error) {
+    }
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0";
+    document.body.appendChild(area);
+    area.select();
+    area.setSelectionRange(0, area.value.length);
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (error) {
+      copied = false;
+    }
+    document.body.removeChild(area);
+    return copied;
+  }
+  function mountResultSave(root, title, presetText) {
+    const button = root.querySelector("#copy-button");
+    const status = root.querySelector("#copy-status");
+    const area = root.querySelector("#copy-area");
+    const fallback = root.querySelector("#copy-fallback");
+    if (!button || !area) return;
+    const text = presetText || extractResultText(root, title);
+    area.value = text;
+    const setStatus = (message, tone) => {
+      status.textContent = message;
+      status.className = tone ? `copy-status ${tone}` : "copy-status";
+    };
+    button.addEventListener("click", async () => {
+      const copied = await copyToClipboard(text);
+      setStatus(
+        copied ? "복사했습니다. 메모나 메신저에 붙여 넣어 주세요." : "자동 복사가 막혀 있습니다. 아래를 펼쳐 직접 선택해 주세요.",
+        copied ? "done" : "fail"
+      );
+      if (!copied) fallback.open = true;
+    });
+    mountResultExport(root, title, setStatus);
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/result-tabs.js
+  var SUMMARY_SELECTORS = [
+    ".result-map-card",
+    // 8개 진단 공용 — 결과값(점수 지도·그래프)
+    ".overall-level-card",
+    // 전체 수준 — 상대 순위보다 먼저 읽어야 할 결과값
+    ".motivation-map-card",
+    // 동기 · TA · Stroke 점수 지도
+    ".stroke-give-card",
+    ".stroke-receive-card",
+    ".stroke-signal-card",
+    ".score-card",
+    // 행동경향(DISC)
+    ".eq-chart-card",
+    // 감성지수 5영역 막대그래프
+    ".stress-map-card",
+    ".resilience-map-card",
+    ".axis-list",
+    // 성격 — 네 축 결과 카드
+    ".stability-card",
+    // 성격 — 뚜렷한 축 / 흔들리는 축
+    ".profile-notice"
+    // 고른 프로필 · 가까운 점수 안내
+  ];
+  var ALWAYS_VISIBLE = [".save-card", ".result-actions"];
+  var matches = (node, selectors) => node.nodeType === 1 && selectors.some((selector) => node.matches(selector));
+  function splitResultIntoTabs(root, options = {}) {
+    if (!root || root.querySelector(".result-tabs")) return;
+    const detailLabel = options.detailLabel || "자세히 보기";
+    const hero = root.querySelector(":scope > .result-hero");
+    const summary = [];
+    const detail = [];
+    const tail = [];
+    for (const node of Array.from(root.childNodes)) {
+      if (node === hero) continue;
+      if (node.nodeType === 3 && !node.nodeValue.trim()) continue;
+      if (matches(node, ALWAYS_VISIBLE)) tail.push(node);
+      else if (matches(node, SUMMARY_SELECTORS)) summary.push(node);
+      else detail.push(node);
+    }
+    if (detail.length === 0) return;
+    const make = (tag, className, html) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (html !== void 0) element.innerHTML = html;
+      return element;
+    };
+    const tabs = make("div", "result-tabs");
+    tabs.setAttribute("role", "tablist");
+    tabs.setAttribute("aria-label", "결과 보기 방식");
+    const summaryPanel = make("section", "result-panel");
+    const detailPanel = make("section", "result-panel hidden");
+    summaryPanel.id = "result-panel-summary";
+    detailPanel.id = "result-panel-detail";
+    for (const panel of [summaryPanel, detailPanel]) {
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("tabindex", "-1");
+    }
+    summary.forEach((node) => summaryPanel.appendChild(node));
+    detail.forEach((node) => detailPanel.appendChild(node));
+    summaryPanel.appendChild(make(
+      "p",
+      "result-panel-hint",
+      `해석과 실습 내용은 위 <strong>${detailLabel}</strong>에 담아 두었습니다. 먼저 숫자만 확인해 주세요.`
+    ));
+    const buttons = [
+      { key: "summary", label: "결과만 보기", panel: summaryPanel },
+      { key: "detail", label: detailLabel, panel: detailPanel }
+    ].map(({ key, label, panel }) => {
+      const button = make("button", "result-tab", label);
+      button.type = "button";
+      button.dataset.tab = key;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", panel.id);
+      tabs.appendChild(button);
+      return { button, panel };
+    });
+    const activate = (index) => {
+      buttons.forEach((item, i) => {
+        const on = i === index;
+        item.button.classList.toggle("active", on);
+        item.button.setAttribute("aria-selected", on ? "true" : "false");
+        item.panel.classList.toggle("hidden", !on);
+      });
+      const target = buttons[index].panel;
+      target.focus({ preventScroll: true });
+      const top = tabs.getBoundingClientRect().top + window.scrollY - 12;
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    };
+    buttons.forEach((item, index) => item.button.addEventListener("click", () => activate(index)));
+    root.replaceChildren(
+      ...hero ? [hero] : [],
+      tabs,
+      summaryPanel,
+      detailPanel,
+      ...tail
+    );
+    activate(0);
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/scoring.js
+  var TYPES = ["D", "I", "S", "C"];
+  var PICK2_MOST = 2;
+  var PICK2_LEAST = 0;
+  var PICK2_MIDDLE = 1;
+  function rankToScore(rank) {
+    if (!Number.isInteger(rank) || rank < 1 || rank > 4) {
+      throw new RangeError("순위는 1부터 4까지여야 합니다.");
+    }
+    return 5 - rank;
+  }
+  function validateAnswers(groups, answers) {
+    if (!Array.isArray(groups) || !answers) return false;
+    return groups.every((group) => {
+      const selected = answers[group.id];
+      const validIds = new Set(group.options.map((option) => option.id));
+      return Array.isArray(selected) && selected.length === 4 && new Set(selected).size === 4 && selected.every((id) => validIds.has(id));
+    });
+  }
+  function calculateScores(groups, answers) {
+    if (!validateAnswers(groups, answers)) {
+      throw new Error("모든 문항의 순위 선택이 완료되지 않았습니다.");
+    }
+    const scores = { D: 0, I: 0, S: 0, C: 0 };
+    for (const group of groups) {
+      const byId = new Map(group.options.map((option) => [option.id, option]));
+      answers[group.id].forEach((id, index) => {
+        const type = byId.get(id).type;
+        if (!TYPES.includes(type)) throw new Error(`알 수 없는 유형: ${type}`);
+        scores[type] += rankToScore(index + 1);
+      });
+    }
+    return scores;
+  }
+  function validatePick2Answers(groups, answers) {
+    if (!Array.isArray(groups) || !answers) return false;
+    return groups.every((group) => {
+      const value = answers[group.id];
+      if (!value || typeof value !== "object") return false;
+      const ids = new Set(group.options.map((option) => option.id));
+      return ids.has(value.most) && ids.has(value.least) && value.most !== value.least;
+    });
+  }
+  function calculatePick2Scores(groups, answers) {
+    if (!validatePick2Answers(groups, answers)) {
+      throw new Error("각 묶음에서 가장 가까운 표현과 가장 먼 표현을 하나씩 골라 주세요.");
+    }
+    const scores = { D: 0, I: 0, S: 0, C: 0 };
+    for (const group of groups) {
+      const { most, least } = answers[group.id];
+      for (const option of group.options) {
+        if (!TYPES.includes(option.type)) throw new Error(`알 수 없는 유형: ${option.type}`);
+        scores[option.type] += option.id === most ? PICK2_MOST : option.id === least ? PICK2_LEAST : PICK2_MIDDLE;
+      }
+    }
+    return scores;
+  }
+  function classifyProfile(scores) {
+    const ranked = TYPES.map((type) => ({ type, score: scores[type] })).sort((a, b) => b.score - a.score || TYPES.indexOf(a.type) - TYPES.indexOf(b.type));
+    const total = TYPES.reduce((sum, type) => sum + scores[type], 0);
+    const mean = total / 4;
+    const blendGap = Math.max(1, Math.round(mean * 0.15));
+    const dominantAt = Math.round(mean * 1.3);
+    const balancedLow = Math.round(mean * 0.88);
+    const balancedHigh = Math.round(mean * 1.12);
+    const topScore = ranked[0].score;
+    const balanced = ranked.every((item) => item.score >= balancedLow && item.score <= balancedHigh);
+    const dominant = topScore >= dominantAt;
+    const primary = ranked.filter((item) => item.score === topScore).map((item) => item.type);
+    const lowestScore = ranked.at(-1).score;
+    const lowest = lowestScore === topScore ? [] : ranked.filter((item) => item.score === lowestScore).map((item) => item.type);
+    if (primary.length > 1) {
+      return { kind: "tie", primary, secondary: [], lowest, gap: 0, ranked, total, mean, balanced, dominant };
+    }
+    const gap = topScore - ranked[1].score;
+    const secondScore = ranked[1].score;
+    return {
+      kind: gap <= blendGap ? "blend" : "primary-secondary",
+      primary,
+      // 2위와 동점인 유형은 함께 보조경향으로 본다.
+      secondary: ranked.filter((item) => item.score === secondScore).map((item) => item.type),
+      lowest,
+      gap,
+      ranked,
+      total,
+      mean,
+      balanced,
+      dominant
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/engine.js
+  function createAssessmentEngine(assessment2) {
+    const mode = assessment2.responseMode || "ranking";
+    const items = mode === "scale" || mode === "pair" ? assessment2.questions : assessment2.groups;
+    const scaleValues = mode === "scale" && Array.isArray(assessment2.responseOptions) ? assessment2.responseOptions.map((option) => option.value) : [1, 2, 3, 4, 5];
+    if (!Array.isArray(items) || items.length === 0) {
+      throw new Error("진단 문항이 필요합니다.");
+    }
+    let index = 0;
+    let answered = 0;
+    let finished = false;
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", (event) => {
+        if (answered === 0 || finished) return;
+        event.preventDefault();
+        event.returnValue = "";
+      });
+    }
+    const emptyValue = () => {
+      if (mode === "scale") return null;
+      if (mode === "pick2") return { most: null, least: null };
+      if (mode === "pair") return null;
+      return [];
+    };
+    const emptyAnswers = () => Object.fromEntries(items.map((item) => [item.id, emptyValue()]));
+    let answers = emptyAnswers();
+    const currentItem = () => items[index];
+    const isComplete = () => {
+      const value = answers[currentItem().id];
+      if (mode === "scale") return scaleValues.includes(value);
+      if (mode === "pick2") return Boolean(value.most) && Boolean(value.least);
+      if (mode === "pair") return value === "left" || value === "right";
+      return value.length === 4;
+    };
+    const getState = () => ({
+      index,
+      total: items.length,
+      item: currentItem(),
+      group: currentItem(),
+      answers: structuredClone(answers),
+      isCurrentComplete: isComplete(),
+      isLast: index === items.length - 1
+    });
+    return {
+      getState,
+      select(optionId) {
+        answered += 1;
+        if (mode === "pair") {
+          if (optionId !== "left" && optionId !== "right") return false;
+          if (answers[currentItem().id] === optionId) return false;
+          answers[currentItem().id] = optionId;
+          return true;
+        }
+        if (mode === "pick2") {
+          const group2 = currentItem();
+          if (!group2.options.some((option) => option.id === optionId)) return false;
+          const value = answers[group2.id];
+          if (value.most === optionId) {
+            value.most = null;
+            return true;
+          }
+          if (value.least === optionId) {
+            value.least = null;
+            return true;
+          }
+          if (value.most === null) {
+            value.most = optionId;
+            return true;
+          }
+          if (value.least === null) {
+            value.least = optionId;
+            return true;
+          }
+          return false;
+        }
+        if (mode !== "ranking") return false;
+        const group = currentItem();
+        const selected = answers[group.id];
+        if (!group.options.some((option) => option.id === optionId)) return false;
+        const selectedIndex = selected.indexOf(optionId);
+        if (selectedIndex >= 0) {
+          selected.splice(selectedIndex, 1);
+          return true;
+        }
+        if (selected.length >= 4) return false;
+        selected.push(optionId);
+        return true;
+      },
+      answer(value) {
+        if (mode !== "scale" || !Number.isInteger(value) || !scaleValues.includes(value)) return false;
+        answered += 1;
+        answers[currentItem().id] = value;
+        return true;
+      },
+      resetCurrent() {
+        answers[currentItem().id] = emptyValue();
+      },
+      previous() {
+        if (index === 0) return false;
+        index -= 1;
+        return true;
+      },
+      next() {
+        if (!isComplete() || index >= items.length - 1) return false;
+        index += 1;
+        return true;
+      },
+      restart() {
+        index = 0;
+        answered = 0;
+        finished = false;
+        answers = emptyAnswers();
+      },
+      getResult() {
+        finished = true;
+        if (typeof assessment2.score === "function") return assessment2.score(structuredClone(answers));
+        const scores = mode === "pick2" ? calculatePick2Scores(items, answers) : calculateScores(items, answers);
+        return { scores, profile: classifyProfile(scores) };
+      }
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/stress-scoring.js
+  var STRESS_DOMAIN_ORDER = [
+    "environment",
+    "demand",
+    "autonomy",
+    "support",
+    "stability",
+    "system",
+    "reward",
+    "culture"
+  ];
+  function calculateStressScores(questions, answers) {
+    const scores = Object.fromEntries(STRESS_DOMAIN_ORDER.map((id) => [id, 0]));
+    for (const question of questions) {
+      if (!STRESS_DOMAIN_ORDER.includes(question.domain)) {
+        throw new Error(`알 수 없는 업무환경 영역: ${question.domain}`);
+      }
+      if (!["risk", "resource"].includes(question.direction)) {
+        throw new Error(`알 수 없는 문항 방향: ${question.direction}`);
+      }
+      const value = answers[question.id];
+      if (value === void 0) throw new Error("모든 문항에 응답해 주세요.");
+      if (!Number.isInteger(value) || value < 1 || value > 5) {
+        throw new RangeError("응답은 1~5의 정수여야 합니다.");
+      }
+      scores[question.domain] += question.direction === "risk" ? value - 1 : 5 - value;
+    }
+    return scores;
+  }
+  function toStressDisplayScore(raw) {
+    if (!Number.isFinite(raw) || raw < 0 || raw > 16) {
+      throw new RangeError("업무환경 영역 원점수는 0~16이어야 합니다.");
+    }
+    return Math.round(raw / 16 * 100);
+  }
+  function pickWithTies(sorted, wanted, limit) {
+    for (let n = wanted; n >= 1; n -= 1) {
+      const threshold = sorted[n - 1].raw;
+      const group = sorted.filter((item) => item.raw >= threshold);
+      if (group.length <= limit) return group;
+    }
+    return [];
+  }
+  function overallLevel(profile) {
+    const values = profile.map((item) => item.percent);
+    const percent = Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+    const band = percent <= 33 ? "low" : percent <= 66 ? "mid" : "high";
+    return { percent, band };
+  }
+  function interpretStressScores(scores, order = STRESS_DOMAIN_ORDER) {
+    const profile = order.map((id, index) => {
+      const raw = scores[id];
+      if (!Number.isFinite(raw) || raw < 0 || raw > 16) {
+        throw new RangeError(`업무환경 영역 점수가 올바르지 않습니다: ${id}`);
+      }
+      return { id, raw, percent: toStressDisplayScore(raw), index };
+    });
+    const ranked = [...profile].sort((a, b) => b.raw - a.raw || a.index - b.index).map(({ id, raw, percent }) => ({ id, raw, percent }));
+    const priorities = pickWithTies(ranked, 2, 4);
+    const indeterminate = priorities.length === 0;
+    const values = profile.map((item) => item.raw);
+    const cleanProfile = profile.map(({ id, raw, percent }) => ({ id, raw, percent }));
+    return {
+      profile: cleanProfile,
+      overall: overallLevel(cleanProfile),
+      priorities,
+      indeterminate,
+      priorityIsClose: priorities.length > 1 && priorities[0].raw - priorities[1].raw <= 1,
+      isEvenProfile: Math.max(...values) - Math.min(...values) <= 2
+    };
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/assessment-ui.js
+  function progressData({ index, total }) {
+    if (!Number.isInteger(index) || !Number.isInteger(total) || total < 1 || index < 0 || index >= total) {
+      throw new RangeError("유효한 진행 상태가 필요합니다.");
+    }
+    return { label: `${index + 1} / ${total}`, percent: Math.round((index + 1) / total * 100) };
+  }
+  function escapeHtml(value) {
+    return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  }
+  function listHtml(items) {
+    return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+  }
+  function updateProgress(state, refs) {
+    const data = progressData(state);
+    refs.label.textContent = data.label;
+    refs.percent.textContent = `${data.percent}%`;
+    refs.bar.style.width = `${data.percent}%`;
+  }
+  function scrollToTop() {
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    window.scrollTo({ top: 0, behavior });
+  }
+
+  // ../../mnt/user-data/uploads/referenced-chatgpt-conversation-this-is-an/outputs/Dawin-I-ON-Lab/assets/js/stress-app.js
+  var assessment = {
+    ...stressAssessment,
+    score(answers) {
+      const scores = calculateStressScores(stressAssessment.questions, answers);
+      return { scores, ...interpretStressScores(scores) };
+    }
+  };
+  var engine = createAssessmentEngine(assessment);
+  var $ = (selector) => document.querySelector(selector);
+  var introView = $("#intro-view");
+  var questionView = $("#question-view");
+  var resultView = $("#result-view");
+  var progress = $("#progress");
+  var scaleOptions = $("#scale-options");
+  function showQuestions() {
+    introView.classList.add("hidden");
+    resultView.classList.add("hidden");
+    questionView.classList.remove("hidden");
+    progress.classList.remove("hidden");
+    renderQuestion();
+  }
+  function renderQuestion() {
+    const state = engine.getState();
+    const answer = state.answers[state.item.id];
+    updateProgress(state, { label: $("#progress-label"), percent: $("#progress-percent"), bar: $("#progress-bar") });
+    $("#question-title").textContent = state.item.text;
+    scaleOptions.replaceChildren(...stressAssessment.responseOptions.map((option) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `scale-option${answer === option.value ? " selected" : ""}`;
+      button.dataset.value = String(option.value);
+      button.setAttribute("aria-pressed", answer === option.value ? "true" : "false");
+      button.innerHTML = `<span class="scale-number">${option.value}</span><span>${escapeHtml(option.label)}</span>`;
+      button.addEventListener("click", () => {
+        if (engine.answer(option.value)) renderQuestion();
+      });
+      return button;
+    }));
+    $("#previous-button").disabled = state.index === 0;
+    $("#next-button").disabled = !state.isCurrentComplete;
+    $("#next-button").textContent = state.isLast ? "결과 보기" : "다음";
+    $("#status-message").textContent = state.isCurrentComplete ? "응답이 선택되었습니다. 다음으로 이동해 주세요." : "한 가지 응답을 선택해 주세요.";
+  }
+  function profileItem(result, id) {
+    return result.profile.find((item) => item.id === id);
+  }
+  function renderMap(result) {
+    const rows = STRESS_DOMAINS.map((id) => {
+      const item = profileItem(result, id);
+      const content = stressAssessment.domains[id];
+      const priority = result.priorities.some((value) => value.id === id);
+      return `<div class="stress-row${priority ? " priority" : ""}"><div class="stress-score-head"><strong>${escapeHtml(content.label)}</strong><span>${priority ? "<em>먼저 살펴보기</em>" : ""}<b>${item.percent}</b></span></div><div class="stress-track" role="img" aria-label="${escapeHtml(content.label)} 업무환경 노출 점수 ${item.percent}점"><span class="stress-fill" style="width:${item.percent}%"></span></div></div>`;
+    }).join("");
+    return `<article class="card result-map-card stress-map-card"><p class="eyebrow">8영역 전체 보기</p><h2>나의 8가지 업무환경 지도</h2><p>0점은 해당 부담 요인이 적고 보호자원이 충분하다고 응답한 쪽, 100점은 반대쪽에 가깝다는 뜻입니다. 정상·위험을 가르는 점수가 아닙니다.</p><div class="stress-map">${rows}</div></article>`;
+  }
+  var STRESS_LEVELS = {
+    low: {
+      tone: "good",
+      label: "크지 않은 편",
+      text: "지금은 크게 걸리는 지점이 많지 않습니다. 이 상태를 만들고 있는 조건이 무엇인지 적어 두세요. 나중에 흔들릴 때 기준이 됩니다."
+    },
+    mid: {
+      tone: "watch",
+      label: "군데군데 있는 편",
+      text: "한 영역에 몰려 있다기보다 몇 군데에 나뉘어 있습니다. 그중 가장 자주 겪는 장면 하나를 골라 보세요."
+    },
+    high: {
+      tone: "alert",
+      label: "여러 곳에서 느껴지는 편",
+      text: "한 가지만 골라 바꾸기는 어려울 수 있습니다. 오늘 이야기 나누고 싶은 장면 하나를 먼저 정해 보세요."
+    }
+  };
+  function renderOverall(result) {
+    const level = STRESS_LEVELS[result.overall.band];
+    return `<article class="card overall-level-card tone-${level.tone}">
+      <p class="eyebrow">${escapeHtml(stressAssessment.timeframe)} 전체 수준</p>
+      <h2>최근 체감하는 부담이 <strong>${level.label}</strong>입니다</h2>
+      <p class="overall-figure">8개 영역 평균 <b>${result.overall.percent}</b></p>
+      <p>${level.text}</p>
+      <p class="overall-note">이 체크 도구는 표준화된 검사가 아닙니다. 따라서, 체크 결과는 개인의 역량이나 조직의 업무 환경을 평가·측정하는 객관적 지표가 될 수 없습니다. 같은 부서·직무에서도 사람마다 다르게 나오며, 최근 상황 및 컨디션에 따라서도 달라질 수 있습니다. 또한, 채용·인사평가·배치·성과 판단의 근거로 사용할 수 없습니다.</p>
+    </article>`;
+  }
+  function renderProfileNotice(result) {
+    if (result.isEvenProfile) {
+      return `<article class="card profile-notice even-profile"><p class="eyebrow">고른 업무환경 프로필</p><h2>8개 영역의 차이가 크지 않습니다.</h2><p>상위 순위를 고정된 문제로 해석하기보다, 최근 실제 장면에서 변화가 가능하고 영향이 큰 요인을 선택해 보세요.</p></article>`;
+    }
+    if (result.priorityIsClose) {
+      return `<article class="card profile-notice"><p class="eyebrow">가까운 우선 요인</p><h2>상위 두 영역의 점수가 비슷합니다.</h2><p>숫자 순서보다 지금 조정 가능하고 업무에 미치는 영향이 큰 영역을 먼저 선택하세요.</p></article>`;
+    }
+    return "";
+  }
+  function renderActionColumns(content) {
+    return `<div class="stress-action-grid"><section class="stress-action-card personal"><h3>개인 실천</h3>${listHtml(content.personalActions)}</section><section class="stress-action-card organization"><h3>조직 개선</h3>${listHtml(content.organizationActions)}</section></div>`;
+  }
+  function renderPriorityCard(item, index) {
+    const content = stressAssessment.domains[item.id];
+    return `<article class="card stress-priority-card"><div class="stress-priority-heading"><div><p class="eyebrow">우선 ${index + 1}</p><h2>${escapeHtml(content.label)}</h2></div><span class="stress-score-circle">${item.percent}</span></div><p>${escapeHtml(content.summary)}</p><section><h3>살펴볼 신호</h3>${listHtml(content.signals)}</section>${renderActionColumns(content)}<div class="stress-reflection"><h3>성찰 질문</h3><p>${escapeHtml(content.reflection)}</p><blockquote>${escapeHtml(content.conversationStarter)}</blockquote></div></article>`;
+  }
+  function renderAllDomains(result) {
+    const cards = STRESS_DOMAINS.map((id) => {
+      const content = stressAssessment.domains[id];
+      const item = profileItem(result, id);
+      return `<details class="stress-domain-card"><summary><span>${escapeHtml(content.label)}</span><b>${item.percent}</b></summary><p>${escapeHtml(content.summary)}</p><h3>살펴볼 신호</h3>${listHtml(content.signals)}${renderActionColumns(content)}<h3>대화 시작 문장</h3><blockquote>${escapeHtml(content.conversationStarter)}</blockquote></details>`;
+    }).join("");
+    return `<article class="card content-card"><p class="eyebrow">전체 영역별 가이드</p><h2>8가지 영역을 하나씩 살펴보세요.</h2><p>필요한 영역을 펼치면 개인 실천과 조직 개선을 함께 확인할 수 있습니다.</p><div class="stress-domain-list">${cards}</div></article>`;
+  }
+  function renderResult() {
+    const result = engine.getResult();
+    resultView.innerHTML = `
+    <article class="card result-hero stress-result-hero"><p class="eyebrow">직무스트레스 요인 프로필</p><h1 class="profile-title">나를 평가하는 점수가 아니라,<br>함께 조정할 조건의 지도입니다.</h1><p>${escapeHtml(stressAssessment.disclaimer)}</p></article>
+    ${renderOverall(result)}
+    ${renderMap(result)}
+    ${renderProfileNotice(result)}
+    ${result.priorities.length ? `<section class="stress-priority-list" aria-label="우선 살펴볼 업무환경 요인"><p class="eyebrow">우선 살펴볼 업무환경 요인</p><h2>최근 응답에서 상대적으로 먼저 살펴볼 영역</h2>${result.priorities.map(renderPriorityCard).join("")}</section>` : ""}
+    ${renderAllDomains(result)}
+    <article class="card content-card activity-card"><p class="eyebrow">교육활동</p><h2>${escapeHtml(stressAssessment.activity.title)}</h2>${listHtml(stressAssessment.activity.steps)}<p><strong>${escapeHtml(stressAssessment.activity.choiceNotice)}</strong></p></article>
+    <article class="card content-card support-card"><p class="eyebrow">도움이 더 필요할 때</p><h2>혼자 버티는 것만이 답은 아닙니다.</h2>${listHtml(stressAssessment.supportResources)}</article>
+    <article class="card reference-code-card"><p class="eyebrow">교육용 안내</p><h2>공식 표준화 검사가 아닌 DAWIN 독자 도구입니다.</h2><p>${escapeHtml(stressAssessment.methodNotice)}</p><p>영역별 점수는 대화를 시작하기 위한 상대 지표이며, 정상·경계·고위험 등급이나 개인의 종합 스트레스 점수로 해석하지 않습니다.</p></article>
+    ${saveCardHtml()}<div class="result-actions"><button id="restart-button" class="button secondary" type="button">다시 하기</button><a class="button" href="./index.html">다른 진단 보기</a></div>`;
+    questionView.classList.add("hidden");
+    progress.classList.add("hidden");
+    resultView.classList.remove("hidden");
+    scrollToTop();
+    splitResultIntoTabs(resultView);
+    mountResultSave(resultView, "DAWIN I:ON Lab · 직무스트레스 요인 체크");
+    $("#restart-button").addEventListener("click", () => {
+      engine.restart();
+      resultView.classList.add("hidden");
+      showQuestions();
+    });
+  }
+  $("#start-button").addEventListener("click", showQuestions);
+  $("#previous-button").addEventListener("click", () => {
+    if (engine.previous()) {
+      renderQuestion();
+      scrollToTop();
+    }
+  });
+  $("#next-button").addEventListener("click", () => {
+    const state = engine.getState();
+    if (!state.isCurrentComplete) return;
+    if (state.isLast) renderResult();
+    else if (engine.next()) {
+      renderQuestion();
+      scrollToTop();
+    }
+  });
+})();
+</script>
+  <p class="build-stamp">버전 20260825-1031</p>
+</body>
+</html>
