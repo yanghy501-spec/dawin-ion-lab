@@ -108,6 +108,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:6px 16px 30px
 </main>
 <footer>끝은 꼭 질문으로 닫아 주세요<br>다윈서비스</footer>
 <script>
+try{if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}}catch(e){}
 document.querySelectorAll('.f').forEach(function(b){b.addEventListener('click',function(){
 var f=b.dataset.f;document.querySelectorAll('.f').forEach(function(x){x.classList.toggle('on',x===b)});
 document.querySelectorAll('.card').forEach(function(c){c.hidden=!(f==='전체'||c.dataset.cat===f)});});});
